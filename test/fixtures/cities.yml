@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: one
+  name: MyString
+  photo: MyString
+  meal_average_price_cents: 1
+
+two:
+  country: two
+  name: MyString
+  photo: MyString
+  meal_average_price_cents: 1
