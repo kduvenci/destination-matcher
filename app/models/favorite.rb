@@ -1,6 +1,6 @@
 class Favorite < ApplicationRecord
   belongs_to :accommodation
   belongs_to :flight
-  has_many :users
+  belongs_to :users
   validates :budget, :presence => true
 end
