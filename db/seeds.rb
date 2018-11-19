@@ -38,7 +38,7 @@ city_photos = ["http://i.imgur.com/tYbuMsG.jpg", "https://iso.500px.com/wp-conte
   country: countries[counter],
   name: city_names[counter],
   photo: city_photos[counter],
-  meal_average_price: "$15")
+  meal_average_price: 15)
   city.remote_photo_url = photos[counter]
   city.save!
   counter += 1
