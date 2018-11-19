@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  accommodation: one
+  flight: one
+  budget: 1
+
+two:
+  accommodation: two
+  flight: two
+  budget: 1
