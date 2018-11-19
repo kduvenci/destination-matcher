@@ -1,8 +1,4 @@
 class Country < ApplicationRecord
   has_many :cities
-  validates :name, presence: true
-  validates :language, presence: true
-  validates :english_level, presence: true
-  validates :currency, presence: true
-  validates :region, presence: true
+  validates :name, :language, :english_level, :currency, :region
 end
