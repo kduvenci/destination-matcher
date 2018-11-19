@@ -1,4 +1,4 @@
 class Region < ApplicationRecord
   has_many :countries
-  validates :name
+  validates :name, :presence => true
 end
