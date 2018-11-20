@@ -1,17 +1,11 @@
-<body>
-  <div class="header">
-    <ul class="signin login">
-      <li>
-        signin
-      </li>
-      <li>
-        login
-      </li>
-    </ul>
-    <h1>Destination Matcher</h1>
+<div class="navbar-destination-matcher">
+  <!-- Our logo here -->
+  <div class="logo">
+    <%= link_to root_path, class: "navbar-destination-matcher-logo" do %>
+    <%= image_tag "logo.jpg", height: 50 %>
+    <% end %>
   </div>
 
-  <%= render "layouts/navbar" %>
   <%= yield %>
 
-</body>
+

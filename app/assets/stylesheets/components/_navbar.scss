@@ -1,2 +1,24 @@
-_navbar.scss
-#
+.navbar {
+  position: relative;
+  padding: $navbar-padding-vertical $navbar-padding-horizontal;
+  @include clearfix;
+
+  @include media-breakpoint-up(sm) {
+    @include border-radius($navbar-border-radius);
+  }
+
+.navbar-config {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+
+.navbar-icon{
+  margin: 15px;
+}
+
+.form-config{
+  padding-top: 20px;
+}
