@@ -1,9 +1,9 @@
-# require "faker"
+require "faker"
 
 if Rails.env.development?
  Flight.destroy_all
- # Accommodation.destroy_all
- # User.destroy_all
+ Accommodation.destroy_all
+ User.destroy_all
  City.destroy_all
  Country.destroy_all
  Region.destroy_all
@@ -71,12 +71,41 @@ airline_names = ["ANA", "Emirates", "Lufthansa", "Thai Airways", "Cathay Pacific
     return_location: city_names[counter],
     price: 1000,
     city: cities[counter],
-    airline_name: airline_names[counter],
-    created_at: DateTime.now,
-    updated_at: DateTime.now + 1)
+    airline_name: airline_names[counter])
   flight.save!
   flights << flight
   counter += 1
 end
 
-#ACCOMODATION: Creates 5 accomotations.
+#ACCOMMODATION: Creates 5 accommotations.
+#WARNING; No photos added yet.
+counter = 0
+accommodations = []
+accommodation_names = ["Sofitel", "Ritz Carlton", "The Westin", "Novotel", "Napoleon"]
+accommodation_photos = ["http://i.imgur.com/tYbuMsG.jpg","http://i.imgur.com/tYbuMsG.jpg","http://i.imgur.com/tYbuMsG.jpg","http://i.imgur.com/tYbuMsG.jpg","http://i.imgur.com/tYbuMsG.jpg"]
+5.times do
+  accommodation = Accommodation.new(
+    city: cities[counter],
+    name: accommodation_names[counter],
+    price: 300,
+    star: 4,
+    photo:accommodation_photos[counter])
+  #accommodation.remote_photo_url = accommodation_photos[counter]
+  accommodation.save!
+  accommodations << accommodation
+  counter += 1
+end
+
+#USER: Creates 5 users.
+counter =0
+users= []
+5.times do
+  user = User.new(
+    name: Faker::Name.name,
+    nationality: Faker::Nation.nationality,
+    email: Faker::Internet.email,
+    password: "123456")
+  user.save!
+  users << user
+  counter += 1
+end
