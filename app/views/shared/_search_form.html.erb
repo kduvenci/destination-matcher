@@ -5,7 +5,7 @@
           <%= text_field_tag :origin, params[:origin], class: "form-control", placeholder: "Where are you traveling from?"%>
         </div>
         <div class ="form-group col-xs-6">
-          <%= text_field_tag :region, params[:region], class: "form-control", placeholder: "Pick a Region"%>
+          <%= select_tag :region, params[:region], class: "form-control", placeholder: "Pick a Region"%>
         </div>
           <%= number_field_tag :min_budget, params[:min_budget], class: "form-control", placeholder: "What's your minimum budget?"%>
           <%= number_field_tag :max_budget, params[:max_budget], class: "form-control", placeholder: "What's your maximum budget?"%>
