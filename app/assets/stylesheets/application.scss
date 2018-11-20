@@ -3,8 +3,16 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-// Components
+// Bootstrap Configs
+@import "config/colors";
+@import "config/fonts";
+@import "config/bootstrap_variables";
+
+
+// CSS Partials
 @import "components/index";
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
