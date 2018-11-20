@@ -1,7 +1,12 @@
 .search-box {
-  width: 500px;
-  padding: 30px;
+  height: 400px;
+  width: 520px;
+  padding: 40px 30px;
   margin-right: 60px;
   background-color: $soft-yellow;
-  border-radius: 5px;
+  border-radius: 8px;
+}
+
+.text-color {
+  color: $navy;
 }
