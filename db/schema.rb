@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_124509) do
+ActiveRecord::Schema.define(version: 2018_11_20_033053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_124509) do
     t.integer "meal_average_price_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "flight_id"
     t.index ["country_id"], name: "index_cities_on_country_id"
-    t.index ["flight_id"], name: "index_cities_on_flight_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -72,6 +70,8 @@ ActiveRecord::Schema.define(version: 2018_11_19_124509) do
     t.string "airline_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_flights_on_city_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 2018_11_19_124509) do
 
   add_foreign_key "accommodations", "cities"
   add_foreign_key "cities", "countries"
-  add_foreign_key "cities", "flights"
   add_foreign_key "countries", "regions"
   add_foreign_key "favorites", "accommodations"
   add_foreign_key "favorites", "flights"
   add_foreign_key "favorites", "users"
+  add_foreign_key "flights", "cities"
 end
