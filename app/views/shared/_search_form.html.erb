@@ -1,5 +1,6 @@
 <div class="containter">
   <div class="row">
+    <div class="search-box">
       <%= form_tag cities_path, method: :get do %>
         <div class ="form-group col-xs-6">
           <%= text_field_tag :origin, params[:origin], class: "form-control", placeholder: "Where are you traveling from?"%>
