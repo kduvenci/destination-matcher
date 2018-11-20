@@ -43,6 +43,7 @@ gem 'devise'
 gem "pundit"
 gem "geocoder"
 gem 'simple_form'
+gem 'thread'
 
 
 
