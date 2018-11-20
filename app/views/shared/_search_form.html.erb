@@ -1,1 +1,10 @@
-_search_form.html.erb
+<%= form_tag cities_path, method: :get do %>
+  <%= text_field_tag :origin, params[:origin], class: "form-control",placeholder: "Where are you traveling from?"%>
+  <%= text_field_tag :region, params[:region], class: "form-control",placeholder: "Pick a Region"%>
+  <%= text_field_tag :min_budget, params[:min_budget], class: "form-control",placeholder: "What's your minimum budget?"%>
+  <%= text_field_tag :max_budget, params[:max_budget], class: "form-control",placeholder: "What's your maximum budget?"%>
+  <!-- put Flatpicker here -->
+  <%= text_field_tag :dep_date, params[:dep_date], iput_html: {class: "datepicker" }, class: "form-control",placeholder: "Departure Date"%>
+  <%= text_field_tag :return_date, params[:return_date], iput_html: {class: "datepicker" }, class: "form-control",placeholder: "Return Date"%>
+  <%= submit_tag ("Search") %>
+<% end %>
