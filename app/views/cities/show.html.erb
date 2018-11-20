@@ -1,1 +1,36 @@
-<h1>City Show Page</h1>
+<div class="container parent-container">
+  <!-- card with background picture -->
+  <div class="city-card-container">
+    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>');">
+      <div class="card city-info-card">
+        <h2><%= @city.name %></h2>
+        <h3><%= @city.country.region.name %></h3>
+      </div>
+    </div>
+  </div>
+  <!-- card with prices of flights/avg meal/hotel -->
+  <div class="information-container">
+    <div class="flight-info-container">
+      <div class="total-price-container">
+
+      </div>
+      <div class="flights-time-container">
+        <p><i class="fas fa-plane-departure"></i> <%= @city.flights.first.depart_departure_time %></p>
+        <p><i class="fas fa-plane-arrival"></i> <%= @city.flights.first.depart_departure_time %></p>
+      </div>
+      <div class="price-container">
+        <p><i class="fas fa-dollar-sign"></i> Total <%= @city.flights.first.price %> USD</p>
+        <p><i class="fas fa-utensils"></i> <%= @city.meal_average_price_cents %> USD (Avg)</p>
+        <p><i class="fas fa-hotel"></i> <%= @city.accommodations.first.price %> USD</p>
+      </div>
+    </div>
+  </div>
+  <!--  card for recoommended stay -->
+  <div class="recommended-stay-container text-center">
+    <h3>Our recommended stay</h3>
+  </div>
+  <br>
+  <div class="recommended-flight-container text-center">
+    <h3>Our recommended flight</h3>
+  </div>
+</div>
