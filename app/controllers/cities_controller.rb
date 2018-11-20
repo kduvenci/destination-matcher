@@ -4,6 +4,7 @@ class CitiesController < ApplicationController
 
   def index
     @flights = SearchFlights.call(params)
+    @accommodations = SearchAccomodations.call(params)
   end
 
   def show

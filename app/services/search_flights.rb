@@ -15,13 +15,3 @@ class SearchFlights
     return flights
   end
 end
-
-    # depart_departure_time: Time.now,
-    # depart_arrival_time: Time.now,
-    # return_departure_time: Time.now,
-    # return_arrival_time: Time.now,
-    # departure_location: city_names[counter],
-    # return_location: city_names[counter],
-    # price: 1000,
-    # city: cities[counter],
-    # airline_name: airline_names[counter])
