@@ -1,31 +1,30 @@
+<!-- Simple Form -->
+
 <div class="containter">
   <div class="row">
     <div class="search-box">
-      <%= form_tag cities_path, method: :get do %>
+      <%= simple_form_for cities_path, method: :get do |f| %>
         <div class ="form-group col-xs-6">
-          <%= text_field_tag :origin, params[:origin], class: "form-control", placeholder: "Traveling from?"%>
+          <%= f.input :origin, class: "form-control", placeholder: "Traveling from?"%>
         </div>
         <div class ="form-group col-xs-6">
-          <%= select_tag :region, params[:region], class: "form-control", prompt: "Pick a Region" %>
+          <%= f.input :region, collection: Region::AREAS, class: "form-control", prompt: "Pick a Region" %>
         </div>
         <div class ="form-group col-xs-12">
-          <%= label_tag "Budget" %>
-          <%= text_field_tag :min_budget, params[:min_budget], class: "form-control", placeholder: "What's your minimum budget?"%>
+          <%= f.input :min_budget, class: "form-control", placeholder: "What's your minimum budget?"%>
         </div>
         <div class ="form-group col-xs-12">
-          <%= text_field_tag :max_budget, params[:max_budget], class: "form-control", placeholder: "What's your maximum budget?"%>
+          <%= f.input :max_budget, class: "form-control", placeholder: "What's your maximum budget?"%>
         </div>
           <!-- put Flatpicker here -->
         <div class="form-group col-xs-6">
-          <%= label_tag "Departure Date" %>
-          <%= date_field_tag :dep_date, params[:dep_date], input_html: { class: "datepicker" }, class: "form-control", placeholder: "Departure Date", label: "Departure Date" %>
+          <%= f.input :dep_date, input_html: { class: "datepicker" }, class: "form-control", placeholder: "Departure Date", label: "Departure Date" %>
         </div>
         <div class="form-group col-xs-6">
-          <%= label_tag "Return Date" %>
-          <%= date_field_tag :return_date, params[:return_date], input_html: { class: "datepicker" }, class: "form-control", placeholder: "Return Date" %>
+          <%= f.input :return_date, input_html: { class: "datepicker" }, class: "form-control", placeholder: "Return Date" %>
         </div>
         <div class="form-group col-xs-12">
-        <div><%= submit_tag ("Search"), class: "form-control btn-primary" %></div>
+        <div><%= f.submit "Search", class: "form-control btn-primary" %></div>
         </div>
       <% end %>
     </div>
