@@ -1,1 +1,10 @@
-_navbar.html.erb
+<div class="navbar-destination-matcher">
+  <!-- Our logo here -->
+  <div class="logo">
+    <%= link_to root_path, class: "navbar-destination-matcher-logo" do %>
+    <%= image_tag "logo.jpg", height: 50 %>
+    <% end %>
+  </div>
+  <%= yield %>
+
+
