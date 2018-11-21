@@ -1,1 +1,18 @@
 <%= render "shared/banner" %>
+
+<div class="wrapper">
+
+  <div class="card"><img src="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&amp;fit=crop&amp;w=667&amp;q=80&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+      <% @countries.each do |country| %>
+      <h1><%= @city.name %></h1>
+      <h3><%= country.name %></h3>
+    <div class="info">
+      <p>Language: <%= country.language %></p>
+      <p>English Level: <%= country.english_level%></p>
+      <p>Currency: <%= country.currency %></p>
+      <button>Read More</button>
+      <% end %>
+    </div>
+  </div>
+
+</div>
