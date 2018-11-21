@@ -113,4 +113,47 @@
   color: white;
 }
 
+.info-card{
+  width: 370px;
+  height: 200px;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 20px 0;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+.stay-card {
+  width: 370px;
+  height: 200px;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 20px 0;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+.flight-card {
+  width: 370px;
+  height: 200px;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 20px 0;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+
 
