@@ -22,5 +22,20 @@
 .flex-fav-book{
   display: flex;
   justify-content: space-around;
-  margin: 30%;
+  text-align: center;
+  margin: 0 30%;
+}
+
+.flex-recommendations{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 0 30%;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
