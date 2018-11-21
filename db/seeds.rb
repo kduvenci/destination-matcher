@@ -12,8 +12,8 @@ end
 #REGION: Creates 10 regions, one for each country card and city bellow.
 counter = 0
 regions = []
-region_names = %w(Europe, Eastern Europe, North America, South America, Central America, Southeast Asia, East Asia, Middle East, South Africa, North Africa)
-  10.times do
+region_names = ["Asia", "Americas", "Americas", "Asia", "Europe", "Europe", "Asia", "Europe", "Americas", "Europe"]
+10.times do
   region = Region.new(
     name: region_names[counter])
   region.save!
