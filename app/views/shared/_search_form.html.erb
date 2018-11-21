@@ -11,10 +11,10 @@
           <%= f.input :region, collection: Region::AREAS, class: "form-control", prompt: "Pick a Region" %>
         </div>
         <div class ="form-group col-xs-12">
-          <%= f.input :min_budget, class: "form-control", placeholder: "What's your minimum budget?"%>
+          <%= f.input :min_budget, collection: [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000], class: "form-control", prompt: "What's your minimum budget? (USD)"%>
         </div>
         <div class ="form-group col-xs-12">
-          <%= f.input :max_budget, class: "form-control", placeholder: "What's your maximum budget?"%>
+          <%= f.input :max_budget, collection: [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000], class: "form-control", prompt: "What's your maximum budget? (USD)"%>
         </div>
           <!-- put Flatpicker here -->
         <div class="form-group col-xs-6">
