@@ -6,43 +6,61 @@ require 'pp'
 
 class FetchFlights
   def self.call(region)
-    country = "JP"
-    currency = "USD"
-    locale = "en-US"
-    originplace = "NRT-sky"
-    # destinationplace = "JFK-sky"
-    outboundpartialdate = "2018-12-05"
-    inboundpartialdate = "2018-12-20"
-    urls = []
+    session_keys = []
     results = []
-
-    # create destinationplace accord. 'region' 
-    destinationplace = ["JFK-sky", "LIR-sky", "BOS-sky", "LCY-sky", "AMS-sky", "DME-sky"]
-
+    country = "JP"
+    originplace = "SFO-sky"
+    outboundDate = "2019-01-01"
+    inboundDate = "2019-01-10"
+    adults = 1
+    postURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
+    getURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0"
+    
+    # destinationplace = ["JFK-sky", "LIR-sky", "BOS-sky", "LCY-sky", "AMS-sky", "DME-sky"]
+    destinationplace = ["LHR-sky"]
+    
+    pool = Thread.pool(6)
+    
     destinationplace.each do |destination|
-      url_head = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/'
-      url_args = "#{country}/#{currency}/#{locale}/#{originplace}/#{destination}/#{outboundpartialdate}/#{inboundpartialdate}"
-      urls << url_head + url_args
-    end
-
-    pp urls
-
-    pool = Thread.pool(3)
-
-    urls.each do |url|  
-      pool.process {
-        puts 'get'
-        response = RestClient.get url, {
+      pool.process {  
+        response = RestClient.post postURL, {
+          "country" => country,
+          "currency" => "USD",
+          "locale" => "en-US",
+          "originPlace" => originplace,
+          "destinationPlace" => destination,
+          "outboundDate" => outboundDate,
+          "inboundDate" => inboundDate,
+          "cabinClass" => "economy",
+          "adults" => adults,
+          "children" => 0,
+          "infants" => 0,
+          "includeCarriers" => "",
+          "excludeCarriers" => "",
+          "groupPricing" => "false"
+        },
+        headers = {
+          "Content-Type" => "application/x-www-form-urlencoded",
           "X-Mashape-Key" => "NxHeqyNqVLmsh85DQkK6sKc4NZitp19PrEhjsnxGrrKE9eOv8f",
           "X-Mashape-Host" => "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
         }
-        puts 'get'
+        session_keys << response.headers[:location].split("/").last
+      }
+    end
+    pool.shutdown
+    
+    pool = Thread.pool(6)
+    session_keys.each do |session_key|
+      # puts "by key => #{session_key}"
+      pool.process {
+        response = RestClient.get "#{getURL}/#{session_key}?pageIndex=0&pageSize=10",{
+        "X-Mashape-Key" => "NxHeqyNqVLmsh85DQkK6sKc4NZitp19PrEhjsnxGrrKE9eOv8f",
+        "X-Mashape-Host" => "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+        }
         results << JSON.parse(response.body)
       }
     end
     pool.shutdown
-
-    pp results << "-"
     return results
   end
 end
