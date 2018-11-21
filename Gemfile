@@ -44,7 +44,7 @@ gem "pundit"
 gem "geocoder"
 gem 'simple_form'
 gem 'thread'
-
+gem 'rest-client', '~> 2.0'
 
 
 group :development, :test do
