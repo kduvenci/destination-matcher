@@ -1,18 +1,24 @@
 <%= render "shared/banner" %>
 
 <div class="wrapper">
+  <div class="container">
+    <div class="row">
 
-  <div class="card"><img src="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&amp;fit=crop&amp;w=667&amp;q=80&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-      <% @countries.each do |country| %>
-      <h1><%= @city.name %></h1>
-      <h3><%= country.name %></h3>
-    <div class="info">
-      <p>Language: <%= country.language %></p>
-      <p>English Level: <%= country.english_level%></p>
-      <p>Currency: <%= country.currency %></p>
-      <button>Read More</button>
-      <% end %>
-    </div>
-  </div>
+        <% @countries.each do |country| %>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="card"><img src="https://images.unsplash.com/photo-1477666250292-1419fac4c25c?auto=format&amp;fit=crop&amp;w=667&amp;q=80&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+              <div class="title"><h1><%= country.cities.name %></h1></div>
+              <div class="info">
+                <h3><%= country.name %></h3>
+                <p>Language: <%= country.language %></p>
+                <p>English Level: <%= country.english_level%></p>
+                <p>Currency: <%= country.currency %></p>
+                <%= link_to "See More Details", class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
+      </div>
+   </div>
 </div>

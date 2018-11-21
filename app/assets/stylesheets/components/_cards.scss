@@ -17,21 +17,31 @@
   padding: 100px 0;
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #F8F0E4;
 }
 
 .card {
-  width: 400px;
+  width: 370px;
   height: 300px;
   border-radius: 15px;
   padding: 1.5rem;
+  margin: 20px 0;
   background: white;
   position: relative;
   display: flex;
   align-items: flex-end;
   transition: 0.4s ease-out;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+.card .title {
+  position: relative;
+  color: white;
+  bottom: 200px;
+  left: 40%;
+  opacity: 1;
+  margin: 0px;
+  z-index: 20;
 }
 .card:hover {
   -webkit-transform: translateY(20px);
@@ -71,6 +81,7 @@
 }
 .card .info {
   position: relative;
+  right: 50px;
   z-index: 3;
   color: white;
   opacity: 0;
@@ -78,9 +89,9 @@
           transform: translateY(30px);
   transition: 0.5s;
 }
-.card .info h1 {
-  margin: 0px;
-}
+// .card .info h1 {
+//   margin: 0px;
+// }
 .card .info p {
   letter-spacing: 1px;
   font-size: 15px;
@@ -98,7 +109,7 @@
   transition: 0.4s ease;
 }
 .card .info button:hover {
-  background: dodgerblue;
+  background: $coral;
   color: white;
 }
 
