@@ -1,5 +1,5 @@
 class Flight < ApplicationRecord
   belongs_to :city
   has_many :favorites
-  validates :depart_departure_time, :depart_arrival_time, :return_departure_time, :return_arrival_time, :departure_location, :return_location, :price, :airline_name, :airport_key, :presence => true
+  validates :depart_departure_time, :depart_arrival_time, :return_departure_time, :return_arrival_time, :departure_location, :return_location, :price, :airline_name, :presence => true
 end
