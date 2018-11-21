@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
   def index
     @countries = Country.all
     @cities = City.all
-    
+
     if params[:commit] == 'Search'
       @flightsAPI = FetchFlights.call(params[:region])
 
