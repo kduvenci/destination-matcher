@@ -22,7 +22,7 @@ curs = dm_db.column(8).drop(1)
 speakLang = dm_db.column(10).drop(1)
 
 cities = dm_db.column(2).drop(1)
-aKeys = dm_db.column(5).drop(1)
+airKeys = dm_db.column(5).drop(1)
 meals = dm_db.column(6).drop(1)
 citiesPhoto = dm_db.column(9).drop(1)
 
@@ -72,6 +72,7 @@ cities.each_with_index do |city, i|
       name: city,
       photo: citiesPhoto[i],
       meal_average_price_cents: meals[i],
+      airport_key: airKeys[i],
       country: Country.find_by(name: countries[i])
     )
     if cit.save
