@@ -3,6 +3,7 @@
   <div class="logo">
     <%= link_to root_path, class: "navbar-dm-logo" do %>
     <%= image_tag "logo.png", height: 50 %>
+    <nobr class="site-title">Destination Matcher</nobr>
     <% end %>
   </div>
 <!-- Right side when Logged IN-->
@@ -21,7 +22,7 @@
   </div>
     <% else %>
       <!-- Right side when logged OUT -->
-      <%= link_to t(".sign_in", default: "Sign Up!"), new_user_registration_path, class: "navbar-dm-item navbar-dm-link" %>
+      <%= link_to t(".sign_in", default: "Sign Up"), new_user_registration_path, class: "navbar-dm-item navbar-dm-link" %>
       <%= link_to t(".sign_in", default: "Log In"), new_user_session_path, class: "navbar-dm-item navbar-dm-link" %>
     <% end %>
   </div>

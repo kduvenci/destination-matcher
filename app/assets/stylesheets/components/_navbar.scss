@@ -4,7 +4,7 @@
   background: #FF5B5B;
   opacity: 0.9 ;
   transition: all 0.3s ease;
-  height: 70px;
+  height: 50px;
   padding: 0px 30px;
   display: flex;
   align-items: center;
@@ -13,11 +13,22 @@
 }
 
 /* Logo */
-.navbar-dm-logo img {
-  height: 45px;
+.navbar-dm-logo {
+  display: flex;
+  align-items: center;
+  img {
+  height: 35px;
   display: absolute;
+  }
+  /* Title text */
+  .site-title {
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: .5px;
+    margin-left: 3px;
+  }
 }
-
 
 /* Right section */
 .navbar-dm-right {
@@ -40,8 +51,8 @@
   font-size: 14px;
 }
 .navbar-dm-link:hover {
-  color: #da552f;
-  text-decoration: none;
+  color: white;
+  text-decoration: underline;
 }
 
 /* Dropdown menu */
