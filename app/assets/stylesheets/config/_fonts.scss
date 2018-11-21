@@ -1,9 +1,10 @@
 // Import Google fonts
-@import url("https://fonts.googleapis.com/css?family=Dosis|Rubik|Proxima");
+
+@import url("https://fonts.googleapis.com/css?family=Dosis|Rubik|Montserrat|Quicksand:400,700");
 
 // Define fonts for body and headers
-$body-font: 'Dosis', sans-serif;
-$headers-font: 'Proxima', Arial, Helvetica, sans-serif;
+$body-font: 'Montserrat', sans-serif;
+$headers-font: 'Quicksand', sans-serif;
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
