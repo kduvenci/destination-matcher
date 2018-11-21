@@ -12,7 +12,6 @@
   <div class="information-container">
     <div class="flight-info-container">
       <div class="total-price-container">
-
       </div>
       <div class="flights-time-container">
         <p><i class="fas fa-plane-departure"></i> <%= @city.flights.first.depart_departure_time %></p>
@@ -30,7 +29,15 @@
     <h3>Our recommended stay</h3>
   </div>
   <br>
+    <!--  card for recoommended flight -->
   <div class="recommended-flight-container text-center">
     <h3>Our recommended flight</h3>
+  </div>
+
+ <!-- "Add to Favorites" and "Book now" button -->
+ <br>
+  <div class="recommended-flight-container flex-fav-book">
+    <input type="submit" name="commit" value="Add to Favorites" class="form-control btn-primary" data-disable-with="Search">
+    <input type="submit" name="commit" value="Book Now!" class="form-control btn-primary" data-disable-with="Search">
   </div>
 </div>
