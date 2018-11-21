@@ -3,6 +3,8 @@ class CitiesController < ApplicationController
   skip_after_action :verify_authorized, :verify_policy_scoped
 
   def index
+    @cities = City.all
+    @countries = Country.all
     if params[:commit] == 'Search'
       @flightsAPI = FetchFlights.call(params[:region])
       pp "HEREEEE #{@flightsAPI}"
