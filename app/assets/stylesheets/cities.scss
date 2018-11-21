@@ -1,4 +1,26 @@
 // Place all the styles related to the Cities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "cities/show";
+
+// City Show Page
+.city-cover-photo {
+  width: 90%;
+  height: 400px;
+  background-size: cover !important;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #333333;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 1px 1px 2px #333333;
+  text-align: center;
+  h2 {
+    font-size: 60px;
+    h3 {
+      font-size: 30px;
+    }
+  }
+}
+
