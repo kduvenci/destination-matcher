@@ -1,13 +1,12 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
 // Bootstrap Configs
 @import "config/colors";
 @import "config/fonts";
 @import "config/bootstrap_variables";
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // CSS Partials
 @import "components/index";
@@ -28,5 +27,4 @@
  *
  *= require_tree .
  *= require_self
- *= require flatpickr/material_red
  */
