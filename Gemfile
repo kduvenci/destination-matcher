@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
+
+
+# ============== ADDED GEMS ============== #
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 5.5.0'
@@ -45,7 +48,12 @@ gem "geocoder"
 gem 'simple_form'
 gem 'thread'
 gem 'rest-client', '~> 2.0'
-
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary'
+gem 'carrierwave', '~> 1.2'
+gem 'faker'
+gem 'flatpickr_rails'
+gem "roo", "~> 2.7.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -71,12 +79,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
-gem 'dotenv-rails', groups: [:development, :test]
-gem 'cloudinary'
-gem 'carrierwave', '~> 1.2'
-
-gem 'faker'
-
-gem 'flatpickr_rails'
