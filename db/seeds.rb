@@ -11,7 +11,7 @@ if Rails.env.development?
  puts "DB destroyed!"
 end
 
-dm_db = Roo::Excelx.new(Rails.root.join('db', 'database.xlsx')).sheet('dm_db')
+dm_db = Roo::Excelx.new(Rails.root.join('db', 'db.xlsx')).sheet('dm_db')
 
 size = dm_db.last_row - 1
 regions = dm_db.column(4).drop(1)
