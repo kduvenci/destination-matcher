@@ -86,12 +86,25 @@ cities.each_with_index do |city, i|
 end
 puts "Total #{counter} cities saved !!!"
 
+#ACCOMMODATION: Made one to use for demonstration week 1.
+puts "------- Accommodations Saving -------"
+  accommodation = Accommodation.new(
+    city: City.find_by(name: 'Taipei'),
+    name: "Taipei Sofitel",
+    photo: "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg",
+    price: 35,
+    star: 2
+    )
+  accommodation.remote_photo_url = citiesPhoto.sample
+  accommodation.save!
+  p "======== > Accommodation #{accommodation.name} Stored !"
+
 # FLIGHT: Creates 5 flights.
 puts "------- Flights Saving -------"
 counter = 0
 airline_names = ["ANA", "Emirates", "Lufthansa", "Thai Airways", "Cathay Pacific Airways"]
 5.times do
-  returnCity = City.find_by(name: 'Panama City')
+  returnCity = City.find_by(name: 'Taipei')
   flight = Flight.new(
     depart_departure_time: Time.now,
     depart_arrival_time: Time.now,
@@ -107,23 +120,7 @@ airline_names = ["ANA", "Emirates", "Lufthansa", "Thai Airways", "Cathay Pacific
   counter += 1
 end
 
-#ACCOMMODATION: Creates 5 accommotations.
-puts "------- Accommodations Saving -------"
-counter = 0
-accommodation_names = ["Sofitel", "Ritz Carlton", "The Westin", "Novotel", "Napoleon"]
 
-5.times do
-  accommodation = Accommodation.new(
-    city: City.find_by(name: 'Panama City'),
-    name: accommodation_names[counter],
-    price: 300,
-    star: 4
-    )
-  accommodation.remote_photo_url = citiesPhoto.sample
-  accommodation.save!
-  p "======== > Accommodation #{accommodation.name} Stored !"
-  counter += 1
-end
 
 # USER: Creates 5 users.
 puts "------- Users Saving -------"
