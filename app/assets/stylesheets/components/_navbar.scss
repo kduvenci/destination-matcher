@@ -1,8 +1,8 @@
 /* Main navbar */
 .navbar-dm {
+  text-decoration: none !important;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: #FF5B5B;
-  opacity: 0.9 ;
+  background: white;
   transition: all 0.3s ease;
   height: 50px;
   padding: 0px 30px;
@@ -10,23 +10,30 @@
   align-items: center;
   justify-content: space-between;
   display: relative;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 30;
 }
 
 /* Logo */
 .navbar-dm-logo {
   display: flex;
   align-items: center;
+  margin-left: 50px;
   img {
   height: 35px;
   display: absolute;
   }
   /* Title text */
   .site-title {
-    color: white;
+    color: black;
     font-weight: 900;
-    font-size: 20px;
-    letter-spacing: .5px;
+    font-size: 15px;
+    letter-spacing: 0.03em;
     margin-left: 3px;
+    font-weight: 10px;
   }
 }
 
@@ -45,18 +52,37 @@
 .navbar-dm-item {
   cursor: pointer;
   padding: 0 20px;
+  letter-spacing: 0.07em;
 }
 
 /* Navbar link */
 .navbar-dm-link {
   font-weight: bold;
-  color: white;
+  color: #999;
   letter-spacing: 0.07em;
   font-size: 14px;
 }
-.navbar-dm-link:hover {
+
+.navbar-dm-link .sign-in-text:hover {
+  color: #111111;
+}
+
+/* Join Free button */
+.sign-in-button {
+  margin-right: 50px;
+}
+.join-free {
+  background-color: #3cb46e;
   color: white;
-  text-decoration: underline;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 5px 11px;
+  text-decoration: none;
+}
+
+.navbar-dm-link:hover {
+  color: #999;
+  text-decoration: none;
 }
 
 /* Dropdown menu */
