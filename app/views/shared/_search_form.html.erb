@@ -5,7 +5,7 @@
     <div class="search-box col-xs-12">
       <%= simple_form_for cities_path, method: :get do |f| %>
         <div class ="form-group col-xs-6">
-          <%= f.input :origin, placeholder: "Traveling from?", input_html: {class: "form-small"} %>
+          <%= f.input :origin, collection:  City.all.each { |r| r.name }, placeholder: "Traveling from?", input_html: {class: "form-small"} %>
         </div>
         <div class ="form-group col-xs-6">
           <%= f.input :region, collection:  Region.all.each { |r| r.name }, input_html: {class: "form-small"}, prompt: "Pick a Region" %>
