@@ -34,7 +34,7 @@
   text-decoration: none !important;
 }
 .card:hover {
-  text-decoration: none;
+  text-decoration: none !important;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
 }
@@ -168,3 +168,16 @@ h3 {
     }
   }
 
+.card {
+  h3:hover{
+    text-decoration: none;
+  }
+
+  p:hover{
+    text-decoration: none;
+  }
+}
+
+a:hover, a:focus {
+  text-decoration: none !important;
+}
