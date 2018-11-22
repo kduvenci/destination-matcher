@@ -1,9 +1,29 @@
 <div class="recommended-flight-container text-center">
-  <h3>Our recommended flight</h3>
-  <div class="flex-recommendations">
-    <input type="submit" value="Change" class="btn-primary other-options">
-   <div class="flight-card">
-    <p>flight info here...</p>
+
+
+
+    <%= render "shared/flight_modal" %>
+
+  <div class="flight-card">
+    <div class="col-xs-8">
+        <!-- Button trigger modal -->
+        <div class="text-left row">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+      <i class="fas fa-exchange-alt"></i></button>
+        <%= @city.flights.first.depart_departure_time.strftime("%R") %> <i class="fas fa-plane"></i> <%= @city.flights.first.depart_arrival_time.strftime("%R") %>
+        </div>
+        <div class="text-left row">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+      <i class="fas fa-exchange-alt"></i></button><%= @city.flights.first.depart_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @city.flights.first.depart_arrival_time.strftime("%R") %>
+    </div>
+      </div>
+      <div class="text-center price-container col-xs-4">
+        <h2><strong>Total</strong></h2>
+        <h4><i class="fas fa-dollar-sign"></i><%= @city.flights.first.price %> USD</h4>
   </div>
-  </div>
+
 </div>
+
+
+
+
