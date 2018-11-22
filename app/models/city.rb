@@ -1,4 +1,5 @@
 class City < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   belongs_to :country
   has_many :accommodations
   has_many :flights

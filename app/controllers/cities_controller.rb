@@ -4,8 +4,8 @@ class CitiesController < ApplicationController
 
   def index
     # @countries = Country.all
-    # @cities = City.all
     @cities = []
+    @cities = City.all
     if params[:commit] == 'Search'
       # prepare params for FetchFlights 
       origin = City.find_by(name: params['/cities']['origin'])
