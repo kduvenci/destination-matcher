@@ -3,19 +3,28 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-
-        <!-- flight details -->
-        <div class="flight-card">
-          <p>flight info here...</p>
-        </div>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">Additional Flight Options</h5>
       </div>
       <div class="modal-body">
-        ...
+           <!-- flight details -->
+
+          <div class="flight-card">
+            <div class="col-xs-8">
+
+                <!-- Button trigger modal -->
+                <div class="text-left row">
+                  <%= @city.flights.first.depart_departure_time.strftime("%R") %> <i class="fas fa-plane"></i> <%= @city.flights.first.depart_arrival_time.strftime("%R") %>
+                </div>
+                <div class="text-left row">
+                <%= @city.flights.first.depart_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @city.flights.first.depart_arrival_time.strftime("%R") %>
+                </div>
+              </div>
+              <div class="text-center price-container col-xs-4">
+                <h2><strong>Total</strong></h2>
+                <h4><i class="fas fa-dollar-sign"></i><%= @city.flights.first.price %> USD</h4>
+              </div>
+          </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
