@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_123833) do
+ActiveRecord::Schema.define(version: 2018_11_22_084022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,9 +61,6 @@ ActiveRecord::Schema.define(version: 2018_11_21_123833) do
   end
 
   create_table "flights", force: :cascade do |t|
-    t.time "depart_arrival_time"
-    t.time "return_departure_time"
-    t.time "return_arrival_time"
     t.string "departure_location"
     t.string "return_location"
     t.integer "price"
@@ -71,7 +68,10 @@ ActiveRecord::Schema.define(version: 2018_11_21_123833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "city_id"
-    t.time "depart_departure_time"
+    t.datetime "depart_arrival_time"
+    t.datetime "depart_departure_time"
+    t.datetime "return_arrival_time"
+    t.datetime "return_departure_time"
     t.index ["city_id"], name: "index_flights_on_city_id"
   end
 
