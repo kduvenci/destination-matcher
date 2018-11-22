@@ -3,11 +3,17 @@ class CitiesController < ApplicationController
   skip_after_action :verify_authorized, :verify_policy_scoped
 
   def index
-    @countries = Country.all
+    # @countries = Country.all
+    @cities = []
     @cities = City.all
-
     if params[:commit] == 'Search'
-      @flightsAPI = FetchFlights.call(params[:region])
+      # prepare params for FetchFlights 
+      origin = City.find_by(name: params['/cities']['origin'])
+      region = Region.find(params['/cities']['region'])
+      outboundDate = params['/cities']["dep_date"] 
+      inboundDate = params['/cities']["return_date"]
+      # Call service
+      @flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
 
       depart_departure_time = ""
       depart_arrival_time = ""
@@ -24,6 +30,7 @@ class CitiesController < ApplicationController
       updated_at = ""
       city_id = ""
 
+      # Get information from json objects
       @flightsAPI.each do |jsonHash|
         jsonHash["Itineraries"].each do |itinerary|
           # find Agent
@@ -34,7 +41,8 @@ class CitiesController < ApplicationController
           # Booking URL and Price
           deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
           price = itinerary["PricingOptions"].first["Price"]      
-
+          
+          # Booking URL and Price
           jsonHash["Legs"].each do |leg|
             if leg["Id"] == itinerary["OutboundLegId"]
               depart_departure_time = leg["Departure"]
@@ -49,6 +57,8 @@ class CitiesController < ApplicationController
               return_destinationID = leg["DestinationStation"]
             end
           end
+          
+          # print console for observation
           puts "#{agent_name} / #{price} $"
           puts "#{depart_departure_time} / #{depart_arrival_time} - #{depart_originID} .. #{depart_destinationID}"
           puts "#{return_departure_time} / #{return_arrival_time} - #{return_originID} .. #{return_destinationID}"
@@ -64,8 +74,8 @@ class CitiesController < ApplicationController
     #   "dep_date"=>"20.12.2018", "return_date"=>"10.01.2019",
     #   "commit"=>"Search"}
 
-    @flightsDB = SearchFlights.call(params)
-    @accommodationsDB = SearchAccomodations.call(params)
+    # @flightsDB = SearchFlights.call(params)
+    # @accommodationsDB = SearchAccomodations.call(params)
   end
 
   def show
