@@ -1,7 +1,7 @@
      <!-- Background picture -->
 
-    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>')">
-           <div class="text-center city-card-container">
+  <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>')">
+    <div class="text-center city-card-container">
       <h2><%= @city.name %></h2>
       <h3><%= @city.country.region.name %></h3>
     </div>
@@ -37,7 +37,7 @@
   </div>
 
       <!--  card for recoommended stay -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="overflow: hidden;">
       <%= render "shared/accomodation_cards" %>
     </div>
   </div>
