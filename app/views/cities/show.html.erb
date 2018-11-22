@@ -1,8 +1,8 @@
 <div class="container parent-container">
   <!-- card with background picture -->
   <div class="city-card-container">
-    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>');">
-      <div class="card city-info-card">
+    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_tag @city.photo if @city.photo.present? %>');">
+      <div class="city-card-container">
         <h2><%= @city.name %></h2>
         <h3><%= @city.country.region.name %></h3>
       </div>
@@ -15,7 +15,7 @@
       </div>
       <div class="flights-time-container">
         <p><i class="fas fa-plane-departure"></i> <%= @city.flights.first.depart_departure_time %></p>
-        <p><i class="fas fa-plane-arrival"></i> <%= @city.flights.first.depart_departure_time %></p>
+        <p><i class="fas fa-plane-arrival"></i> <%= @city.flights.first.depart_arrival_time %></p>
       </div>
       <div class="price-container">
         <p><i class="fas fa-dollar-sign"></i> Total <%= @city.flights.first.price %> USD</p>
@@ -24,27 +24,12 @@
       </div>
     </div>
   </div>
+
   <!--  card for recoommended stay -->
-  <div class="recommended-stay-container text-center">
-    <h3>Our recommended stay</h3>
-    <div class="flex-recommendations">
-      <input type="submit" value="Change" class="btn-primary other-options">
-      <div class="stay-card">
-        <p>stay info here...</p>
-      </div>
-    </div>
-  </div>
-  <br>
-    <!--  card for recommended flight -->
-  <div class="recommended-flight-container text-center">
-    <h3>Our recommended flight</h3>
-    <div class="flex-recommendations">
-      <input type="submit" value="Change" class="btn-primary other-options">
-     <div class="flight-card">
-      <p>flight info here...</p>
-    </div>
-    </div>
-  </div>
+  <%= render "shared/accomodation_cards" %>
+
+  <!--  card for recommended flight -->
+  <%= render "shared/flight_cards" %>
 
  <!-- "Add to Favorites" and "Book now" button -->
  <br>
@@ -56,6 +41,3 @@
 <br>
 <br>
 </div>
-
-
-
