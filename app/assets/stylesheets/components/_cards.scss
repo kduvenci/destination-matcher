@@ -103,7 +103,7 @@
   border-radius: 15px;
   padding: 1.5rem;
   margin: 20px 0;
-  background: $light-coral;
+  background: white;
   position: relative;
   display: flex;
   align-items: flex-center;
@@ -111,7 +111,7 @@
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
 }
 .info-card .total {
-  border-radius: 4px;
+  border-radius: 8px;
   border: 2px solid $coral;
 }
 
@@ -146,4 +146,6 @@
 .flight-card .price-container {
   border-left: 3px dotted $dim-gray;
 }
-
+.flight-card button {
+  margin-top: 50px;
+}
