@@ -2,7 +2,7 @@
   <!-- card with background picture -->
   <div class="city-card-container">
     <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>');">
-      <div class="card city-info-card">
+      <div class="city-card-container">
         <h2><%= @city.name %></h2>
         <h3><%= @city.country.region.name %></h3>
       </div>
@@ -56,6 +56,3 @@
 <br>
 <br>
 </div>
-
-
-
