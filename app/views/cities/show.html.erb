@@ -24,27 +24,12 @@
       </div>
     </div>
   </div>
+
   <!--  card for recoommended stay -->
-  <div class="recommended-stay-container text-center">
-    <h3>Our recommended stay</h3>
-    <div class="flex-recommendations">
-      <input type="submit" value="Change" class="btn-primary other-options">
-      <div class="stay-card">
-        <p>stay info here...</p>
-      </div>
-    </div>
-  </div>
-  <br>
-    <!--  card for recommended flight -->
-  <div class="recommended-flight-container text-center">
-    <h3>Our recommended flight</h3>
-    <div class="flex-recommendations">
-      <input type="submit" value="Change" class="btn-primary other-options">
-     <div class="flight-card">
-      <p>flight info here...</p>
-    </div>
-    </div>
-  </div>
+  <%= render "shared/accomodation_cards" %>
+
+  <!--  card for recommended flight -->
+  <%= render "shared/flight_cards" %>
 
  <!-- "Add to Favorites" and "Book now" button -->
  <br>
