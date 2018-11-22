@@ -10,8 +10,8 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"] 
       inboundDate = params['/cities']["return_date"]
-      min_budget = params['/cities']["min_budget"].to_i
-      max_budget = params['/cities']["max_budget"].to_i
+      min_budget = params['/cities']["min_budget"].gsub(" USD", "").gsub(",","").to_i
+      max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
 
       # Call service
       @flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
@@ -94,14 +94,6 @@ class CitiesController < ApplicationController
           )
 
           if flight.save!
-            # p "."
-            # p "---"
-            # p "====>> Flight is saved. <<===="
-            # p "#{flight.price} == #{flight.airline_name}"
-            # p "#{flight.departure_location} >> #{flight.depart_departure_time}//#{flight.depart_arrival_time}"
-            # p "#{flight.return_location} << #{flight.return_departure_time}//#{flight.return_arrival_time}"
-            # p "---"
-            # p "."
             @savedFlights << flight
           else
             p "= = > > Error durin saving flight: #{flight.errors.messages} "
@@ -109,45 +101,36 @@ class CitiesController < ApplicationController
         end
       end
 
-      puts "----------------------------------------------"
       @savedFlights.sort { |a, b| a.price <=> b.price }
-
-      @savedFlights.each do |flight|
-        meal = flight.city.meal_average_price_cents;
-        period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
-        accommodation = period * 100
-        total = meal * 3 * period + flight.price + accommodation
-        
-        if total >= min_budget && total <= max_budget
-          @cost_range << {
-            flight_id: flight.id,
-            meal: meal,
-            period: period,
-            food: meal * 3 * period,
-            ticket: flight.price,
-            accommodation: accommodation, 
-            total: total
-          }
-        end
-      end
-      
-      # p "Meal Expence : #{meal_expense}USD"
-      # p "Flight Expence : #{ticket_expense}USD"
-      # p "Accomm Expence : #{accommodations_expense}USD"
-      # p "total_expense : #{total_expense}USD"
-      
       @cities = [@savedFlights.first.city]
+      ## BUGDET CALCULATION
+      # @savedFlights.each do |flight|
+      #   meal = flight.city.meal_average_price_cents;
+      #   period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
+      #   accommodation = period * 100
+      #   total = meal * 3 * period + flight.price + accommodation
+        
+      #   if total >= min_budget && total <= max_budget
+      #     @cost_range << {
+      #       flight_id: flight.id,
+      #       meal: meal,
+      #       period: period,
+      #       food: meal * 3 * period,
+      #       ticket: flight.price,
+      #       accommodation: accommodation, 
+      #       total: total
+      #     }
+      #   end
+      #   @cities = []
+      #   @cost_range.each do |flight_set|
+      #     flight = Flight.find(flight_set[:flight_id])
+      #     @cities << flight.city unless @cities.include?(flight.city)
+      #   end
+      # end
+
     end
-
-    # Parameters: {"utf8"=>"✓", "origin"=>"Tokyo", "region"=>"Europe",
-    #   "min_budget"=>"2000", "max_budget"=>"2500",
-    #   "dep_date"=>"20.12.2018", "return_date"=>"10.01.2019",
-    #   "commit"=>"Search"}
-
-    # @flightsDB = SearchFlights.call(params)
-    # @accommodationsDB = SearchAccomodations.call(params)
   end
-
+  
   def show
     @city = City.find(params[:id])
   end
