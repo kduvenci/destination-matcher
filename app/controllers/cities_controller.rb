@@ -10,10 +10,15 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"] 
       inboundDate = params['/cities']["return_date"]
+      min_budget = params['/cities']["min_budget"].to_i
+      max_budget = params['/cities']["max_budget"].to_i
+      
       # Call service
       @flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-
+      
       # Get information from json objects
+      @cost_range = []
+      @savedFlights = []
       @flightsAPI.each do |jsonHash|
         depart_departure_time = ""
         depart_arrival_time = ""
@@ -38,7 +43,6 @@ class CitiesController < ApplicationController
         updated_at = ""
         city_id = ""
 
-        @savedFlights = []
         jsonHash["Itineraries"].each do |itinerary|
           # find Agent
           agentId = itinerary["PricingOptions"].first["Agents"].first
@@ -76,6 +80,7 @@ class CitiesController < ApplicationController
           
           depart_carrier = jsonHash["Carriers"].select {|carrier| carrier["Id"] == depart_carrierID }
           return_carrier = jsonHash["Carriers"].select {|carrier| carrier["Id"] == return_carrierID }
+
           flight = Flight.new(
             depart_departure_time: depart_departure_time.to_time,
             depart_arrival_time: depart_arrival_time.to_time,
@@ -87,37 +92,51 @@ class CitiesController < ApplicationController
             city: City.find_by(airport_key: "#{return_location[0]["Code"]}-sky"),
             airline_name: depart_carrier[0]["Name"]
           )
-          p "-----------#{return_arrival_time}"
-          p "-----------#{return_arrival_time.to_time}"
+
           if flight.save!
-            p "."
-            p "---"
-            p "====>> Flight is saved. <<===="
-            p "#{flight.price} == #{flight.airline_name}"
-            p "#{flight.departure_location} >> #{flight.depart_departure_time}//#{flight.depart_arrival_time}"
-            p "#{flight.return_location} << #{flight.return_departure_time}//#{flight.return_arrival_time}"
-            p "---"
-            p "."
+            # p "."
+            # p "---"
+            # p "====>> Flight is saved. <<===="
+            # p "#{flight.price} == #{flight.airline_name}"
+            # p "#{flight.departure_location} >> #{flight.depart_departure_time}//#{flight.depart_arrival_time}"
+            # p "#{flight.return_location} << #{flight.return_departure_time}//#{flight.return_arrival_time}"
+            # p "---"
+            # p "."
             @savedFlights << flight
           else
-            p "====>> Error durin saving flight: #{flight.errors.messages} "
+            p "= = > > Error durin saving flight: #{flight.errors.messages} "
           end
         end
       end
 
-      puts "-------------------------------------------------"
+      puts "----------------------------------------------"
       @savedFlights.sort { |a, b| a.price <=> b.price }
-      @chosenFlight = @savedFlights.first
 
-      meal = @chosenFlight.city.meal_average_price_cents
-      days = ((@chosenFlight.return_arrival_time - @chosenFlight.depart_departure_time)/60/60/24).floor
+      @savedFlights.each do |flight|
+        meal = flight.city.meal_average_price_cents;
+        period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
+        accommodation = period * 100
+        total = meal * 3 * period + flight.price + accommodation
+        
+        if total >= min_budget && total <= max_budget
+          @cost_range << {
+            flight_id: flight.id,
+            meal: meal,
+            period: period,
+            food: meal * 3 * period,
+            ticket: flight.price,
+            accommodation: accommodation, 
+            total: total
+          }
+        end
+      end
       
-      meal_expense = meal * 3 * (days + 1) 
-      ticket_expense = @chosenFlight.price
-      accommodations_expense = days * 100 
-
-      total_expense = meal_expense + ticket_expense + accommodations_expense
-      @cities = [@chosenFlight.city]
+      # p "Meal Expence : #{meal_expense}USD"
+      # p "Flight Expence : #{ticket_expense}USD"
+      # p "Accomm Expence : #{accommodations_expense}USD"
+      # p "total_expense : #{total_expense}USD"
+      
+      @cities = [@savedFlights.first.city]
     end
 
     # Parameters: {"utf8"=>"✓", "origin"=>"Tokyo", "region"=>"Europe",
