@@ -1,9 +1,17 @@
 <div class="recommended-flight-container text-center">
   <h3>Our recommended flight</h3>
   <div class="flex-recommendations">
-    <input type="submit" value="Change" class="btn-primary other-options">
-   <div class="flight-card">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+      Change
+    </button>
+
+    <%= render "shared/flight_modal" %>
+
+  <div class="flight-card">
     <p>flight info here...</p>
   </div>
+
   </div>
 </div>
