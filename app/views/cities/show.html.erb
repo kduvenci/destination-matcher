@@ -1,7 +1,7 @@
 <div class="container parent-container">
   <!-- card with background picture -->
   <div class="city-card-container">
-    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @city.photo if @city.photo.present? %>');">
+    <div class="city-cover-photo" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_tag @city.photo if @city.photo.present? %>');">
       <div class="city-card-container">
         <h2><%= @city.name %></h2>
         <h3><%= @city.country.region.name %></h3>
@@ -15,7 +15,7 @@
       </div>
       <div class="flights-time-container">
         <p><i class="fas fa-plane-departure"></i> <%= @city.flights.first.depart_departure_time %></p>
-        <p><i class="fas fa-plane-arrival"></i> <%= @city.flights.first.depart_departure_time %></p>
+        <p><i class="fas fa-plane-arrival"></i> <%= @city.flights.first.depart_arrival_time %></p>
       </div>
       <div class="price-container">
         <p><i class="fas fa-dollar-sign"></i> Total <%= @city.flights.first.price %> USD</p>
