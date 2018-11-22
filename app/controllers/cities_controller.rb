@@ -3,7 +3,7 @@ class CitiesController < ApplicationController
   skip_after_action :verify_authorized, :verify_policy_scoped
 
   def index
-    @countries = Counbytry.all
+    @cities = City.all
     if params[:commit] == 'Search'
       # prepare params for FetchFlights 
       origin = City.find_by(name: params['/cities']['origin'])
@@ -117,7 +117,7 @@ class CitiesController < ApplicationController
       accommodations_expense = days * 100 
 
       total_expense = meal_expense + ticket_expense + accommodations_expense
-      @cities = @chosenFlight.city
+      @cities = [@chosenFlight.city]
     end
 
     # Parameters: {"utf8"=>"✓", "origin"=>"Tokyo", "region"=>"Europe",
