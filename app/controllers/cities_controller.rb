@@ -6,16 +6,16 @@ class CitiesController < ApplicationController
     @cities = City.all
     if params[:commit] == 'Search'
       # prepare params for FetchFlights 
-      origin = City.find_by(name: params['/cities']['origin'])
+      origin = City.find(params['/cities']['origin'])
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"] 
       inboundDate = params['/cities']["return_date"]
       min_budget = params['/cities']["min_budget"].to_i
       max_budget = params['/cities']["max_budget"].to_i
-      
+
       # Call service
       @flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-      
+
       # Get information from json objects
       @cost_range = []
       @savedFlights = []
