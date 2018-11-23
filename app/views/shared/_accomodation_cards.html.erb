@@ -7,11 +7,15 @@
     <div class="stay-clear"></div>
       <div class="stay-item">
         <img src="https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg" alt="Accomodation"/>
-        <h3>Taipei Sofitel</h3>
-        <h4>★★</h4>
-        <p><em>$30</em> per day</p>
+        <h3><%= @city.name %> Sofitel</h3>
+        <h4><%= "★" * @accommodation.star %></h4>
+        <p><em>$<%= @accommodation.price%></em> per day</p>
+        <h5><em>$<%= @accommodation.address%></em></h5>
            <!-- Button trigger modal -->
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
   </div>
 </div>
 <br>
+
+
+
