@@ -86,18 +86,21 @@ cities.each_with_index do |city, i|
 end
 puts "Total #{counter} cities saved !!!"
 
-#ACCOMMODATION: Made one to use for demonstration week 1.
+#1 for each city.
 puts "------- Accommodations Saving -------"
+accommodationPhoto = "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg"
+  City.all.each do |city|
   accommodation = Accommodation.new(
-    city: City.find_by(name: 'Taipei'),
-    name: "Taipei Sofitel",
-    photo: "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg",
+    city: city,
+    name: "#{city.name} Sofitel",
+    address: Faker::Address.full_address,
     price: 35,
     star: 2
     )
-  accommodation.remote_photo_url = citiesPhoto.sample
+  accommodation.remote_photo_url = accommodationPhoto
   accommodation.save!
   p "======== > Accommodation #{accommodation.name} Stored !"
+end
 
 # FLIGHT: Creates 5 flights.
 puts "------- Flights Saving -------"
