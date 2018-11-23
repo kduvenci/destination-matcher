@@ -5,7 +5,7 @@
   background: white;
   transition: all 0.3s ease;
   height: 50px;
-  padding: 0px 30px;
+  padding: 0px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,8 +28,8 @@
   }
   /* Title text */
   .site-title {
-    color: black;
-    font-weight: 900;
+    color: #171717;
+    font-weight: 600;
     font-size: 15px;
     letter-spacing: 0.03em;
     margin-left: 3px;
@@ -70,7 +70,10 @@
 /* Join Free button */
 .sign-in-button {
   margin-right: 50px;
+  letter-spacing: 0.02em;
+  font-weight: 100;
 }
+
 .join-free {
   background-color: #3cb46e;
   color: white;
@@ -79,11 +82,37 @@
   padding: 5px 11px;
   text-decoration: none;
 }
+.join-free:hover {
+  color: white !important;
+  background-color: #37A464;
+}
+
+.sign-in-text:hover {
+  color: #7E7E7E !important;
+}
 
 .navbar-dm-link:hover {
   color: #999;
   text-decoration: none;
 }
+
+// Drop Down heart icon //
+
+.menu-dropdown-ico {
+  display: flex;
+  // flex-direction: column;
+  align-items: baseline;
+}
+
+.menu-dropdown-ico .fa-heart {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #3cb46e;
+}
+
+.menu-dropdown-ico .fa-heart:hover {
+  color: #2C8351;
+  }
 
 /* Dropdown menu */
 .menu-dropdown-icon {
@@ -103,8 +132,8 @@
   font-weight: lighter !important;
   color: #999999 !important;
   font-size: 15px !important;
-  line-height: 22px !important;
-  padding: 10px 20px;
+  line-height: 17px !important;
+  padding: 7px 10px;
 }
 
 .navbar-dm-dropdown-menu li > a:hover {
@@ -115,7 +144,7 @@
 .navbar-dm-dropdown-menu:before {
   content: ' ';
   height: 10px;
-  width: 10px;
+  width: 7px;
   position: absolute;
   right: 10px;
   top: -6px;
