@@ -110,9 +110,6 @@ class CitiesController < ApplicationController
         period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
         accommodation = period * 100
         total = meal * 3 * period + flight.price + accommodation
-        puts "==============================================="
-        puts "=======> #{min_budget}//#{total}//#{max_budget}"
-        puts "==============================================="
         
         if total >= min_budget && total <= max_budget
           @cost_range << {
@@ -157,7 +154,8 @@ class CitiesController < ApplicationController
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = @meal * 3 * @period
-    @accommodation = @period * 100
+    @accommodations = @city.accommodations
+    @accommodation = @accommodations.first
     @total = @food + @flight.price + @accommodation
   end
 end
