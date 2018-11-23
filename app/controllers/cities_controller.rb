@@ -3,7 +3,7 @@ class CitiesController < ApplicationController
   skip_after_action :verify_authorized, :verify_policy_scoped
 
   def index
-    @cities = City.all
+    @result_cities = []
     if params[:commit] == 'Search'
       # prepare params for FetchFlights 
       origin = City.find(params['/cities']['origin'])
@@ -103,35 +103,59 @@ class CitiesController < ApplicationController
 
       @savedFlights.sort { |a, b| a.price <=> b.price }
       @cities = [@savedFlights.first.city]
-      ## BUGDET CALCULATION
-      # @savedFlights.each do |flight|
-      #   meal = flight.city.meal_average_price_cents;
-      #   period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
-      #   accommodation = period * 100
-      #   total = meal * 3 * period + flight.price + accommodation
-        
-      #   if total >= min_budget && total <= max_budget
-      #     @cost_range << {
-      #       flight_id: flight.id,
-      #       meal: meal,
-      #       period: period,
-      #       food: meal * 3 * period,
-      #       ticket: flight.price,
-      #       accommodation: accommodation, 
-      #       total: total
-      #     }
-      #   end
-      #   @cities = []
-      #   @cost_range.each do |flight_set|
-      #     flight = Flight.find(flight_set[:flight_id])
-      #     @cities << flight.city unless @cities.include?(flight.city)
-      #   end
-      # end
+      # BUGDET CALCULATION
 
+      @savedFlights.each do |flight|
+        meal = flight.city.meal_average_price_cents;
+        period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
+        accommodation = period * 100
+        total = meal * 3 * period + flight.price + accommodation
+        
+        if total >= min_budget && total <= max_budget
+          @cost_range << {
+            flight_id: flight.id,
+            flight: flight,
+            city: flight.city,
+            meal: meal,
+            period: period,
+            food: meal * 3 * period,
+            ticket: flight.price,
+            accommodation: accommodation, 
+            total: total
+          }
+        else
+        end
+
+        @cost_range.each do |flight_set|
+          @cities << flight_set[:city] unless @cities.include?(flight_set[:city])
+        end
+        @result_cities = ""
+        @result_cities = @cities.map do |city|
+          [ city,
+            @cost_range.select {|cost| cost[:city] == city }.map { |cost| cost[:flight_id] }
+            # accommodation: Accommodation.find_by(city: city)
+          ]
+        end
+
+        
+      end
     end
   end
   
   def show
     @city = City.find(params[:id])
+    @flights = []
+    @flights_ids = params["flight_ids"].split("-")
+    @flights_ids.each do |id|
+      @flights << Flight.find(id)
+    end
+    @flights = @flights.sort { |a, b| a.price <=> b.price }
+    @flight = @flights.first
+    @meal = @flight.city.meal_average_price_cents;
+    @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
+    @food = @meal * 3 * @period
+    @accommodations = @city.accommodations
+    @accommodation = @accommodations.first
+    @total = @food + @flight.price + @accommodation
   end
 end
