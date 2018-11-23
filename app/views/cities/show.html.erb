@@ -4,7 +4,6 @@
     <div class="text-center city-card-container">
       <h2><%= @city.name %></h2>
       <h3><%= @city.country.region.name %></h3>
-      <h3><%= @city.country.region.name %></h3>
       <p><%= @flight.depart_departure_time.strftime("%b %d") %> - <%= @flight.return_departure_time.strftime("%b %d") %> (<%= @period %> days)</p>
     </div>
   </div>
@@ -20,7 +19,7 @@
           <div class="price-container col-xs-8">
             <h4>Recommended Plan</h4>
             <p><i class="fas fa-utensils"></i> <%= @food %> USD (Avg)</p>
-            <p><i class="fas fa-hotel"></i> <%= @accommodation.price %> USD for <%= @period %> days </p>
+            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD for <%= @period %> days </p>
             <p><i class="fas fa-dollar-sign"></i> <%= @flight.price %> USD </p>
           </div>
           <div class="total text-center price-container col-xs-4">

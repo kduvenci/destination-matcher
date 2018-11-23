@@ -156,6 +156,6 @@ class CitiesController < ApplicationController
     @food = @meal * 3 * @period
     @accommodations = @city.accommodations
     @accommodation = @accommodations.first
-    @total = @food + @flight.price + @accommodation.price
+    @total = @food + @flight.price + @accommodation.price * @period
   end
 end
