@@ -118,7 +118,7 @@
   width: 100%;
   height: 150px;
   padding: 1.5rem;
-  margin: 20px 0;
+  margin: 20px 5px;
   background: white;
   position: relative;
   display: flex;
@@ -130,9 +130,9 @@
 .flight-card .price-container {
   border-left: 3px dotted $dim-gray;
 }
-.flight-card button {
-  margin: 10px;
-}
+// .flight-card button {
+//   margin: 5px;
+// }
 
 
 // Accomodation Cards

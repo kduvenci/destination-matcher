@@ -5,19 +5,22 @@
     <%= render "shared/flight_modal" %>
 
   <div class="flight-card">
-    <div class="col-xs-8">
-        <!-- Button trigger modal -->
+    <div class="col-xs-1">
+    <!-- Button trigger modal -->
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
+    </div>
+    <div class="col-xs-5">
         <div class="text-left row">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
           <span><%= @flight.airline_name %></span>
-          <span><%= @flight.depart_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @flight.depart_arrival_time.strftime("%R") %></span>
+          <span><%= @flight.depart_departure_time.strftime("%R") %> <i class="fas fa-plane"> </i><%= @flight.depart_arrival_time.strftime("%R") %></span>
         </div>
         <div class="text-left row">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
-          <i class="fas fa-exchange-alt"></i></button>
           <span><%= @flight.airline_name %></span>
-          <span><%= @flight.return_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @flight.return_arrival_time.strftime("%R") %></span>
+          <span><%= @flight.return_departure_time.strftime("%R") %> <i class="fas fa-plane"> </i><%= @flight.return_arrival_time.strftime("%R") %></span>
         </div>
+      </div>
+      <div class="col-xs-2">
+        <%= link_to "Book", "https://www.skyscanner.jp/?", class: "btn btn-success" %>
       </div>
       <div class="text-center price-container col-xs-4">
         <h2><strong>Total</strong></h2>
