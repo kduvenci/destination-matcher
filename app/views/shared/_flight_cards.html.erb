@@ -9,19 +9,19 @@
         <!-- Button trigger modal -->
         <div class="text-left row">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
-          <span><%= @city.flights.first.airline_name %></span>
-          <span><%= @city.flights.first.depart_departure_time.strftime("%R") %> <i class="fas fa-plane"></i> <%= @city.flights.first.depart_arrival_time.strftime("%R") %></span>
+          <span><%= @flight.airline_name %></span>
+          <span><%= @flight.depart_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @flight.depart_arrival_time.strftime("%R") %></span>
         </div>
         <div class="text-left row">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
           <i class="fas fa-exchange-alt"></i></button>
-          <span><%= @city.flights.first.airline_name %></span>
-          <span><%= @city.flights.first.depart_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @city.flights.first.depart_arrival_time.strftime("%R") %></span>
+          <span><%= @flight.airline_name %></span>
+          <span><%= @flight.return_departure_time.strftime("%R") %> </i> <i class="fas fa-plane"> </i><%= @flight.return_arrival_time.strftime("%R") %></span>
         </div>
       </div>
       <div class="text-center price-container col-xs-4">
         <h2><strong>Total</strong></h2>
-        <h4><i class="fas fa-dollar-sign"></i><%= @city.flights.first.price %> USD</h4>
+        <h4><i class="fas fa-dollar-sign"></i><%= @flight %> USD</h4>
       </div>
 
   </div>
