@@ -5,10 +5,10 @@ class CitiesController < ApplicationController
   def index
     @result_cities = []
     if params[:commit] == 'Search'
-      # prepare params for FetchFlights 
+      # prepare params for FetchFlights
       origin = City.find(params['/cities']['origin'])
       region = Region.find(params['/cities']['region'])
-      outboundDate = params['/cities']["dep_date"] 
+      outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
       min_budget = params['/cities']["min_budget"].gsub(" USD", "").gsub(",","").to_i
       max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
@@ -27,7 +27,7 @@ class CitiesController < ApplicationController
         depart_departure_placeID = ""
         depart_arrival_placeID = ""
         depart_carrierID = ""
-  
+
         return_departure_time = ""
         return_arrival_time = ""
         return_originID = ""
@@ -35,7 +35,7 @@ class CitiesController < ApplicationController
         return_departure_placeID = ""
         return_arrival_placeID = ""
         return_carrierID = ""
-  
+
         departure_location = ""
         return_location = ""
         airline_name = ""
@@ -48,11 +48,11 @@ class CitiesController < ApplicationController
           agentId = itinerary["PricingOptions"].first["Agents"].first
           agent = jsonHash["Agents"].select {|agent| agent["Id"] == agentId }
           agent_name = agent.first["Name"]
-      
+
           # Booking URL and Price
           deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
-          price = itinerary["PricingOptions"].first["Price"]      
-          
+          price = itinerary["PricingOptions"].first["Price"]
+
           # Booking URL and Price
           jsonHash["Legs"].each do |leg|
             if leg["Id"] == itinerary["OutboundLegId"]
@@ -77,7 +77,7 @@ class CitiesController < ApplicationController
 
           departure_location = jsonHash["Places"].select {|place| place["Id"] == depart_departure_placeID }
           return_location = jsonHash["Places"].select {|place| place["Id"] == return_departure_placeID }
-          
+
           depart_carrier = jsonHash["Carriers"].select {|carrier| carrier["Id"] == depart_carrierID }
           return_carrier = jsonHash["Carriers"].select {|carrier| carrier["Id"] == return_carrierID }
 
@@ -110,7 +110,7 @@ class CitiesController < ApplicationController
         period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
         accommodation = period * 100
         total = meal * 3 * period + flight.price + accommodation
-        
+
         if total >= min_budget && total <= max_budget
           @cost_range << {
             flight_id: flight.id,
@@ -120,7 +120,7 @@ class CitiesController < ApplicationController
             period: period,
             food: meal * 3 * period,
             ticket: flight.price,
-            accommodation: accommodation, 
+            accommodation: accommodation,
             total: total
           }
         else
@@ -137,11 +137,11 @@ class CitiesController < ApplicationController
           ]
         end
 
-        
+
       end
     end
   end
-  
+
   def show
     @city = City.find(params[:id])
     @flights = []
@@ -156,6 +156,6 @@ class CitiesController < ApplicationController
     @food = @meal * 3 * @period
     @accommodations = @city.accommodations
     @accommodation = @accommodations.first
-    @total = @food + @flight.price + @accommodation
+    @total = @food + @flight.price + @accommodation.price
   end
 end
