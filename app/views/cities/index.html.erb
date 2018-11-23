@@ -1,9 +1,8 @@
 <%= render "shared/banner" %>
-
 <div class="wrapper">
   <div class="container">
+    <h3 class="text-center">Our recommended destionations for you</h3>
     <div class="row">
-
         <% @cities.each do |city| %>
          <% country = city.country %>
           <div class="col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
@@ -21,7 +20,6 @@
             </div>
           </div>
         <% end %>
-
       </div>
    </div>
 </div>

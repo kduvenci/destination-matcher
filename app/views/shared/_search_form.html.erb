@@ -3,7 +3,7 @@
 <div class="containter">
   <div class="row">
     <div class="search-box col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
-      <%= simple_form_for cities_path, method: :get do |f| %>
+      <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
         <div class ="form-group col-xs-12 col-md-6">
           <%= f.input :origin, collection:  City.all.each { |r| r.name }, placeholder: "Traveling from?", input_html: {class: "form-small"} %>
         </div>
