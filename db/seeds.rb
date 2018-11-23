@@ -88,19 +88,19 @@ puts "Total #{counter} cities saved !!!"
 
 #1 for each city.
 puts "------- Accommodations Saving -------"
+accommodationPhoto = "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg"
   City.all.each do |city|
   accommodation = Accommodation.new(
     city: city,
     name: "#{city.name} Sofitel",
-    photo: "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg",
     address: Faker::Address.full_address,
     price: 35,
     star: 2
     )
-end
-  accommodation.remote_photo_url = citiesPhoto.sample
+  accommodation.remote_photo_url = accommodationPhoto
   accommodation.save!
   p "======== > Accommodation #{accommodation.name} Stored !"
+end
 
 # FLIGHT: Creates 5 flights.
 puts "------- Flights Saving -------"
