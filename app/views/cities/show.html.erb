@@ -4,6 +4,7 @@
     <div class="text-center city-card-container">
       <h2><%= @city.name %></h2>
       <h3><%= @city.country.region.name %></h3>
+      <span><%= @city.flights.first.depart_departure_time.strftime("%b %d") %> - <%= @city.flights.first.depart_departure_time.strftime("%b %d") %></span>
     </div>
   </div>
 
