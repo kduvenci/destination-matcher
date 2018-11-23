@@ -42,9 +42,9 @@ class FetchFlights
         },
         headers = {
           "Content-Type" => "application/x-www-form-urlencoded",
-          "X-Mashape-Key" => "NxHeqyNqVLmsh85DQkK6sKc4NZitp19PrEhjsnxGrrKE9eOv8f",
-          "X-Mashape-Host" => "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-        }
+          "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
+          "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
+          }
         session_keys << response.headers[:location].split("/").last
       }
     end
@@ -55,8 +55,8 @@ class FetchFlights
       # puts "by key => #{session_key}"
       pool.process {
         response = RestClient.get "#{getURL}/#{session_key}?pageIndex=0&pageSize=10",{
-        "X-Mashape-Key" => "NxHeqyNqVLmsh85DQkK6sKc4NZitp19PrEhjsnxGrrKE9eOv8f",
-        "X-Mashape-Host" => "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+        "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
+        "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
         }
         results << JSON.parse(response.body)
       }
