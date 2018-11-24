@@ -18,8 +18,8 @@
       <div class="info-card">
           <div class="price-container col-xs-8">
             <h4>Recommended Plan</h4>
-            <p><i class="fas fa-utensils"></i> <%= @food %> USD (Avg)</p>
-            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD for <%= @period %> days </p>
+            <p><i class="fas fa-utensils"></i> <%= @food %> USD (Avg total for <%= @period %> days)</p>
+            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD total for <%= @period %> days </p>
             <p><i class="fas fa-plane"> </i> <i class="fas fa-dollar-sign"></i> <%= @flight.price %> USD round trip </p>
           </div>
           <div class="total text-center price-container col-xs-4">
