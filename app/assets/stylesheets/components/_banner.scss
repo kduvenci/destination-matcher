@@ -1,8 +1,6 @@
 .banner {
   color: white;
-  text-align: center;
   height: 100vh;
-  /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
   background-image: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('travel2.jpg');
   position: relative;
@@ -15,11 +13,13 @@
 }
 
 .banner h2 {
-  margin-top: 100px;
+  text-align: center;
+  margin-top: 120px;
   font-weight: bold;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
 }
 .banner p {
+  text-align: center;
   font-size: 18px;
   font-weight: 400;
   color: rgb(255, 255, 255);
