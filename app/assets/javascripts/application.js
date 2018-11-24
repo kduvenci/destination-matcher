@@ -14,3 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// console.log("hello from JS spinner");
+//
+// const searchButton = document.querySelector(".spin-trigger");
+// console.log(searchButton);
