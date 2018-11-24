@@ -20,8 +20,8 @@ class FetchFlights
       destinationplaces << city.airport_key
     end
     
-    pool = Thread.pool(6)
-    
+    pool = Thread.pool(5)
+
     destinationplaces.each do |destination|
       pool.process {  
         response = RestClient.post postURL, {
@@ -49,12 +49,11 @@ class FetchFlights
       }
     end
     pool.shutdown
-    
-    pool = Thread.pool(6)
+    pool = Thread.pool(5)
+
     session_keys.each do |session_key|
-      # puts "by key => #{session_key}"
       pool.process {
-        response = RestClient.get "#{getURL}/#{session_key}?pageIndex=0&pageSize=10",{
+        response = RestClient.get "#{getURL}/#{session_key}",{
         "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
         "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
         }
@@ -62,6 +61,7 @@ class FetchFlights
       }
     end
     pool.shutdown
+    
     return results
   end
 end
