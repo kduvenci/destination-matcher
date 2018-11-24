@@ -1,11 +1,14 @@
 .search-box {
   width: 100%;
-  padding: 25px 10px;
+  // height: 100%;
+  padding: 20px 5px;
   background-color: #FBFBFB;
   border-radius: 4px !important;
   color: #2A262D;
   font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
   font-size: 15px;
+  position: absolute;
+  margin-bottom: 10px;
 }
 
 .form-control {

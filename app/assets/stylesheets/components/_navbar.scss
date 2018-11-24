@@ -5,7 +5,7 @@
   background: white;
   transition: all 0.3s ease;
   height: 50px;
-  padding: 0px 50px;
+  padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 .navbar-dm-logo {
   display: flex;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 5px;
   img {
   height: 35px;
   display: absolute;
@@ -69,7 +69,7 @@
 
 /* Join Free button */
 .sign-in-button {
-  margin-right: 50px;
+  margin-right: 10px;
   letter-spacing: 0.02em;
   font-weight: 100;
 }
