@@ -4,6 +4,7 @@
     <div class="text-center city-card-container">
       <h2><%= @city.name %></h2>
       <h3><%= @city.country.region.name %></h3>
+      <p><%= @flight.depart_departure_time.strftime("%b %d") %> - <%= @flight.return_departure_time.strftime("%b %d") %> (<%= @period %> days)</p>
     </div>
   </div>
 
@@ -17,13 +18,13 @@
       <div class="info-card">
           <div class="price-container col-xs-8">
             <h4>Recommended Plan</h4>
-            <p><i class="fas fa-utensils"></i> <%= meal = @city.meal_average_price_cents %> USD (Avg)</p>
-            <p><i class="fas fa-hotel"></i> <%= accommodation = @city.accommodations.first.price %> USD</p>
-            <p><i class="fas fa-dollar-sign"></i><%= flight = @city.flights.first.price %> USD</p>
+            <p><i class="fas fa-utensils"></i> <%= @food %> USD (Avg total for <%= @period %> days)</p>
+            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD total for <%= @period %> days </p>
+            <p><i class="fas fa-plane"> </i> <i class="fas fa-dollar-sign"></i> <%= @flight.price %> USD round trip </p>
           </div>
           <div class="total text-center price-container col-xs-4">
             <h2><strong>Total</strong></h2>
-            <p><%= meal + accommodation + flight %> USD</p>
+            <p><strong><%= @total %></strong> USD</p>
           </div>
         </div>
       </div>
@@ -37,10 +38,11 @@
   </div>
 
       <!--  card for recoommended stay -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="overflow: hidden;">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <%= render "shared/accomodation_cards" %>
     </div>
   </div>
 
 
 </div>
+
