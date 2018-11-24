@@ -103,6 +103,7 @@ class CitiesController < ApplicationController
 
       @savedFlights.sort { |a, b| a.price <=> b.price }
       @cities = [@savedFlights.first.city]
+
       # BUGDET CALCULATION
 
       @savedFlights.each do |flight|

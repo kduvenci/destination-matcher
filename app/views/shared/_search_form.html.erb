@@ -1,9 +1,9 @@
 <!-- Simple Form -->
 
-<div class="containter">
+<div class="container">
   <div class="row">
     <div class="search-box col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
-      <%= simple_form_for cities_path, method: :get do |f| %>
+      <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
         <div class ="form-group col-xs-12 col-md-6">
           <%= f.input :origin, collection:  City.all.each { |r| r.name }, placeholder: "Traveling from?", input_html: {class: "form-small"} %>
         </div>
@@ -24,7 +24,7 @@
           <%= f.input :return_date, as: :string, required: false, input_html: {class: "datepicker form-small"}, placeholder: "Return Date", label: raw('<i class="fas fa-plane-arrival"></i> Return Date') %>
         </div>
         <div class="form-group col-xs-12">
-        <div><%= f.submit "Search", class: "form-small submit-button btn btn-primary" %></div>
+        <div><%= f.submit "Search", class: "form-small submit-button btn btn-primary spin-trigger" %></div>
         </div>
       <% end %>
     </div>
