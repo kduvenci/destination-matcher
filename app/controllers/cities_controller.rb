@@ -68,8 +68,6 @@ class CitiesController < ApplicationController
     # Get information from json objects
     savedFlights = []
     flightsAPI.each do |jsonHash|
-
-
       depart_departure_time = ""
       depart_arrival_time = ""
       depart_originID = ""
@@ -91,6 +89,7 @@ class CitiesController < ApplicationController
       departure_location = ""
       return_location = ""
       counter = 0
+
       jsonHash["Itineraries"].each do |itinerary|
         if counter < save_max_flight
           # ticket general informations
