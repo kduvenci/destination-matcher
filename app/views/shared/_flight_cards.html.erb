@@ -11,11 +11,11 @@
     </div>
     <div class="col-xs-5">
         <div class="text-left row">
-          <span><%= @flight.airline_name %></span>
+          <span><%= @flight.depart_airline_name %></span>
           <span><%= @flight.depart_departure_time.strftime("%R") %> <i class="fas fa-plane"> </i><%= @flight.depart_arrival_time.strftime("%R") %></span>
         </div>
         <div class="text-left row">
-          <span><%= @flight.airline_name %></span>
+          <span><%= @flight.return_airline_name %></span>
           <span><%= @flight.return_departure_time.strftime("%R") %> <i class="fas fa-plane"> </i><%= @flight.return_arrival_time.strftime("%R") %></span>
         </div>
       </div>

@@ -68,6 +68,8 @@ class CitiesController < ApplicationController
     # Get information from json objects
     savedFlights = []
     flightsAPI.each do |jsonHash|
+
+
       depart_departure_time = ""
       depart_arrival_time = ""
       depart_originID = ""
@@ -75,6 +77,7 @@ class CitiesController < ApplicationController
       depart_departure_placeID = ""
       depart_arrival_placeID = ""
       depart_carrierID = ""
+      depart_stops = ""
 
       return_departure_time = ""
       return_arrival_time = ""
@@ -83,45 +86,48 @@ class CitiesController < ApplicationController
       return_departure_placeID = ""
       return_arrival_placeID = ""
       return_carrierID = ""
+      return_stops = ""
 
       departure_location = ""
       return_location = ""
       counter = 0
       jsonHash["Itineraries"].each do |itinerary|
         if counter < save_max_flight
-          # Booking URL and Price
+          # ticket general informations
+          adults = jsonHash["Query"]["Adults"]
+          cabin_class = jsonHash["Query"]["CabinClass"]
           deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
           ticket_price = itinerary["PricingOptions"].first["Price"]
 
-          # find Agent
+          # find agent
           agentId = itinerary["PricingOptions"].first["Agents"].first
           agent = jsonHash["Agents"].select {|agent| agent["Id"] == agentId }
           agent_name = agent.first["Name"]
 
-          # Departure and Arrival Infos
+          # departure and arrival infos
           jsonHash["Legs"].each do |leg|
             if leg["Id"] == itinerary["OutboundLegId"]
               depart_departure_time = leg["Departure"].to_time
               depart_arrival_time = leg["Arrival"].to_time
               depart_departure_placeID = leg["OriginStation"]
-              depart_arrival_placeID = leg["DestinationStation"]
+              # depart_arrival_placeID = leg["DestinationStation"]
               depart_carrierID = leg["Carriers"].first
-              depart_originID = leg["OriginStation"]
-              depart_destinationID = leg["DestinationStation"]
+              depart_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
             end
             if leg["Id"] == itinerary["InboundLegId"]
               return_departure_time = leg["Departure"].to_time
               return_arrival_time = leg["Arrival"].to_time
               return_departure_placeID = leg["OriginStation"]
-              return_arrival_placeID = leg["DestinationStation"]
+              # return_arrival_placeID = leg["DestinationStation"]
               return_carrierID = leg["Carriers"].first
-              return_originID = leg["OriginStation"]
-              return_destinationID = leg["DestinationStation"]
+              return_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
             end
           end
 
+          # locations
           departure_location = jsonHash["Places"].select { |place| place["Id"] == depart_departure_placeID }
           return_location = jsonHash["Places"].select { |place| place["Id"] == return_departure_placeID }
+          # airline company
           depart_carrier = jsonHash["Carriers"].select { |carrier| carrier["Id"] == depart_carrierID }
           return_carrier = jsonHash["Carriers"].select { |carrier| carrier["Id"] == return_carrierID }
           city = City.find_by(airport_key: "#{return_location[0]["Code"]}-sky")
@@ -129,29 +135,39 @@ class CitiesController < ApplicationController
           if in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time)
             # prepare flight instances
             flight = Flight.new(
+              # general
+              adults: adults,
+              agent: agent_name,
+              cabin_class: cabin_class,
+              price: ticket_price,
+              booking_url: deeplinkUrl,
+              city: city,
+              # depart info
+              depart_airline_name: depart_carrier[0]["Name"],
+              departure_location: departure_location[0]["Name"],
               depart_departure_time: depart_departure_time,
               depart_arrival_time: depart_arrival_time,
+              depart_stops: depart_stops,
+              # return info
+              return_airline_name: return_carrier[0]["Name"],
+              return_location: return_location[0]["Name"],
               return_departure_time: return_departure_time,
               return_arrival_time: return_arrival_time,
-              departure_location: departure_location[0]["Name"],
-              return_location: return_location[0]["Name"],
-              price: ticket_price,
-              city: city,
-              airline_name: depart_carrier[0]["Name"]
+              return_stops: return_stops
             )
             
             # save flights
             if flight.save!
               savedFlights << flight
             else
-              p "= = > > Error durin saving flight: #{flight.errors.messages} "
+              p "= = > > Error during saving flight: #{flight.errors.messages} "
             end
           end
         end
         counter += 1
       end
     end
-
+    
     return savedFlights.sort { |a, b| a.price <=> b.price }  
   end
 

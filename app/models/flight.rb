@@ -1,5 +1,8 @@
 class Flight < ApplicationRecord
   belongs_to :city
   has_many :favorites
-  validates :depart_departure_time, :depart_arrival_time, :return_departure_time, :return_arrival_time, :departure_location, :return_location, :price, :airline_name, :presence => true
+
+  NON_VAL_ATTRS = ["id", "created_at", "updated_at"]
+  VAL_ATTRS = Flight.attribute_names.reject{ |attr| NON_VAL_ATTRS.include?(attr) }
+  validates_presence_of VAL_ATTRS
 end
