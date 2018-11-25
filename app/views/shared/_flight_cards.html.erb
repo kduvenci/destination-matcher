@@ -38,16 +38,28 @@
       <div class="col-xs-3">
         <div class="row">
           <ul class="list-unstyled">
-            <li><%= @flight.depart_departure_time - @flight.depart_arrival_time %></li>
+            <li><%= ((@flight.depart_arrival_time - @flight.depart_departure_time)/3600).round(2) %></li>
             <li>--------<i class="fas fa-plane"></i></li>
-            <li><%= @flight.depart_stops %></li>
+            <% if @flight.depart_stops == "direct" %>
+              <li><%= @flight.depart_stops %></li>
+            <% elsif @flight.depart_stops == "1" %>
+              <li><%= @flight.depart_stops %> stop</li>
+            <% else %>
+              <li><%= @flight.depart_stops %> stops</li>
+            <% end %>
           </ul>
         </div>
         <div class="row">
           <ul class="list-unstyled">
-            <li><%= @flight.return_departure_time - @flight.return_arrival_time %></li>
+            <li><%= ((@flight.return_arrival_time - @flight.return_departure_time)/3600).round(2) %></li>
             <li>--------<i class="fas fa-plane"></i></li>
-            <li><%= @flight.return_stops %></li>
+            <% if @flight.return_stops == "Direct" %>
+              <li><%= @flight.return_stops %></li>
+            <% elsif @flight.return_stops == "1" %>
+              <li><%= @flight.return_stops %> stop</li>
+            <% else %>
+              <li><%= @flight.return_stops %> stops</li>
+            <% end %>
           </ul>
         </div>
       </div>
