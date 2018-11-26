@@ -15,11 +15,11 @@
                 <div class="card-overlay"></div>
                 <span class="title"><h3><%= city.name %>, <%= country.name %></h3></span>
                 <span class="info">
+                <h4>Language: <%= country.language %></h4>
                 <h4>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h4>
                 <h4>Overall Risk: <%= "medium".capitalize %></h4><!-- To unhardcode when risks seeded -->
+                <h4>Currency: <%= country.currency %></h4>
                 </span>
-                <p>Language: <%= country.language %></p>
-                <p>Currency: <%= country.currency %></p>
               </div>
             <% end %>
           </div>
