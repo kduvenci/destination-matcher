@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  safety_rank: 1.5
+  overrall_risk: MyString
+  pickpoket_risk: MyString
+  mugging_risk: MyString
+  scams_risk: MyString
+  transport_and_taxis_risk: MyString
+  natural_disasters_risk: MyString
+  terrorism_risk: MyString
+  women_travelers_risk: MyString
+  city: one
+
+two:
+  safety_rank: 1.5
+  overrall_risk: MyString
+  pickpoket_risk: MyString
+  mugging_risk: MyString
+  scams_risk: MyString
+  transport_and_taxis_risk: MyString
+  natural_disasters_risk: MyString
+  terrorism_risk: MyString
+  women_travelers_risk: MyString
+  city: two
