@@ -16,7 +16,7 @@ class CitiesController < ApplicationController
       # Call service
       fetchTime = Time.now
       flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-      
+
       # Save Flights if in Bugdet
       save_flight_time = Time.now
       saved_flights = save_flights(flightsAPI, max_budget)
@@ -50,13 +50,28 @@ class CitiesController < ApplicationController
       @flights << Flight.find(id)
     end
     @flights = @flights.sort { |a, b| a.price <=> b.price }
-    @flight = @flights.first
+
+    if params['flight_choice']
+      @flight = Flight.find(params['flight_choice'].to_i)
+      @picked_flight = params['flight_choice'].to_i
+    else
+      @flight = @flights[0]
+      @picked_flight = @flight.id
+    end
+
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = @meal * 3 * @period
     @accommodations = @city.accommodations
     @accommodation = @accommodations.first
     @total = @food + @flight.price + @accommodation.price * @period
+  end
+
+  def change_first_pick
+    # change @flight to the picked one by using @picked_flight
+    # @flight = Flight.find(params["flight-choice"])
+
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], flight_choice: params['flight_choice']
   end
 
   private
@@ -154,7 +169,7 @@ class CitiesController < ApplicationController
               return_arrival_time: return_arrival_time,
               return_stops: return_stops
             )
-            
+
             # save flights
             if flight.save!
               savedFlights << flight
@@ -166,8 +181,8 @@ class CitiesController < ApplicationController
         counter += 1
       end
     end
-    
-    return savedFlights.sort { |a, b| a.price <=> b.price }  
+
+    return savedFlights.sort { |a, b| a.price <=> b.price }
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time)
@@ -177,7 +192,7 @@ class CitiesController < ApplicationController
     accommodation = city.accommodations.first
     accommodation_cost = accommodation.price * period
     total = food + ticket_price + accommodation_cost
-  
+
     return total <= max_budget
   end
 
