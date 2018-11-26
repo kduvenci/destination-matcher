@@ -9,6 +9,9 @@
   background-color: $light-yellow;
 }
 
+// .card:before{
+//   background-image: rgba(1,1,1,1);
+// }
 .card {
   width: 370px;
   height: 300px;
@@ -32,7 +35,7 @@
   z-index: 20;
   font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
   text-decoration: none !important;
-  text-shadow: 1px 1px #C7C7C7;
+  text-shadow: 1px 1px #5B5B5B;
 }
 .card:hover {
   text-decoration: none !important;
@@ -40,10 +43,9 @@
           transform: translateY(20px);
 }
 .card:hover:before {
-  opacity: 1;
+  opacity: 0.8;
 }
 .card:hover .info {
-  opacity: 1;
   -webkit-transform: translateY(0px);
           transform: translateY(0px);
 }
@@ -71,19 +73,26 @@
   left: 0;
   border-radius: 4px;
 }
+.card-overlay {
+  background-color: black;
+  opacity:0.17;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+}
 .card .info {
+  text-shadow: 1px 2px black;
   position: relative;
   z-index: 3;
   color: white;
-  opacity: 0;
-  -webkit-transform: translateY(30px);
-          transform: translateY(30px);
-  transition: 0.5s;
 }
 // .card .info h1 {
 //   margin: 0px;
 // }
-.card .info h3 {
+.card .info h4 {
   font-family: 'Proxima', Arial, Helvetica, sans-serif;
   text-decoration: none !important;
 }
@@ -178,4 +187,8 @@ h3 {
 
 a:hover, a:focus {
   text-decoration: none !important;
+}
+
+.yellow{
+  color: yellow;
 }
