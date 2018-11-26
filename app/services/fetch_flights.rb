@@ -7,7 +7,7 @@ require 'pp'
 class FetchFlights
   def self.call(origin, region, outboundDate, inboundDate)
     destinationplaces = []
-    
+
     session_keys = []
     results = []
     country = "JP"
@@ -15,15 +15,15 @@ class FetchFlights
     adults = 1
     postURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
     getURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0"
-    
+
     region.cities.each do |city|
       destinationplaces << city.airport_key
     end
-    
+
     pool = Thread.pool(5)
 
     destinationplaces.each do |destination|
-      pool.process {  
+      pool.process {
         response = RestClient.post postURL, {
           "country" => country,
           "currency" => "USD",
@@ -61,7 +61,7 @@ class FetchFlights
       }
     end
     pool.shutdown
-    
+
     return results
   end
 end
