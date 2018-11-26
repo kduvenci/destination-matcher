@@ -4,45 +4,67 @@
     <div class="text-center city-card-container">
       <h2><%= @city.name %></h2>
       <h3><%= @city.country.region.name %></h3>
-      <p><%= @flight.depart_departure_time.strftime("%b %d") %> - <%= @flight.return_departure_time.strftime("%b %d") %> (<%= @period %> days)</p>
+      <p><%= @flight.depart_departure_time.strftime("%b %d") %> - <%= @flight.return_departure_time.strftime("%b %d") %></p>
     </div>
   </div>
 
-<div class="results container">
+<div class="results container-fluid">
+  <div class="content container">
 
   <!-- card with prices of flights/avg meal/hotel -->
   <div class="row">
-
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+    <!-- Information about country -->
+    <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="row">
-      <div class="info-card">
-          <div class="price-container col-xs-8">
-            <h4>Recommended Plan</h4>
-            <p><i class="fas fa-utensils"></i> <%= @food %> USD (Avg total for <%= @period %> days)</p>
-            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD total for <%= @period %> days </p>
-            <p><i class="fas fa-plane"> </i> <i class="fas fa-dollar-sign"></i> <%= @flight.price %> USD round trip </p>
+        <div class="info-card">
+        <div class="price-container col-xs-8">
+            <h4>Recommended Plan for <%= @period %> days</h4>
+            <p><i class="fas fa-utensils"></i> <%= @food.round %> USD (Total Avg)</p>
+            <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD total</p>
+            <p><i class="fas fa-plane"> </i> <%= @flight.price %> USD round trip </p>
           </div>
           <div class="total text-center price-container col-xs-4">
             <h2><strong>Total</strong></h2>
-            <p><strong><%= @total %></strong> USD</p>
+            <p><strong><%= @total.round %></strong> USD</p>
           </div>
         </div>
       </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="card-country-general-info">
+            <h3>Country at a Glance</h3>
+            <h4>Language: <%= @city.country.language %></h4>
+            <h4>English Level: <span class="yellow"><%= '★' * @city.country.english_level %></span></h4>
+            <h4>Overall Risk: <%= "medium".capitalize %></h4><!-- To unhardcode when risks seeded -->
+            <h4>Currency: <%= @city.country.currency %></h4>
+          </div>
+        </div>
+
+        <div class="col-xs-8">
+            <%= render "shared/flight_cards" %>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+    <!-- Flight and Total Cost Cards -->
+
+
 
 
 
     <!--  card for recommended flight -->
-    <div class="row">
-      <%= render "shared/flight_cards" %>
-    </div>
-  </div>
+
 
       <!--  card for recoommended stay -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
       <%= render "shared/accomodation_cards" %>
     </div>
   </div>
-
+  </div>
 
 </div>
 
