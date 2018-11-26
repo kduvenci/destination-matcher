@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_061341) do
+ActiveRecord::Schema.define(version: 2018_11_26_062541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2018_11_26_061341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
-    t.string "image_url"
-    t.string "booking_url"
+    t.text "image_url"
+    t.text "booking_url"
     t.string "score"
     t.index ["city_id"], name: "index_accommodations_on_city_id"
   end
