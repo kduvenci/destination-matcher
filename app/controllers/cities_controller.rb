@@ -90,6 +90,7 @@ class CitiesController < ApplicationController
       depart_arrival_placeID = ""
       depart_carrierID = ""
       depart_stops = ""
+      depart_code = ""
 
       return_departure_time = ""
       return_arrival_time = ""
@@ -99,7 +100,8 @@ class CitiesController < ApplicationController
       return_arrival_placeID = ""
       return_carrierID = ""
       return_stops = ""
-
+      return_code = ""
+      
       departure_location = ""
       return_location = ""
       counter = 0
@@ -108,13 +110,15 @@ class CitiesController < ApplicationController
         if counter < save_max_flight
           # ticket general informations
           adults = jsonHash["Query"]["Adults"]
+          depart_code = jsonHash["Places"].select { |place| place["Id"] == jsonHash["Query"]["OriginPlace"].to_i }.first["Code"]
+          return_code = jsonHash["Places"].select { |place| place["Id"] == jsonHash["Query"]["DestinationPlace"].to_i }.first["Code"]
           cabin_class = jsonHash["Query"]["CabinClass"]
           deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
           ticket_price = itinerary["PricingOptions"].first["Price"]
 
           # find agent
           agentId = itinerary["PricingOptions"].first["Agents"].first
-          agent = jsonHash["Agents"].select {|agent| agent["Id"] == agentId }
+          agent = jsonHash["Agents"].select { |agent| agent["Id"] == agentId }
           agent_name = agent.first["Name"]
 
           # departure and arrival infos
@@ -161,12 +165,16 @@ class CitiesController < ApplicationController
               depart_departure_time: depart_departure_time,
               depart_arrival_time: depart_arrival_time,
               depart_stops: depart_stops,
+              depart_code: depart_code,
+              depart_image_url: depart_carrier[0]["ImageUrl"],
               # return info
               return_airline_name: return_carrier[0]["Name"],
               return_location: return_location[0]["Name"],
               return_departure_time: return_departure_time,
               return_arrival_time: return_arrival_time,
-              return_stops: return_stops
+              return_stops: return_stops,
+              return_code: return_code,
+              return_image_url: return_carrier[0]["ImageUrl"]
             )
 
             # save flights
