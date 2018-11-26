@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_062541) do
+ActiveRecord::Schema.define(version: 2018_11_26_092254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_062541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
-    t.text "image_url"
+    t.text "photo"
     t.text "booking_url"
     t.string "score"
     t.index ["city_id"], name: "index_accommodations_on_city_id"
@@ -87,6 +87,22 @@ ActiveRecord::Schema.define(version: 2018_11_26_062541) do
     t.index ["city_id"], name: "index_flights_on_city_id"
   end
 
+  create_table "level_of_safeties", force: :cascade do |t|
+    t.float "safety_rank"
+    t.string "overrall_risk"
+    t.string "pickpoket_risk"
+    t.string "mugging_risk"
+    t.string "scams_risk"
+    t.string "transport_and_taxis_risk"
+    t.string "natural_disasters_risk"
+    t.string "terrorism_risk"
+    t.string "women_travelers_risk"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_level_of_safeties_on_city_id"
+  end
+
   create_table "regions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -114,4 +130,5 @@ ActiveRecord::Schema.define(version: 2018_11_26_062541) do
   add_foreign_key "favorites", "flights"
   add_foreign_key "favorites", "users"
   add_foreign_key "flights", "cities"
+  add_foreign_key "level_of_safeties", "cities"
 end
