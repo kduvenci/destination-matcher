@@ -18,12 +18,12 @@ class FetchAccommodations
   end
 
   def call
-    url =  "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1DCAEoggI46AdIM1gEaHWIAQGYAQm4AQfIAQzYAQPoAQGIAgGoAgM&lang=en-gb&sid=de09dff5fbf4dd458853cf6d1bbb24e3&sb=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.en-gb.html%3Flabel%3Dgen173nr-1DCAEoggI46AdIM1gEaHWIAQGYAQm4AQfIAQzYAQPoAQGIAgGoAgM%3Bsid%3Dde09dff5fbf4dd458853cf6d1bbb24e3%3Bsb_price_type%3Dtotal%26%3B&ss=#{@city_name}&is_ski_area=0&ssne=#{@city_name}&ssne_untouched=#{@city_name}&selected_currency=USD&dest_id=-246227&dest_type=city&checkin_monthday=#{@checkin_monthday}&checkin_month=#{@checkin_month}&checkin_year=#{@checkin_year}&checkout_monthday=#{@checkout_monthday}&checkout_month=#{@checkout_month}&checkout_year=#{@checkout_year}&no_rooms=1&group_adults=2&group_children=0&b_h4u_keep_filters=&from_sf=1"
+    url = "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1DCAEoggI46AdIM1gEaHWIAQGYAQm4AQfIAQzYAQPoAQGIAgGoAgM&lang=en-gb&sid=de09dff5fbf4dd458853cf6d1bbb24e3&sb=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.en-gb.html%3Flabel%3Dgen173nr-1DCAEoggI46AdIM1gEaHWIAQGYAQm4AQfIAQzYAQPoAQGIAgGoAgM%3Bsid%3Dde09dff5fbf4dd458853cf6d1bbb24e3%3Bsb_price_type%3Dtotal%26%3B&ss=#{@city_name}&is_ski_area=0&ssne=Tokyo&ssne_untouched=Tokyo&selected_currency=USD&dest_id=-246227&dest_type=city&checkin_monthday=#{@checkin_monthday}&checkin_month=#{@checkin_month}&checkin_year=#{@checkin_year}&checkout_monthday=#{@checkout_monthday}&checkout_month=#{@checkout_month}&checkout_year=#{@checkout_year}&no_rooms=1&group_adults=2&group_children=0&b_h4u_keep_filters=&from_sf=1"
 
     html = open(url, {
       "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
     }).read
-    File.write("temp.html", html)
+    # File.write("temp.html", html)
     parsed_content = Nokogiri::HTML html
     contents = parsed_content.css(".sr_item")
     hotels_array = Array.new
@@ -53,4 +53,4 @@ class FetchAccommodations
   end
 end
 
-FetchAccommodations.call("Seoul", 12, 13 ,2018, 12, 15, 2018)
+FetchAccommodations.new("Shanghai", 12, 1 ,2018, 12, 15, 2018).call
