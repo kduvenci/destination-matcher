@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_092254) do
+ActiveRecord::Schema.define(version: 2018_11_26_130758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,10 @@ ActiveRecord::Schema.define(version: 2018_11_26_092254) do
     t.string "return_stops"
     t.string "agent"
     t.string "return_airline_name"
+    t.string "depart_code"
+    t.text "depart_image_url"
+    t.string "return_code"
+    t.text "return_image_url"
     t.index ["city_id"], name: "index_flights_on_city_id"
   end
 
