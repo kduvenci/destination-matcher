@@ -40,7 +40,7 @@
         <div class="row">
           <ul class="list-unstyled">
             <li>--------<i class="fas fa-plane"></i></li>
-            <% if @flight.depart_stops == "direct" %>
+            <% if @flight.depart_stops == "Direct" %>
               <li><%= @flight.depart_stops %></li>
             <% elsif @flight.depart_stops == "1" %>
               <li><%= @flight.depart_stops %> stop</li>
