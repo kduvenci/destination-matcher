@@ -16,17 +16,17 @@
     <div class="col-xs-11">
       <div class="col-xs-3">
         <div clas="row">
-          <span><%= @flight.depart_airline_name %></span>
+          <span><%= @flight.depart_image_url %></span>
         </div>
         <div clas="row">
-          <span><%= @flight.return_airline_name %></span>
+          <span><%= @flight.return_image_url %></span>
         </div>
       </div>
       <div class="col-xs-3">
         <div class="text-right row">
           <ul class="list-unstyled">
             <li><%= @flight.depart_departure_time.strftime("%R") %></li>
-            <li><%= @flight.departure_location %></li>
+            <li><%= @flight.depart_code %></li>
           </ul>
         </div>
         <div class="text-right row">
@@ -72,7 +72,7 @@
         <div class="row">
           <ul class="text-left list-unstyled">
             <li><%= @flight.return_arrival_time.strftime("%R") %></li>
-            <li><%= @flight.departure_location %></li>
+            <li><%= @flight.depart_code %></li>
           </ul>
         </div>
       </div>
