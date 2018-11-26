@@ -10,7 +10,6 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
-      min_budget = params['/cities']["min_budget"].gsub(" USD", "").gsub(",","").to_i
       max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
 
       # Call service
