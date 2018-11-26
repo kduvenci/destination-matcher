@@ -35,7 +35,7 @@
   z-index: 20;
   font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
   text-decoration: none !important;
-  text-shadow: 1px 1px #C7C7C7;
+  text-shadow: 1px 1px #5B5B5B;
 }
 .card:hover {
   text-decoration: none !important;
@@ -46,7 +46,6 @@
   opacity: 0.8;
 }
 .card:hover .info {
-  opacity: 0.8;
   -webkit-transform: translateY(0px);
           transform: translateY(0px);
 }
@@ -85,20 +84,15 @@
   border-radius: 4px;
 }
 .card .info {
-  text-shadow: 1px 1px black;
-  background-color: black;
+  text-shadow: 1px 2px black;
   position: relative;
   z-index: 3;
   color: white;
-  opacity: 1;
-  -webkit-transform: translateY(30px);
-          transform: translateY(30px);
-  transition: 0.5s;
 }
 // .card .info h1 {
 //   margin: 0px;
 // }
-.card .info h3 {
+.card .info h4 {
   font-family: 'Proxima', Arial, Helvetica, sans-serif;
   text-decoration: none !important;
 }
