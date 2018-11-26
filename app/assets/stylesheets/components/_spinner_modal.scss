@@ -6,7 +6,14 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  // background: rgb(255, 92, 93);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+  background: #FF5C5D; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FF5C5D, #FF8889); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FF5C5D, #FF8889);
 }
 
 body.loading .spinner-modal {

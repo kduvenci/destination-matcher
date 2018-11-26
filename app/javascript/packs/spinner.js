@@ -7,5 +7,5 @@ searchButton.addEventListener("click", (event) => {
   // event.preventDefault();
   // console.log(event);
   const spin = document.querySelector(".spinner-modal");
-  spin.style.display = "block";
+  spin.style.display = "flex";
 });
