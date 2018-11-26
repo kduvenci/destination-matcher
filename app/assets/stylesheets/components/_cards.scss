@@ -22,7 +22,7 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  transition: 0.4s ease-out;
+  transition: 0.2s ease-out;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
 }
 .card .title {
@@ -84,7 +84,7 @@
   border-radius: 4px;
 }
 .card .info {
-  text-shadow: 1px 2px black;
+  text-shadow: 1px 1px $gray;
   position: relative;
   z-index: 3;
   color: white;
