@@ -8,3 +8,4 @@
 // layout file, like app/views/layouts/application.html.erb
 import "../plugins/flatpickr"
 import "./spinner"
+import "./search_form"
