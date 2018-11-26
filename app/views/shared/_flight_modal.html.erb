@@ -9,12 +9,14 @@
       <div class="modal-body">
            <!-- flight details -->
         <% @flights.each do |flight| %>
-        <div class="flight-card">
+        <div class="flight-card" id="flight-radio-btn">
+              <!-- radio button -->
+
+                <input type="radio" class="flight_choice" name="flight_choice" value=<%= flight.id %>
+                <%= flight.id == @picked_flight ? 'checked' : '' %>>
+
               <!-- Flight content -->
               <div class="col-xs-9">
-                <input type="radio" id="flight-choice" name="flight_choice" value=<%= flight.id %>
-         <%= flight.id == @picked_flight ? 'checked' : '' %>>
-
                 <div class="col-xs-2">
                   <div clas="row">
                     <span><%= flight.depart_airline_name %></span>
