@@ -41,6 +41,8 @@
           <li><a href="#">Host</a></li>
           <li><a href="#">Trips</a></li>
           <li><a href="#">Messagese</a></li>
+          <li><%= link_to t(".sign_in", default: "Log In"), new_user_session_path %></li>
+          <li><%= link_to t(".sign_in", default: "Join now"), new_user_registration_path %></li>
         </ul>
       </div>
     </div>

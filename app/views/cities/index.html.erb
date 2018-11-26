@@ -2,21 +2,28 @@
   <div class="container">
     <h3 class="text-center">Our recommended destinations for you</h3>
     <div class="row">
+
+      <% if @result_cities == [] %>
+        <h3>Sorry, there are no destinations within your budget!</h3>
+      <% else %>
        <% @result_cities.each do |city, flight_ids| %>
          <% country = city.country %>
           <div class="col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
             <%= link_to city_path(city, flight_ids: flight_ids.join("-")) do %>
               <div class="card">
-                <%= cl_image_tag city.photo %>
+                <%= cl_image_tag city.photo, size: "370x300" %>
                 <div class="card-overlay"></div>
                 <span class="title"><h3><%= city.name %>, <%= country.name %></h3></span>
                 <span class="info">
                 <h4>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h4>
                 <h4>Overall Risk: <%= "medium".capitalize %></h4><!-- To unhardcode when risks seeded -->
                 </span>
+                <p>Language: <%= country.language %></p>
+                <p>Currency: <%= country.currency %></p>
               </div>
             <% end %>
           </div>
+        <% end %>
         <% end %>
       </div>
    </div>
