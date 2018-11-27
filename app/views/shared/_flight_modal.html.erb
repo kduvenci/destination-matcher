@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Additional Flight Options</h5>
@@ -12,7 +12,7 @@
         <div class="flight-card" id="flight-radio-btn">
               <!-- radio button -->
 
-                <input type="radio" class="flight_choice" name="flight_choice" value=<%= flight.id %>
+                <input type="radio" class="flight_choice radio" name="flight_choice" value=<%= flight.id %>
                 <%= flight.id == @picked_flight ? 'checked' : '' %>>
 
               <!-- Flight content -->
