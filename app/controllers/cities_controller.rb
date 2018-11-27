@@ -226,7 +226,7 @@ class CitiesController < ApplicationController
     #     end
     #   end
     # end
-    return savedAccommodations.sort { |a, b| a.price <=> b.price }
+    # return savedAccommodations.sort { |a, b| a.price <=> b.price }
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
