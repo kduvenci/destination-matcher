@@ -208,25 +208,25 @@ class CitiesController < ApplicationController
 
   def save_accommodation(accommodationsAPI)
     savedAccommodations = []
-    accommodationsAPI.each do |accCity|
-      accCity.each do |accommodation|
-        accommodation = Accommodation.new(
-          city: City.find_by(name: accommodation[:city]),
-          name: accommodation[:name],
-          price: accommodation[:price].gsub("US$","").to_i,
-          address: accommodation[:address],
-          photo: accommodation[:image_url],
-          booking_url: accommodation[:booking_url],
-          score: accommodation[:score]
-        )
-        if accommodation.save
-          savedAccommodations << accommodation
-        else
-          p "= = > > Error during saving accommodation: #{accommodation.errors.messages} "
-        end
-      end
-    end
-    return savedAccommodations.sort { |a, b| a.price <=> b.price }
+    # accommodationsAPI.each do |accCity|
+    #   accCity.each do |accommodation|
+    #     accommodation = Accommodation.new(
+    #       city: City.find_by(name: accommodation[:city]),
+    #       name: accommodation[:name],
+    #       price: accommodation[:price].gsub("US$","").to_i,
+    #       address: accommodation[:address],
+    #       photo: accommodation[:image_url],
+    #       booking_url: accommodation[:booking_url],
+    #       score: accommodation[:score]
+    #     )
+    #     if accommodation.save
+    #       savedAccommodations << accommodation
+    #     else
+    #       p "= = > > Error during saving accommodation: #{accommodation.errors.messages} "
+    #     end
+    #   end
+    # end
+    # return savedAccommodations.sort { |a, b| a.price <=> b.price }
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
