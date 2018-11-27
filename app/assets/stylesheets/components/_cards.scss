@@ -192,3 +192,15 @@ a:hover, a:focus {
 .yellow{
   color: yellow;
 }
+
+// Country at a Glance General Info
+.card-country-general-info {
+  padding: 1.5rem;
+  margin: 20px 5px;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-center;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}

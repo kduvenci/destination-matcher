@@ -14,6 +14,7 @@
                 <%= cl_image_tag city.photo, height: 300, width: 370, crop: :fill %>
                 <div class="card-overlay"></div>
                 <span class="title"><h3><%= city.name %>, <%= country.name %></h3></span>
+                <span>Total Cost: <%= @total %></span>
                 <span class="info">
                 <h4>Language: <%= country.language %></h4>
                 <h4>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h4>
