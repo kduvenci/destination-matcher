@@ -5,7 +5,13 @@ const searchButton = document.querySelector(".spin-trigger");
 
 searchButton.addEventListener("click", (event) => {
   // event.preventDefault();
-  // console.log(event);
   const spin = document.querySelector(".spinner-modal");
-  spin.style.display = "flex";
+  const searchForm = document.querySelector(".search-box .simple_form")
+  const formValues = []
+  searchForm.querySelectorAll("select").forEach((select) => {
+    formValues.push(select.value)
+  });
+  if ( formValues.includes("")) {
+    return false
+  } else {spin.style.display = "flex" };
 });
