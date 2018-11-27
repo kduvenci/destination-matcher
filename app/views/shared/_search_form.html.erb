@@ -1,46 +1,62 @@
 <!-- Simple Form -->
-
-
-    <div class="search-box">
-      <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
-          <div class ="form-group">
-            <%= f.input :origin, collection: City.all.order(:name), prompt: "Traveling from?", input_html: {class: "form-small"} %>
-        </div>
-
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5">
-          <div class ="form-group">
-            <%= f.input :region, collection:  Region.all.order(:name), input_html: {class: "form-small"}, prompt: "To which region?" %>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
-          <div class ="form-group">
-            <%= f.input :max_budget, collection: ["500 USD", "800 USD","1,000 USD", "1,500 USD", "2,000 USD", "2,500 USD", "3,000 USD", "3,500 USD", "4,000 USD", "4,500 USD", "5,000 USD", "5,500 USD", "6,000 USD"], input_html: {class: "form-small"}, label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget')%>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
-            <!-- put Flatpicker here -->
-          <div class="form-group">
-              <%= f.input :dep_date, as: :string, required: false, input_html: {class: "datepicker form-small"}, prompt: "Departure Date", label: raw('<i class="fas fa-plane-departure"></i> Departure Date') %>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5">
-          <div class="form-group">
-            <%= f.input :return_date, as: :string, required: false, input_html: {class: "datepicker form-small"}, prompt: "Return Date", label: raw('<i class="fas fa-plane-arrival"></i> Return Date') %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 text-center">
-            <div class="form-group">
-              <%= f.submit "Search", class: "form-small submit-button btn btn-primary spin-trigger" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<div class="search-box">
+  <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
+      <div class ="form-group">
+        <%= f.input :origin,
+                    collection: City.all.order(:name),
+                    prompt: "Traveling from?",
+                    input_html: {class: "form-small", required: true} %>
     </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5">
+      <div class ="form-group">
+        <%= f.input :region,
+                    collection:  Region.all.order(:name),
+                    input_html: {class: "form-small", required: true},
+                    prompt: "To which region?" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+      <div class ="form-group">
+        <%= f.input :max_budget,
+                    collection: ["500 USD", "800 USD","1,000 USD", "1,500 USD", "2,000 USD", "2,500 USD", "3,000 USD", "3,500 USD", "4,000 USD", "4,500 USD", "5,000 USD", "5,500 USD", "6,000 USD"],
+                    input_html: {class: "form-small", required: true},
+                    label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget')%>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
+        <!-- put Flatpicker here -->
+      <div class="form-group">
+          <%= f.input :dep_date,
+          as: :string,
+          required: true,
+          input_html: {class: "datepicker form-small"},
+          prompt: "Departure Date",
+          label: raw('<i class="fas fa-plane-departure"></i> Departure Date') %>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5">
+      <div class="form-group">
+        <%= f.input :return_date,
+                    as: :string,
+                    required: true,
+                    input_html: {class: "datepicker form-small"},
+                    prompt: "Return Date",
+                    label: raw('<i class="fas fa-plane-arrival"></i> Return Date') %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="form-group">
+          <%= f.submit "Search", class: "form-small submit-button btn btn-primary spin-trigger" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
