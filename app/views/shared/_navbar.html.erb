@@ -33,17 +33,22 @@
           <% end %>
         </div>
     </div>
+
     <!-- Dropdown appearing on mobile only -->
     <div class="navbar-dm-item hidden-md hidden-lg">
       <div class="dropdown">
         <i class="fas fa-bars dropdown-toggle" data-toggle="dropdown" role="button"></i>
-        <ul class="dropdown-menu dropdown-menu-right navbar-dm-dropdown-menu">
-          <li><a href="#">Host</a></li>
-          <li><a href="#">Trips</a></li>
-          <li><a href="#">Messagese</a></li>
-          <li><%= link_to t(".sign_in", default: "Log In"), new_user_session_path %></li>
-          <li><%= link_to t(".sign_in", default: "Join now"), new_user_registration_path %></li>
-        </ul>
+          <ul class="dropdown-menu dropdown-menu-right navbar-dm-dropdown-menu">
+            <% if user_signed_in? %>
+              <li><%= link_to 'Favorites', favorites_path %>  </li>
+              <li><%= link_to destroy_user_session_path, method: :delete, class: "navbar-dm-item navbar-dm-link" do  %>
+              <%= t(".sign_out", default: "Log out") %></li>
+              <% end %>
+            <% else %>
+              <li><%= link_to t(".sign_in", default: "Log In"), new_user_session_path %></li>
+              <li><%= link_to t(".sign_in", default: "Join now"), new_user_registration_path %></li>
+              <% end %>
+          </ul>
       </div>
     </div>
   </div>
