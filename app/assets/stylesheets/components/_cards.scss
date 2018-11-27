@@ -125,6 +125,9 @@
 .price-container {
   padding: 15px;
   height: 100px;
+  p {
+    font-size: 20px;
+  }
 }
 .info-card .total {
   height: 106px;
@@ -221,8 +224,8 @@ a:hover, a:focus {
   height: 100vh;
   padding: 1.5rem;
   margin: 0 20px;
-  background: white;
-  color: $dim-gray;
+  background: rgba(231,64,48, 0.6);
+  color: white;
   position: relative;
   display: flex;
   align-items: flex-center;
