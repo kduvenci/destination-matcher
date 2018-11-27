@@ -19,7 +19,7 @@ class FavoritesController < ApplicationController
       redirect_to city_path(@flight.city)
     else
       render "cities/show"
-    else
+    end
   end
 end
 
