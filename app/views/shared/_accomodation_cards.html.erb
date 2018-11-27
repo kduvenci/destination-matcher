@@ -1,20 +1,24 @@
 <div class="recommended-stay-container text-center">
-  <div class="flex-recommendations">
 
      <%= render "shared/accomodation_modal" %>
 
   <div class="stay-wrapper">
     <div class="stay-clear"></div>
       <div class="stay-item">
-        <img src="https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg" alt="Accomodation"/>
-        <h3><%= @city.name %> Sofitel</h3>
-        <h4>Rating: <%= @accommodation.score %></h4>
-        <p><em>$<%= @accommodation.price%></em>/day</p>
-        <h5><em>$<%= @accommodation.address%></em></h5>
-           <!-- Button trigger modal -->
+        <div class="row">
+          <div class="col-xs-6">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg" alt="Accomodation"/>
+          </div>
+          <div class="col-xs-6">
+            <h3><%= @city.name %> Sofitel</h3>
+            <h4>Rating: <%= @accommodation.score %></h4>
+            <p><em>$<%= @accommodation.price%></em>/day</p>
+            <h5><em>$<%= @accommodation.address%></em></h5>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
-<br>
 
 
 
