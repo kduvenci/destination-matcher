@@ -58,7 +58,6 @@ class CitiesController < ApplicationController
 
   def show
     @city = City.find(params[:id])
-    raise
     @flights = []
     @flights_ids = params["flight_ids"].split("-")
     @flights_ids.each do |id|
