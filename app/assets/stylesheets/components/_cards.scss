@@ -19,7 +19,7 @@
   padding: 1.5rem;
   margin: 20px 0;
   background: white;
-  position: fixed;
+  position: relative;
   display: flex;
   align-items: flex-end;
   transition: 0.2s ease-out;
@@ -84,11 +84,12 @@
   border-radius: 4px;
 }
 .card .info {
-  width: 500px;
+  width: 290px;
   text-shadow: 1px 1px $gray;
-  position: relative;
+  position: absolute;
   z-index: 3;
   color: white;
+  background-color: rgba(1,1,1,0.3);
 }
 // .card .info h1 {
 //   margin: 0px;

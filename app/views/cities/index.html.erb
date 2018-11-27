@@ -17,6 +17,7 @@
                 <span>Total Cost: <%= @total %></span>
                 <span class="info">
                 <h5>Language: <%= country.language %></h5>
+                <h5>Currency: <%= country.currency %></h5>
                 <h5>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h5>
                 <% if city.level_of_safety.overrall_risk == 'low' %>
                   <h5>Overall Risk: <span class="green"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
@@ -25,7 +26,6 @@
                   <% else %>
                   <h5>Overall Risk: <span class="red"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
                 <% end %>
-                <h5>Currency: <%= country.currency %></h5>
                 </span>
               </div>
             <% end %>
@@ -33,5 +33,7 @@
         <% end %>
         <% end %>
       </div>
+      <br>
+   <div style="text-align:center;"><%= link_to "Return", root_path,  class: "return-button btn btn-primary spin-trigger" %></div>
    </div>
 </div>
