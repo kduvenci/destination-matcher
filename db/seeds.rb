@@ -138,20 +138,3 @@ puts "Total #{counter} Level of Safety saved !!!"
 puts ""
 
 visa_db = Roo::Excelx.new(Rails.root.join('db', 'visa_db.xlsx')).sheet('visa')
-
-# #1 for each city.
-# puts "------- Accommodations Saving -------"
-# accommodationPhoto = "https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg"
-#   City.all.each do |city|
-#   accommodation = Accommodation.new(
-#     city: city,
-#     name: "#{city.name} Sofitel",
-#     address: Faker::Address.full_address,
-#     price: 35,
-#     booking_url: "url",
-#     score: "8.2"
-#     )
-#   accommodation.remote_photo_url = accommodationPhoto
-#   accommodation.save!
-#   p "======== > Accommodation #{accommodation.name} Stored !"
-# end
