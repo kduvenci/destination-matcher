@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="container">
-    <h3 class="text-center">Our recommended destinations for you</h3>
     <div class="row">
 
       <% if @result_cities == [] %>
-        <h3>Sorry, there are no destinations within your budget!</h3>
+        <h3 class="text-center">Sorry, there are no destinations within your budget!</h3>
       <% else %>
+        <h3 class="text-center">Our recommended destinations for you</h3>
        <% @result_cities.each do |city, flight_ids| %>
          <% country = city.country %>
           <div class="col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
