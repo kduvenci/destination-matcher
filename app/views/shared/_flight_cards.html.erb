@@ -82,8 +82,8 @@
 
       <div class="text-center flight-total col-xs-3">
         <div class="row">
-          <h2><strong>Total</strong></h2>
-          <h4><i class="fas fa-dollar-sign"></i><%= @flight.price %> USD</h4>
+          <h3><strong>Total</strong></h3>
+          <h4><%= @flight.price %> USD</h4>
         </div>
         <div class="row">
           <%= link_to "Book", @flight.booking_url, target: "_blank", class: "btn btn-success" %>
