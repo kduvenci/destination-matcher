@@ -233,7 +233,8 @@ class CitiesController < ApplicationController
     period = ((return_arrival_time - depart_departure_time)/60/60/24).floor;
     meal = city.meal_average_price_cents;
     food = (meal * 3 * period).round
-    accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
+    # accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
+    accommodation_cost = 35
     total = food + ticket_price + accommodation_cost
     pp "Food = #{food}, Acc = #{accommodation_cost}, Fly = #{ticket_price}, T = #{total}, B = #{max_budget}"
     return total <= max_budget
