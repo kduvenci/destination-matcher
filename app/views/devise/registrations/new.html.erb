@@ -22,12 +22,13 @@
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :nationality,
-                      required: true,
+                      collection: Country.order(:nationality).pluck(:nationality),
                       input_html: { autocomplete: "current-password" } %>
         </div>
 
+
         <div class="form-actions btn">
-          <%= f.button :submit, "Sign up" %>
+          <%= f.button :submit, "Sign me up!", class: "form-small signup-button btn btn-primary spin-trigger" %>
         </div>
         <% end %>
     </div>
