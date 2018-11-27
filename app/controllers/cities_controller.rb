@@ -27,7 +27,7 @@ class CitiesController < ApplicationController
       save_flight_time = Time.now
       saved_accoms = save_accommodation(accommodationsAPI)
       saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
-
+      
       # prepare city array from flights
       cf_id_array = []
       saved_flights.each do |flight|
@@ -59,11 +59,20 @@ class CitiesController < ApplicationController
   def show
     @city = City.find(params[:id])
     @flights = []
+    @accommodations = []
+    #prepare flight instances
     @flights_ids = params["flight_ids"].split("-")
     @flights_ids.each do |id|
       @flights << Flight.find(id)
     end
     @flights = @flights.sort { |a, b| a.price <=> b.price }
+
+    #prepare accommodation instances
+    @accom_ids = params["accom_ids"].split("-")
+    @accom_ids.each do |id|
+      @accommodations << Accommodation.find(id)
+    end
+    @accommodations = @accommodations.sort { |a, b| a.price <=> b.price }
 
     if params['flight_choice']
       @flight = Flight.find(params['flight_choice'].to_i)
@@ -76,7 +85,6 @@ class CitiesController < ApplicationController
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = (@meal * 3 * @period).round
-    @accommodations = @city.accommodations
     @accommodation = @accommodations.first
     @total = @food + @flight.price + @accommodation.price * @period
   end
@@ -208,33 +216,36 @@ class CitiesController < ApplicationController
 
   def save_accommodation(accommodationsAPI)
     savedAccommodations = []
-    # accommodationsAPI.each do |accCity|
-    #   accCity.each do |accommodation|
-    #     accommodation = Accommodation.new(
-    #       city: City.find_by(name: accommodation[:city]),
-    #       name: accommodation[:name],
-    #       price: accommodation[:price].gsub("US$","").to_i,
-    #       address: accommodation[:address],
-    #       photo: accommodation[:image_url],
-    #       booking_url: accommodation[:booking_url],
-    #       score: accommodation[:score]
-    #     )
-    #     if accommodation.save
-    #       savedAccommodations << accommodation
-    #     else
-    #       p "= = > > Error during saving accommodation: #{accommodation.errors.messages} "
-    #     end
-    #   end
-    # end
-    # return savedAccommodations.sort { |a, b| a.price <=> b.price }
+    accommodationsAPI.each do |accCity|
+      accCity.each do |accommodation|
+        accommodation = Accommodation.new(
+          city: City.find_by(name: accommodation[:city]),
+          name: accommodation[:name],
+          price: accommodation[:price].gsub("US$","").to_i,
+          address: accommodation[:address],
+          photo: accommodation[:image_url],
+          booking_url: accommodation[:booking_url],
+          score: accommodation[:score]
+        )
+        if accommodation.save
+          savedAccommodations << accommodation
+        else
+          p "= = > > Error during saving accommodation: #{accommodation.errors.messages} "
+        end
+      end
+    end
+    return savedAccommodations.sort { |a, b| a.price <=> b.price }
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
     period = ((return_arrival_time - depart_departure_time)/60/60/24).floor;
     meal = city.meal_average_price_cents;
     food = (meal * 3 * period).round
-    # accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
-    accommodation_cost = 35
+    if saved_accoms.present?
+      accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
+    else
+      accommodation_cost = 35
+    end
     total = food + ticket_price + accommodation_cost
     pp "Food = #{food}, Acc = #{accommodation_cost}, Fly = #{ticket_price}, T = #{total}, B = #{max_budget}"
     return total <= max_budget
