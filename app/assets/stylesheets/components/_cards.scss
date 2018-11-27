@@ -117,7 +117,7 @@
   height: 320px;
   background-image: url("https://images.pexels.com/photos/163194/old-retro-antique-vintage-163194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   color: white;
-  padding-top: 75px;
+  padding-top: 80px;
 }
 .price-container {
   padding: 15px;
@@ -134,14 +134,15 @@
   padding: 1.5rem;
   margin-top: 30px;
   background: white;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  transition: 0.4s ease-out;
+  // position: relative;
+  // display: flex;
+  // align-items: flex-end;
+  // transition: 0.4s ease-out;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
 }
 
 .flight-total {
+  height: 100%;
   border-left: 3px dotted $dim-gray;
 }
 .card-flight-content {
