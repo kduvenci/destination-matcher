@@ -84,6 +84,7 @@
   border-radius: 4px;
 }
 .card .info {
+  width: 500px;
   text-shadow: 1px 1px $gray;
   position: relative;
   z-index: 3;
@@ -92,9 +93,10 @@
 // .card .info h1 {
 //   margin: 0px;
 // }
-.card .info h4 {
+.card .info h5 {
   font-family: 'Proxima', Arial, Helvetica, sans-serif;
   text-decoration: none !important;
+  font-size: 22px;
 }
 .card .info p {
   letter-spacing: 1px;
@@ -190,5 +192,17 @@ a:hover, a:focus {
 }
 
 .yellow{
-  color: yellow;
+  color: $yellow;
+}
+
+.orange{
+  color: $orange;
+}
+
+.green{
+  color: $green;
+}
+
+.red{
+  color: $red;
 }

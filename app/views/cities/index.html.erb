@@ -15,16 +15,16 @@
                 <div class="card-overlay"></div>
                 <span class="title"><h3><%= city.name %>, <%= country.name %></h3></span>
                 <span class="info">
-                <h4>Language: <%= country.language %></h4>
-                <h4>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h4>
-                <% if city.overrall_risk == 'low' %>
-                  <h4>Overall Risk: <span class="blue"><%= city.overrall_risk.capitalize %></h4></span>
-                  <% elsif city.overrall_risk == 'medium' %>
-                  <h4>Overall Risk: <span class="yellow"><%= city.overrall_risk.capitalize %></h4></span>
+                <h5>Language: <%= country.language %></h5>
+                <h5>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h5>
+                <% if city.level_of_safety.overrall_risk == 'low' %>
+                  <h5>Overall Risk: <span class="green"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
+                  <% elsif city.level_of_safety.overrall_risk == 'medium' %>
+                  <h5>Overall Risk: <span class="orange"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
                   <% else %>
-                  <h4>Overall Risk: <span class="red"><%= city.overrall_risk.capitalize %></h4></span>
+                  <h5>Overall Risk: <span class="red"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
                 <% end %>
-                <h4>Currency: <%= country.currency %></h4>
+                <h5>Currency: <%= country.currency %></h5>
                 </span>
               </div>
             <% end %>
@@ -34,8 +34,3 @@
       </div>
    </div>
 </div>
-
-<%= cities.overrall_risk.capitalize %></h4>
-
-
-
