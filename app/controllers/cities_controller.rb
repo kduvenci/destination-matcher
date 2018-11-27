@@ -167,7 +167,7 @@ class CitiesController < ApplicationController
             # prepare flight instances
             flight = Flight.new(
               # general
-              adults: "1",
+              # adults: "1",
               agent: agent_name,
               cabin_class: cabin_class,
               price: ticket_price,
