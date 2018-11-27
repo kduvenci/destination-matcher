@@ -1,5 +1,6 @@
 class Country < ApplicationRecord
   has_many :cities
+  has_one :visa
   belongs_to :region
 
   NON_VAL_ATTRS = ["id", "created_at", "updated_at"]
