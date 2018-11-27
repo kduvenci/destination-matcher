@@ -17,7 +17,13 @@
                 <span class="info">
                 <h4>Language: <%= country.language %></h4>
                 <h4>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h4>
-                <h4>Overall Risk: <%= "medium".capitalize %></h4><!-- To unhardcode when risks seeded -->
+                <% if city.overrall_risk == 'low' %>
+                  <h4>Overall Risk: <span class="blue"><%= city.overrall_risk.capitalize %></h4></span>
+                  <% elsif city.overrall_risk == 'medium' %>
+                  <h4>Overall Risk: <span class="yellow"><%= city.overrall_risk.capitalize %></h4></span>
+                  <% else %>
+                  <h4>Overall Risk: <span class="red"><%= city.overrall_risk.capitalize %></h4></span>
+                <% end %>
                 <h4>Currency: <%= country.currency %></h4>
                 </span>
               </div>
@@ -28,3 +34,8 @@
       </div>
    </div>
 </div>
+
+<%= cities.overrall_risk.capitalize %></h4>
+
+
+
