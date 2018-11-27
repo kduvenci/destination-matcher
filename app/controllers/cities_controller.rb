@@ -92,7 +92,7 @@ class CitiesController < ApplicationController
   def change_first_pick
     # change @flight to the picked one by using @picked_flight
     # @flight = Flight.find(params["flight-choice"])
-    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], flight_choice: params['flight_choice']
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], flight_choice: params['flight_choice']
   end
 
   private
