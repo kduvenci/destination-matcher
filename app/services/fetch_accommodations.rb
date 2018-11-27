@@ -38,6 +38,7 @@ class FetchAccommodations
     "checkout_year=#{@checkout_year}&"\
     "no_rooms=1&"\
     "group_adults=#{@adult}&"\
+    "order=price&"\
     "group_children=0&"
 
     html = open(url, {
@@ -76,10 +77,6 @@ end
 FetchAccommodations.new("Shanghai", 12, 1 ,2018, 12, 15, 2018).call
 FetchAccommodations.new("Amsterdam", 12, 1 ,2018, 12, 15, 2018).call
 FetchAccommodations.new("Istanbul", 12, 1 ,2018, 12, 15, 2018).call
-
-
-
-
 
 
 
