@@ -91,7 +91,7 @@ class CitiesController < ApplicationController
 
   def save_flights(flightsAPI, max_budget, saved_accoms)
     # from result max how much ticket will should save
-    save_max_flight = 30
+    save_max_flight = 150
 
     # Get information from json objects
     savedFlights = []
@@ -167,7 +167,7 @@ class CitiesController < ApplicationController
             # prepare flight instances
             flight = Flight.new(
               # general
-              # adults: "1",
+              adults: adults,
               agent: agent_name,
               cabin_class: cabin_class,
               price: ticket_price,
