@@ -138,3 +138,28 @@ puts "Total #{counter} Level of Safety saved !!!"
 puts ""
 
 visa_db = Roo::Excelx.new(Rails.root.join('db', 'visa_db.xlsx')).sheet('visa')
+
+puts "------- Visa Relationships Saving -------"
+counter = 0
+size = visa_db.last_row
+countries = visa_db.column(1).drop(1)
+
+countries.each_with_index do |country, c_i|
+  rel_hash = {}
+  relationships = visa_db.column(c_i + 2).drop(1)
+  relationships.each_with_index do |relationship, r_i|
+    rel_hash[countries[r_i]] = relationships[r_i]
+  end
+  cou = Country.find_by(name: country)
+  visa = Visa.new(
+    relationship: rel_hash,
+    country: cou
+  )
+  if visa.save
+    p "======== > Visa Relationship for #{visa.country.name} created!"
+    counter += 1
+  else
+    p "======== > Error for visa relationship: #{visa.errors.messages}"
+  end
+end
+puts "Total #{counter} Visa Relationship saved !!!"
