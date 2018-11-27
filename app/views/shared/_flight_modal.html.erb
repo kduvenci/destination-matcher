@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Additional Flight Options</h5>
+        <h3 class="modal-title" id="exampleModalLongTitle">Additional Flight Options</h3>
       </div>
       <form method="get" action="/change_first_pick">
       <div class="modal-body">
@@ -11,12 +11,13 @@
         <% @flights.each do |flight| %>
         <div class="flight-card" id="flight-radio-btn">
               <!-- radio button -->
-
+              <div class="card-flight-content col-xs-1">
                 <input type="radio" class="flight_choice radio" name="flight_choice" value=<%= flight.id %>
                 <%= flight.id == @picked_flight ? 'checked' : '' %>>
+              </div>
 
               <!-- Flight content -->
-              <div class="card-flight-content col-xs-9">
+              <div class="card-flight-content col-xs-8">
                 <div class="col-xs-2">
                   <div clas="row">
                     <span><%= image_tag @flight.depart_image_url %></span>
@@ -82,7 +83,7 @@
               </div>
 
 
-                <div class="text-center price-container col-xs-3">
+                <div class="text-center flight-total col-xs-3">
                   <div class="row">
                     <h2><strong>Total</strong></h2>
                     <h4><i class="fas fa-dollar-sign"></i><%= flight.price %> USD</h4>
