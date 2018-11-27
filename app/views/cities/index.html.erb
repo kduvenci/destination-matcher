@@ -3,7 +3,7 @@
     <div class="row">
 
       <% if @result_cities == [] %>
-        <h3 class="text-center">Sorry, there are no destinations within your budget!</h3>
+        <h3 class="text-center">Sorry, there currently are no destinations within your budget!</h3>
       <% else %>
         <h3 class="text-center">Our recommended destinations for you</h3>
        <% @result_cities.each do |city, flight_ids| %>
