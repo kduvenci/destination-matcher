@@ -1,3 +1,5 @@
+require 'thread'
+require 'thread/pool'
 class CitiesController < ApplicationController
   skip_before_action :authenticate_user!
   skip_after_action :verify_authorized, :verify_policy_scoped
@@ -5,17 +7,22 @@ class CitiesController < ApplicationController
   def index
     @result_cities = []
     if params[:commit] == 'Search'
+      
       # prepare params for fetchflight and budget calc
       origin = City.find(params['/cities']['origin'])
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
       max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
-
-      # Call service
-      fetchTime = Time.now
-      flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-
+      
+      # Call api & scraping services
+      # pool = Thread.pool(1)
+      # pool.process {
+        flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
+        accommodationsAPI = FetchAccommodations.call(region, outboundDate, inboundDate)
+      # }
+      # pool.shutdown
+    
       # Save Flights if in Bugdet
       save_flight_time = Time.now
       saved_flights = save_flights(flightsAPI, max_budget)
@@ -36,8 +43,7 @@ class CitiesController < ApplicationController
           cf_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:flight_id] }
         ]
       end
-      puts "========== FETCH DATA COMPLETED ============ >>> in > #{save_flight_time - fetchTime} sec"
-      puts "========== SAVE FLIGHTS COMPLETED ============ >>> in > #{Time.now - save_flight_time} sec"
+
     end
   end
 
