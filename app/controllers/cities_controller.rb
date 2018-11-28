@@ -265,7 +265,6 @@ class CitiesController < ApplicationController
       cost = food + accom_price + flight_price
       total_cost[city_info.first] = cost
     end
-    raise
     total_cost
   end
 end
