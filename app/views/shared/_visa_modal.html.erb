@@ -7,11 +7,16 @@
         </div>
         <div class="modal-body">
           <div class ="form-group">
-            <%= select_tag "country",
-            options_from_collection_for_select(Country.all.order(:name), :id, :name),
-            input_html: {class: "form-small", required: true},
-            prompt: "Where is your passport from?" %>
-
+            <%= form_tag controller: "visas", action: "show", remote: true, method: :get do %>
+              <%= select_tag "country",
+              options_from_collection_for_select(Country.all.order(:name), :id, :name),
+              input_html: {class: "form-small", required: true},
+              prompt: "Where is your passport from?" %>
+              <%= submit_tag "Search" %>
+            <% end %>
+            <br>
+            <div id="result">
+            </div>
           </div>
 
         </div>
