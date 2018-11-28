@@ -221,7 +221,7 @@ class CitiesController < ApplicationController
         accommodation = Accommodation.new(
           city: City.find_by(name: accommodation[:city]),
           name: accommodation[:name],
-          price: accommodation[:price].gsub("US$","").to_i,
+          price: accommodation[:price].gsub(",","").gsub("US$","").to_i,
           address: accommodation[:address],
           photo: accommodation[:image_url],
           booking_url: accommodation[:booking_url],
