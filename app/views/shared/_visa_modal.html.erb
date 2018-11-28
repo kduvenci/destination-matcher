@@ -1,17 +1,16 @@
 <center>
   <div class="modal fade" id="visas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="moda-content">
+      <div class="modal-content" style="color: black;">
         <div class="modal-body">
-          <h3>Let's see if you need a visa for <%= @city.name %>...</h3>
+          <h3>Let's see if you need a visa for <%= @city.country.name %>...</h3>
+          <h4>Select bellow your passport's nationality</h4>
         </div>
         <div class="modal-body">
           <div class ="form-group">
-            <%= form_tag controller: "visas", action: "show", remote: true, method: :get do %>
-              <%= select_tag "country",
-              options_from_collection_for_select(Country.all.order(:name), :id, :name),
-              input_html: {class: "form-small", required: true},
-              prompt: "Where is your passport from?" %>
+            <%= form_tag({controller: :visas, action: :search}, remote: true, method: :get) do %>
+              <%= select_tag "id", options_for_select(Visa.all.map { |visa| [visa.country.nationality, visa.id] }) %>
+              <%= hidden_field_tag :destination, @city.country.name %>
               <%= submit_tag "Search" %>
             <% end %>
             <br>
@@ -25,4 +24,6 @@
   </div>
 </center>
 
+<script>
 
+</script>

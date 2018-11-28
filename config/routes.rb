@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :visas, only: [:show]
+  get "/visas/search", to: "visas#search", as: :search
 end
