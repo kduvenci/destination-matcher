@@ -1,16 +1,15 @@
-<div class="recommended-stay-container text-center">
+<!-- <div class="recommended-stay-container text-center"> -->
 
      <%= render "shared/accomodation_modal" %>
 
-  <div class="stay-wrapper">
+<!--   <div class="stay-wrapper">
     <div class="stay-clear"></div>
       <div class="stay-item">
         <div class="row">
           <div class="text-left col-xs-6">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/08/34/c0/41/v-one-vogue-hotel.jpg" alt="Accomodation"/>
-          </div>
+
           <div class="col-xs-6">
-            <h3><%= @city.name %> Sofitel</h3>
+
             <h4>Rating: <%= @accommodation.score %></h4>
             <p><em><%= @accommodation.price%></em> USD per day</p>
             <h5><em><%= @accommodation.address%></em></h5>
@@ -18,7 +17,23 @@
         </div>
       </div>
   </div>
-</div>
+</div> -->
+
+  <div class="blog-card">
+    <div class="meta">
+      <div class="photo"><%= image_tag @accommodation.photo, width: 300, height: 300, crop: :fill %></div>
+    </div>
+    <div class="description">
+      <h1><%= @accommodation.name %></h1>
+      <h2>Rating: <%= @accommodation.score %></h2>
+      <p>Price: <%= @accommodation.price%> USD per night</p>
+      <p><%= @accommodation.address%></p>
+      <p class="read-more">
+        <a href="#">Read More</a>
+      </p>
+    </div>
+  </div>
+
 
 
 
