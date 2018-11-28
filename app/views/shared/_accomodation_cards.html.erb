@@ -6,18 +6,14 @@
   <div class="description">
     <div class="col-xs-12">
       <div class="row">
-        <div class="col-xs-9">
-          <h1><%= @accommodation.name %></h1>
-          <h2>Rating: <%= @accommodation.score %></h2>
-          <p>Price: <%= @accommodation.price%> US$ per night</p>
-          <p><%= @accommodation.address%></p>
-        </div>
-        <div class="col-xs-3">
-          <button type="button" class="modal-btn btn btn-primary" data-toggle="modal" data-target="#accom">Change</button>
-        </div>
-      <div class="row">
-        <%= link_to "Book", @accommodation.booking_url, target: "_blank", class: "btn btn-success" %>
+        <h1><%= @accommodation.name %></h1>
+        <h2>Rating: <%= @accommodation.score %></h2>
+        <p>Price: <%= @accommodation.price%> US$ per night</p>
+        <p><%= @accommodation.address%></p>
       </div>
+      <div class="buttons text-right row">
+        <button type="button" class="modal-btn btn btn-primary" data-toggle="modal" data-target="#accom">Change</button>
+        <%= link_to "Book", @accommodation.booking_url, target: "_blank", class: "btn btn-success" %>
     </div>
     </div>
   </div>

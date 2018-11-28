@@ -80,6 +80,12 @@ a {transition: .25s all;}
     padding: 30px 0;
   }
 }
+.price-container .meal {
+  border-right: 1px dotted $coral;
+}
+.price-container .accom {
+  border-right: 1px dotted $coral;
+}
 
 .flight-card {
   width: 100%;
@@ -141,7 +147,7 @@ a:hover, a:focus {
 .card-country-general-info {
   width: 105%;
   margin-left: -5%;
-  height: 435px;
+  height: 410px;
   padding: 1.5rem;
   margin-top: 10px;
   background-color: white;
@@ -154,6 +160,7 @@ a:hover, a:focus {
 }
 .card-country-general-info h3{
   color: $coral;
+  margin-bottom: 25px;
 }
 .card-icons p {
   font-size: 25px;
