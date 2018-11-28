@@ -1,0 +1,29 @@
+<center>
+  <div class="modal fade" id="visas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="color: black;">
+        <div class="modal-body">
+          <h3>Let's see if you need a visa for <%= @city.country.name %>...</h3>
+          <h4>Select bellow your passport's nationality</h4>
+        </div>
+        <div class="modal-body">
+          <div class ="form-group">
+            <%= form_tag({controller: :visas, action: :search}, remote: true, method: :get) do %>
+              <%= select_tag "id", options_for_select(Visa.all.map { |visa| [visa.country.nationality, visa.id] }) %>
+              <%= hidden_field_tag :destination, @city.country.name %>
+              <%= submit_tag "Search" %>
+            <% end %>
+            <br>
+            <div id="result">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</center>
+
+<script>
+
+</script>

@@ -1,4 +1,3 @@
-require "faker"
 require 'roo'
 
 if Rails.env.development?
