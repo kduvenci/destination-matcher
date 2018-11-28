@@ -3,7 +3,7 @@
   <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
-      <div class ="form-group">
+      <div class ="form-group traveling-from-form">
         <%= f.input :origin,
                     collection: City.all.order(:name),
                     input_html: {class: "form-small", required: true},
@@ -25,10 +25,11 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
       <div class ="form-group">
         <%= f.input :max_budget,
-                    collection: ["500 USD", "800 USD","1,000 USD", "1,500 USD", "2,000 USD", "2,500 USD", "3,000 USD", "3,500 USD", "4,000 USD", "4,500 USD", "5,000 USD", "5,500 USD", "6,000 USD"],
+                    collection: ["500 US$", "800 US$","1,000 US$", "1,500 US$", "2,000 US$", "2,500 US$", "3,000 US$", "3,500 US$", "4,000 US$", "4,500 US$", "5,000 US$", "5,500 US$", "6,000 US$"],
                     input_html: {class: "form-small", required: true},
                     label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget'),
-                    selected: "1,000 USD" %>
+                    selected: "1,000 US$",
+                    hint: '*Includes: meals, flights, accommodations' %>
       </div>
     </div>
   </div>
