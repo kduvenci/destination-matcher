@@ -37,7 +37,7 @@ class CitiesController < ApplicationController
           flight_id: flight.id
         }
       end
-      
+
       # prepare city accom. pairs
       ca_id_array = []
       saved_accoms.each do |accom|
@@ -45,7 +45,7 @@ class CitiesController < ApplicationController
           city_id: accom.city.id,
           accom_id: accom.id
         }
-      end      
+      end
 
       # prepare list for view
       @result_cities = @result_cities.map do |city|
@@ -86,17 +86,26 @@ class CitiesController < ApplicationController
       @picked_flight = @flight.id
     end
 
+    if params['accommodation_choice']
+      @accommodation = Accommodation.find(params['accommodation_choice'])
+      @picked_accommodation = params['accommodation_choice']
+    else
+      @accommodation = @accommodations[0]
+      @picked_accommodation = @accommodation.id
+    end
+
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = (@meal * 3 * @period).round
-    @accommodation = @accommodations.first
     @total = @food + @flight.price + @accommodation.price * @period
   end
 
   def change_first_pick
-    # change @flight to the picked one by using @picked_flight
-    # @flight = Flight.find(params["flight-choice"])
     redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], flight_choice: params['flight_choice']
+  end
+
+  def change_accom
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], accommodation_choice: params['accommodation_choice']
   end
 
   private
@@ -261,7 +270,7 @@ class CitiesController < ApplicationController
       period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
       food = (meal * 3 * period).round
       accom_id = city_info.third.first
-      accom_price = Accommodation.find(accom_id).price
+      accom_price = Accommodation.find(accom_id).price * period
       cost = food + accom_price + flight_price
       total_cost[city_info.first] = cost
     end
