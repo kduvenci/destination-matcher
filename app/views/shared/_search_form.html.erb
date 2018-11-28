@@ -3,7 +3,7 @@
   <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
-      <div class ="form-group">
+      <div class ="form-group traveling-from-form">
         <%= f.input :origin,
                     collection: City.all.order(:name),
                     input_html: {class: "form-small", required: true},
