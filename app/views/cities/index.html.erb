@@ -1,39 +1,36 @@
 <div class="wrapper">
-  <div class="container">
-    <div class="row">
+  <% if @result_cities == [] %>
+    <h3 class="text-center">Sorry, there currently are no destinations within your budget!</h3>
+  <% else %>
+    <br>
+    <br>
+    <br>
+    <h3 class="text-center">Our recommended destinations for you</h3>
+    <br>
+      <div class="container m-t-md">
+        <!-- First row -->
+        <div class="row">
+          <% @result_cities.each do |city, flight_ids , accom_ids| %>
+           <% country = city.country %>
 
-      <% if @result_cities == [] %>
-        <h3 class="text-center">Sorry, there currently are no destinations within your budget!</h3>
-      <% else %>
-        <h3 class="text-center">Our recommended destinations for you</h3>
-        <% @result_cities.each do |city, flight_ids , accom_ids| %>
-         <% country = city.country %>
-          <div class="col-xs-12.offset-xs-2 col-sm-6 col-md-6 col-lg-4">
-            <%= link_to city_path(city, flight_ids: flight_ids.join("-"), accom_ids: accom_ids.join("-")) do %>
-              <div class="card">
-                <%= cl_image_tag city.photo, height: 300, width: 370, crop: :fill %>
-                <div class="card-overlay"></div>
-                <span class="title"><h3><%= city.name %>, <%= country.name %></h3></span>
-                <span>Total Cost: <%= @total %></span>
-                <span class="info">
-                <h5>Language: <%= country.language %></h5>
-                <h5>Currency: <%= country.currency %></h5>
-                <h5>English Level: <span class="yellow"><%= '★' * country.english_level %></span></h5>
-                <% if city.level_of_safety.overrall_risk == 'low' %>
-                  <h5>Overall Risk: <span class="green"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
-                  <% elsif city.level_of_safety.overrall_risk == 'medium' %>
-                  <h5>Overall Risk: <span class="orange"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
-                  <% else %>
-                  <h5>Overall Risk: <span class="red"><%= city.level_of_safety.overrall_risk.capitalize %></h5></span>
-                <% end %>
-                </span>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <% end %>
+            <div class="col-xs-12 col-md-4">
+              <!-- Card -->
+              <%= link_to city_path(city, flight_ids: flight_ids.join("-"), accom_ids: accom_ids.join("-")), class: "card-link" do %>
+                <article class="card animated fadeInLeft">
+                  <%= cl_image_tag city.photo, class:"card-img-top img-responsive" %>
+                  <div class="card-block text-center">
+                    <h4 class="card-title"><%= city.name %>, <%= country.name %></h4>
+                    <h6 class="text-total"><strong><%= @total_price %> USD in total </strong><h6>
+                  </div>
+                </article>
+                <!-- .end Card -->
+              <% end %>
+            </div>
+          <% end %>
+       </div>
       </div>
-      <br>
-   <div style="text-align:center;"><%= link_to "Return", root_path,  class: "return-button btn btn-primary spin-trigger" %></div>
-   </div>
-</div>
+    <% end %>
+    <br>
+    <br>
+    <br>
+  </div>
