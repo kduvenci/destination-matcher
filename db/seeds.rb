@@ -2,13 +2,15 @@ require "faker"
 require 'roo'
 
 if Rails.env.development?
- Flight.destroy_all
- Accommodation.destroy_all
- User.destroy_all
- City.destroy_all
- Country.destroy_all
- Region.destroy_all
- puts "DB destroyed!"
+  LevelOfSafety.destroy_all
+  Visa.destroy_all
+  Flight.destroy_all
+  Accommodation.destroy_all
+  User.destroy_all
+  City.destroy_all
+  Country.destroy_all
+  Region.destroy_all
+  puts "DB destroyed!"
 end
 
 #===========================================================================================
