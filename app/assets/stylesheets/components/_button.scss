@@ -5,11 +5,12 @@
   border-radius: 50%;
   font-size: 12px;
 }
-
 .modal-btn {
-  margin-top: 50px;
+  border: 2px solid $dim-gray;
+  color: $dim-gray;
+  background-color: white;
+  margin-right: 3px;
 }
-
 .return-button {
   color: white;
   border-radius: 5px;
