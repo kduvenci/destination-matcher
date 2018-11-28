@@ -18,7 +18,7 @@
                 <h2>Rating: <%= accom.score %></h2>
                 <p>Price: <%= accom.price%> US$ per night</p>
                 <p><%= accom.address%></p>
-                <input type="radio" class="accommodation_choice radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
+                <input type="radio" class="accommodation_choice change_btn radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
               </div>
             </div>
 

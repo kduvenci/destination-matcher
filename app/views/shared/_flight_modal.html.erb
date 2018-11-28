@@ -12,7 +12,7 @@
         <div class="flight-card" id="flight-radio-btn">
               <!-- radio button -->
               <div class="card-flight-content col-xs-1">
-                <input type="radio" class="flight_choice radio" name="flight_choice" value=<%= flight.id %>
+                <input type="radio" class="flight_choice change_btn radio" name="flight_choice" value=<%= flight.id %>
                 <%= flight.id == @picked_flight ? 'checked' : '' %>>
               </div>
 
@@ -85,8 +85,7 @@
 
                 <div class="text-center flight-total col-xs-3">
                   <div class="row">
-                    <h2><strong>Total</strong></h2>
-                    <h4><i class="fas fa-dollar-sign"></i><%= flight.price %> US$</h4>
+                    <h4><strong></i><%= flight.price %> US$</strong></h4>
                   </div>
                 </div>
 
