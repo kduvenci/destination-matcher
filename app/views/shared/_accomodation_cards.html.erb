@@ -12,7 +12,7 @@
           <p><%= @accommodation.address%></p>
         </div>
         <div class="col-xs-3">
-          <button type="button" class="modal-btn btn btn-success" data-toggle="modal" data-target="#accom"><i class="fas fa-exchange-alt"></i></button>
+          <button type="button" class="modal-btn btn btn-primary" data-toggle="modal" data-target="#accom">Change</button>
         </div>
       <div class="row">
         <%= link_to "Book", @accommodation.booking_url, target: "_blank", class: "btn btn-success" %>
