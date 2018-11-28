@@ -44,6 +44,9 @@
 .flight_choice:checked {
   background: $coral;
 }
+.flight_choice:checked:focus {
+  outline: none;
+}
 .flight_choice:checked::before {
   height: 30px;
   width: 30px;
