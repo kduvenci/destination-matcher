@@ -71,8 +71,9 @@
                     <h4>Currency: <%= @city.country.currency %></h4>
                   </div>
                   <div class="card-icons col-xs-12">
-                    <button type="button" class="modal-btn btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
+                    <button type="button" class="modal-btn btn btn-success" data-toggle="modal" data-target="#visas"><i class="fas fa-exchange-alt"></i></button>
                   </div>
+                  <%= render "shared/visa_modal" %>
                 </div>
               </div>
             </div>

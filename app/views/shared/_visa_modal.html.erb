@@ -1,0 +1,22 @@
+<center>
+  <div class="modal fade" id="visas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="moda-content">
+        <div class="modal-body">
+          <h3>Let's see if you need a Visa...</h3>
+        </div>
+        <div class="modal-body">
+          <h4>Where is your passport from?</h4>
+          <div class ="form-group">
+            <%= select_tag "region",
+            options_from_collection_for_select(Region.all.order(:name), :id, :name),
+            input_html: {class: "form-small", required: true},
+            prompt: "To which region?" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</center>
+
+
