@@ -7,14 +7,14 @@ class CitiesController < ApplicationController
   def index
     @result_cities = []
     if params[:commit] == 'Search'
-      
+
       # prepare params for fetchflight and budget calc
       origin = City.find(params['/cities']['origin'])
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
       max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
-      
+
       # Call api & scraping services
       # pool = Thread.pool(1)
       # pool.process {
@@ -22,12 +22,12 @@ class CitiesController < ApplicationController
         accommodationsAPI = FetchAccommodations.call(region, outboundDate, inboundDate)
       # }
       # pool.shutdown
-    
+
       # Save Flights if in Bugdet
       save_flight_time = Time.now
       saved_accoms = save_accommodation(accommodationsAPI)
       saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
-      
+
       # prepare city array from flights
       cf_id_array = []
       saved_flights.each do |flight|
@@ -50,9 +50,10 @@ class CitiesController < ApplicationController
       @result_cities = @result_cities.map do |city|
         [ city,
           cf_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:flight_id] },
-          ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] } 
+          ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] }
         ]
       end
+      @total_price = "1300"
     end
   end
 
@@ -123,7 +124,7 @@ class CitiesController < ApplicationController
       return_carrierID = ""
       return_stops = ""
       return_code = ""
-      
+
       departure_location = ""
       return_location = ""
       counter = 0
