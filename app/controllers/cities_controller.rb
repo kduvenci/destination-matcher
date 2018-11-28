@@ -13,7 +13,7 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
-      max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
+      max_budget = params['/cities']["max_budget"].gsub(",","").gsub(" US$", "").to_i
 
       # Call api & scraping services
       # pool = Thread.pool(1)
