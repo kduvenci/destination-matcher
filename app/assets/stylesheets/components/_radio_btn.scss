@@ -14,7 +14,7 @@
   }
 }
 
-.flight_choice {
+.change_btn {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -34,20 +34,20 @@
   cursor: pointer;
   display: inline-block;
   margin-right: 0.5rem;
-  outline: none;
+  outline: none !important;
   position: relative;
   z-index: 1000;
 }
-.flight_choice:hover {
+.change_btn:hover {
   background: #9faab7;
 }
-.flight_choice:checked {
+.change_btn:checked {
   background: $coral;
 }
-.flight_choice:checked:focus {
+.change_btn:checked:focus {
   outline: none;
 }
-.flight_choice:checked::before {
+.change_btn:checked::before {
   height: 30px;
   width: 30px;
   position: absolute;
@@ -57,7 +57,7 @@
   text-align: center;
   line-height: 30px;
 }
-.flight_choice:checked::after {
+.change_btn:checked::after {
   -webkit-animation: click-wave 0.65s;
   -moz-animation: click-wave 0.65s;
   animation: click-wave 0.65s;
@@ -67,10 +67,10 @@
   position: relative;
   z-index: 100;
 }
-.flight_choice.radio {
+.change_btn.radio {
   border-radius: 50%;
 }
-.flight_choice.radio::after {
+.change_btn.radio::after {
   border-radius: 50%;
 }
 
