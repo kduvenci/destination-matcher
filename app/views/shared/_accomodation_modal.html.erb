@@ -14,11 +14,18 @@
                 <div class="photo"><%= image_tag accom.photo, width: 300, height: 300, crop: :fill %></div>
               </div>
               <div class="description">
-                <h1><%= accom.name %></h1>
-                <h2>Rating: <%= accom.score %></h2>
-                <p>Price: <%= accom.price%> US$ per night</p>
-                <p><%= accom.address%></p>
-                <input type="radio" class="accommodation_choice change_btn radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
+                <div class ="row">
+                  <div class="col-xs-10">
+                    <h1><%= accom.name %></h1>
+                    <h2>Rating: <%= accom.score %></h2>
+                    <p>Price: <%= accom.price%> US$ per night</p>
+                    <p><%= accom.address%></p>
+                  </div>
+                  <div class="col-xs-2">
+                    <br>
+                    <input type="radio" class="accommodation_choice change_btn radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
+                  </div>
+                </div>
               </div>
             </div>
 
