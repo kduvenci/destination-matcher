@@ -64,11 +64,14 @@
                   </div>
                   <div class="card-icons col-xs-12">
                     <p><i class="fas fa-exclamation-circle"></i></p>
-                    <h4>Overall Risk: <%= "medium".capitalize %></h4><!-- To unhardcode when risks seeded -->
+                    <h4>Safety Index: <%= @city.level_of_safety.safety_rank.to_i %>%</h4>
                   </div>
                   <div class="card-icons col-xs-12">
                     <p><i class="fas fa-money-bill"></i></p>
                     <h4>Currency: <%= @city.country.currency %></h4>
+                  </div>
+                  <div class="card-icons col-xs-12">
+                    <button type="button" class="modal-btn btn btn-success" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-exchange-alt"></i></button>
                   </div>
                 </div>
               </div>
@@ -77,6 +80,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
