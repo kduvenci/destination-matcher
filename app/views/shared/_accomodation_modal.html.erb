@@ -4,27 +4,35 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="text-center modal-title" id="exampleModalLongTitle">Additional Accomodation Options</h3>
+        <form method="get" action="/change_accom">
         <div class="modal-body">
         <!-- accomodation details -->
         <% @accommodations.each do |accom| %>
-        <div class="blog-card">
-          <div class="meta">
-            <div class="photo"><%= image_tag accom.photo, width: 300, height: 300, crop: :fill %></div>
-          </div>
-          <div class="description">
-            <h1><%= accom.name %></h1>
-            <h2>Rating: <%= accom.score %></h2>
-            <p>Price: <%= accom.price%> USD per night</p>
-            <p><%= accom.address%></p>
-          </div>
-        </div>
+
+            <div class="blog-card" id="accomm-radio-btn">
+              <div class="meta">
+                <div class="photo"><%= image_tag accom.photo, width: 300, height: 300, crop: :fill %></div>
+              </div>
+              <div class="description">
+                <h1><%= accom.name %></h1>
+                <h2>Rating: <%= accom.score %></h2>
+                <p>Price: <%= accom.price%> US$ per night</p>
+                <p><%= accom.address%></p>
+                <input type="radio" class="accommodation_choice radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
+              </div>
+            </div>
+
         <% end %>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-success">Save changes</button>
       </div>
+      <input type="hidden" name="city-id" value=<%= params[:id] %>>
+      <input type="hidden" name="flight_ids" value=<%= params['flight_ids'] %>>
+      <input type="hidden" name="accom_ids" value=<%= params['accom_ids'] %>>
+      </form>
     </div>
   </div>
 </div>

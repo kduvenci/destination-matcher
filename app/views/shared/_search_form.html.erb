@@ -3,11 +3,12 @@
   <%= simple_form_for cities_path, url: cities_path, method: :get do |f| %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1">
-      <div class ="form-group">
+      <div class ="form-group traveling-from-form">
         <%= f.input :origin,
                     collection: City.all.order(:name),
-                    prompt: "Traveling from?",
-                    input_html: {class: "form-small", required: true} %>
+                    input_html: {class: "form-small", required: true},
+                    label: 'Traveling From?',
+                    selected: City.find_by_name("Tokyo").id %>
     </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-5">
@@ -15,7 +16,8 @@
         <%= f.input :region,
                     collection:  Region.all.order(:name),
                     input_html: {class: "form-small", required: true},
-                    prompt: "To which region?" %>
+                    label: "To Which Region?",
+                    selected: 1 %>
       </div>
     </div>
   </div>
@@ -23,9 +25,11 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
       <div class ="form-group">
         <%= f.input :max_budget,
-                    collection: ["500 USD", "800 USD","1,000 USD", "1,500 USD", "2,000 USD", "2,500 USD", "3,000 USD", "3,500 USD", "4,000 USD", "4,500 USD", "5,000 USD", "5,500 USD", "6,000 USD"],
+                    collection: ["500 US$", "800 US$","1,000 US$", "1,500 US$", "2,000 US$", "2,500 US$", "3,000 US$", "3,500 US$", "4,000 US$", "4,500 US$", "5,000 US$", "5,500 US$", "6,000 US$"],
                     input_html: {class: "form-small", required: true},
-                    label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget')%>
+                    label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget'),
+                    selected: "1,000 US$",
+                    hint: '*Includes: meals, flights, accommodations' %>
       </div>
     </div>
   </div>
@@ -36,7 +40,7 @@
           <%= f.input :dep_date,
           as: :string,
           required: true,
-          input_html: {class: "datepicker form-small"},
+          input_html: {class: "datepicker depart-date form-small"},
           prompt: "Departure Date",
           label: raw('<i class="fas fa-plane-departure"></i> Departure Date') %>
       </div>
@@ -46,7 +50,7 @@
         <%= f.input :return_date,
                     as: :string,
                     required: true,
-                    input_html: {class: "datepicker form-small"},
+                    input_html: {class: "datepicker return-date form-small"},
                     prompt: "Return Date",
                     label: raw('<i class="fas fa-plane-arrival"></i> Return Date') %>
       </div>
@@ -54,8 +58,8 @@
   </div>
     <div class="row">
       <div class="col-xs-12 col-sm-12 text-center">
-        <div class="form-group">
-          <%= f.submit "Search", class: "form-small submit-button btn btn-primary spin-trigger" %>
+        <div class="form-group submit-button">
+          <%= f.submit "Search", class: "form-small submit-button btn btn-success spin-trigger" %>
         </div>
       </div>
     </div>

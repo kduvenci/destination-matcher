@@ -10,24 +10,28 @@
   margin-bottom: 10px;
 }
 
+.form-control-label {
+  margin-left: 12px;
+}
+
 .form-control {
   border-radius: 4px !important;
-  // font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+  width: 96%;
+  margin: auto;
 }
 
 .form-small {
   font-size: 15px !important;
-  color: #7D7D7D;
+  color: #676767;
   }
 
 .submit-button {
   color: white;
   padding: 10px 50px;
+  margin-bottom: 0px;
   border-radius: 5px;
 }
 
-.signup-button {
-  color: white;
-  border-radius: 5px;
+.text-muted {
+  margin-left: 10px;
 }
-

@@ -11,64 +11,66 @@
 <div class="show-container results container-fluid">
   <div class="content container">
     <div class="row">
-        <!-- Total and Flight Card Column -->
-        <div class="col-xs-8">
+      <div class="col-xs-12">
           <!-- Total Card Row -->
-          <div class="row">
             <div class="info-card">
-              <div class="row">
-                <div class="header col-xs-12">
-                  <h2 class="text-center">Best deal for <%= @period %> days</h2>
+              <div class="row" style="margin: 0;">
+                <div class="header text-center col-xs-12">
+                  <h2><strong>Best deal for <%= @period %> days: <%= @total.round %> US$</strong></h2>
                 </div>
               </div>
-              <div class="price-container row">
-                <div class="col-xs-6">
-                  <p><i class="fas fa-utensils"></i> <%= @food.round %> USD (Total Avg)</p>
-                  <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> USD total</p>
-                  <p><i class="fas fa-plane"> </i> <%= @flight.price %> USD round trip </p>
+
+              <div class="row">
+              <div class="text-center price-container">
+                <div class="col-xs-12 col-md-4">
+                  <p><i class="fas fa-utensils"></i> <%= @food.round %> US$ (Total Avg)</p>
                 </div>
-                <div class="total text-center col-xs-6">
-                  <h2><strong>Total: <%= @total.round %> USD</strong></h2>
+                <div class="col-xs-12 col-md-4">
+                  <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> US$ total</p>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                  <p><i class="fas fa-plane"> </i> <%= @flight.price %> US$ round trip </p>
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+         </div>
+      </div>
           <!-- Flight Card Row -->
-         <div class="row">
+      <div class="row">
+        <div class="col-xs-12 col-md-9">
+
         <!--  card for recommended flight -->
           <%= render "shared/flight_cards" %>
-        </div>
+
         <!--  card for recoommended stay -->
-        <div class="row">
+
           <%= render "shared/accomodation_cards" %>
-        </div>
+
       </div>
 
       <!-- Country at a Glance and Accomodation Column -->
-      <div class="col-xs-4">
-        <div class="row">
+      <div class="col-xs-12 col-md-3">
+
           <!-- Country at a Glance Info -->
-          <div class="card-country-general-info">
-            <div class="col-xs-12">
+
+            <div class="card-country-general-info col-xs-12">
                 <h3 class="text-center"><%= @city.country.name %> at a Glance</h3>
 
 
-                <div class="row">
-                  <div class="card-icons col-xs-12">
-                    <p><i class="fas fa-globe-americas"></i></p>
-                    <h4>Language: <%= @city.country.language %></h4>
+
+                  <div class="card-icons">
+                    <h4><i class="far fa-comment"></i> <%= @city.country.language %></h4>
                   </div>
-                  <div class="card-icons col-xs-12">
-                    <p><i class="fas fa-star"></i></p>
-                    <h4>English Level: <span class="yellow"><%= '★' * @city.country.english_level %></span></h4>
+                  <div class="card-icons">
+                    <h4><%= '★' * @city.country.english_level %> English Level</h4>
                   </div>
                   <div class="card-icons col-xs-12">
                     <p><i class="fas fa-exclamation-circle"></i></p>
                     <h4>Safety Index: <%= @city.level_of_safety.safety_rank.to_i %>%</h4>
                   </div>
-                  <div class="card-icons col-xs-12">
-                    <p><i class="fas fa-money-bill"></i></p>
-                    <h4>Currency: <%= @city.country.currency %></h4>
+                  <div class="card-icons">
+                    <h4><i class="fas fa-money-bill"></i> <%= @city.country.currency %></h4>
                   </div>
                   <div class="card-icons col-xs-12">
                     <button type="button" class="modal-btn btn btn-success" data-toggle="modal" data-target="#visas"><i class="fas fa-exchange-alt"></i></button>
@@ -76,8 +78,8 @@
                   <%= render "shared/visa_modal" %>
                 </div>
               </div>
-            </div>
-        </div>
+
+
       </div>
     </div>
   </div>

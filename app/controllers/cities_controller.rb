@@ -13,7 +13,7 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
-      max_budget = params['/cities']["max_budget"].gsub(" USD", "").gsub(",","").to_i
+      max_budget = params['/cities']["max_budget"].gsub(",","").gsub(" US$", "").to_i
 
       # Call api & scraping services
       # pool = Thread.pool(1)
@@ -28,7 +28,7 @@ class CitiesController < ApplicationController
       saved_accoms = save_accommodation(accommodationsAPI)
       saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
 
-      # prepare city array from flights
+      # prepare city array and city flight pairs
       cf_id_array = []
       saved_flights.each do |flight|
         @result_cities << flight.city unless @result_cities.include?(flight.city)
@@ -38,6 +38,7 @@ class CitiesController < ApplicationController
         }
       end
 
+      # prepare city accom. pairs
       ca_id_array = []
       saved_accoms.each do |accom|
         ca_id_array << {
@@ -53,7 +54,9 @@ class CitiesController < ApplicationController
           ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] }
         ]
       end
-      @total_price = "1300"
+
+      # prepare cost list by city
+      @total_cost =  prepare_cost_for_index(@result_cities)
     end
   end
 
@@ -83,17 +86,26 @@ class CitiesController < ApplicationController
       @picked_flight = @flight.id
     end
 
+    if params['accommodation_choice']
+      @accommodation = Accommodation.find(params['accommodation_choice'])
+      @picked_accommodation = params['accommodation_choice']
+    else
+      @accommodation = @accommodations[0]
+      @picked_accommodation = @accommodation.id
+    end
+
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = (@meal * 3 * @period).round
-    @accommodation = @accommodations.first
     @total = @food + @flight.price + @accommodation.price * @period
   end
 
   def change_first_pick
-    # change @flight to the picked one by using @picked_flight
-    # @flight = Flight.find(params["flight-choice"])
     redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], flight_choice: params['flight_choice']
+  end
+
+  def change_accom
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], accommodation_choice: params['accommodation_choice']
   end
 
   private
@@ -239,17 +251,29 @@ class CitiesController < ApplicationController
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
-    period = ((return_arrival_time - depart_departure_time)/60/60/24).floor;
-    meal = city.meal_average_price_cents;
+    period = ((return_arrival_time - depart_departure_time)/60/60/24).floor
+    meal = city.meal_average_price_cents
     food = (meal * 3 * period).round
-    if saved_accoms.present?
-      accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
-    else
-      accommodation_cost = 35
-    end
+    accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
     total = food + ticket_price + accommodation_cost
-    pp "Food = #{food}, Acc = #{accommodation_cost}, Fly = #{ticket_price}, T = #{total}, B = #{max_budget}"
+    # pp "Food = #{food}, Acc = #{accommodation_cost}, Fly = #{ticket_price}, T = #{total}, B = #{max_budget}"
     return total <= max_budget
   end
 
+  def prepare_cost_for_index(result_cities)
+    total_cost = {}
+    result_cities.each do |city_info|
+      flight_id = city_info.second.first
+      flight = Flight.find(flight_id)
+      flight_price = flight.price
+      meal = flight.city.meal_average_price_cents;
+      period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
+      food = (meal * 3 * period).round
+      accom_id = city_info.third.first
+      accom_price = Accommodation.find(accom_id).price * period
+      cost = food + accom_price + flight_price
+      total_cost[city_info.first] = cost
+    end
+    total_cost
+  end
 end
