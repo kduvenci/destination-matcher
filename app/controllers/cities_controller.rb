@@ -97,7 +97,7 @@ class CitiesController < ApplicationController
     @meal = @flight.city.meal_average_price_cents;
     @period = ((@flight.return_arrival_time - @flight.depart_departure_time)/60/60/24).floor;
     @food = (@meal * 3 * @period).round
-    @total = @food + @flight.price + @accommodation.price * @period
+    @total = @food + @flight.price + @accommodation.price
   end
 
   def change_first_pick
