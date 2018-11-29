@@ -25,8 +25,9 @@ a {transition: .25s all;}
 }
 
 .card-block {
-  padding: 1.25rem;
+  padding: 1rem;
   height: 14vh;
+  margin-bottom: -16px;
 }
 
 .card-img-top {
@@ -65,29 +66,37 @@ a {transition: .25s all;}
 }
 .header {
   width: 100%;
-  height: 150px;
+  height: 90px;
   background-color: $coral;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  h2 {
+    font-size: 28px;
+    padding-bottom: 20px;
+  }
 }
 .price-container {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   p {
-    font-size: 30px;
+    font-size: 22px;
     color: $dim-gray;
-    padding: 50px 0;
+    padding: 16px 0;
+    margin: 0;
   }
 }
 .price-container .meal {
-  border-right: 1px dotted $coral;
+  border-right: 1px dotted $dim-gray;
 }
 .price-container .accom {
-  border-right: 1px dotted $coral;
+  border-right: 1px dotted $dim-gray;
+}
+.price-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
 }
 
 .flight-card {
@@ -109,6 +118,7 @@ a {transition: .25s all;}
 }
 .card-flight-content {
   padding-top: 15px;
+  margin-right: -25px;
 }
 // .flight-card button {
 //   margin: 5px;
@@ -148,8 +158,8 @@ a:hover, a:focus {
 
 // Country at a Glance General Info
 .card-country-general-info {
-  width: 105%;
-  margin-left: -5%;
+  width: 108%;
+  margin-left: -8%;
   height: 410px;
   padding: 1.5rem;
   margin-top: 10px;
@@ -162,8 +172,13 @@ a:hover, a:focus {
   text-align: left;
 }
 .card-country-general-info h3{
+  font-size: 24px;
   color: $coral;
   margin-bottom: 25px;
+}
+.card-country-general-info h4 {
+  font-size: 17px;
+  margin-left: 19px;
 }
 .card-icons p {
   font-size: 25px;

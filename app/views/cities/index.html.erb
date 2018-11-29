@@ -20,7 +20,7 @@
               <!-- Card -->
               <%= link_to city_path(city, flight_ids: flight_ids.join("-"), accom_ids: accom_ids.join("-")), class: "card-link" do %>
                 <article class="card animated fadeInLeft">
-                  <%= cl_image_tag city.photo, class:"card-img-top img-responsive" %>
+                  <%= cl_image_tag city.photo, class:"card-img-top img-responsive", height: 370 , witdh: 720, crop: :fill %>
                   <div class="card-block text-center">
                     <h4 class="card-title"><%= city.name %>, <%= country.name %></h4>
                     <h6 class="text-total"><strong><%= @total_cost[city] %> US$ in total </strong><h6>

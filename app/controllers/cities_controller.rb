@@ -6,6 +6,7 @@ class CitiesController < ApplicationController
 
   def index
     @result_cities = []
+    @result_message = ""
     if params[:commit] == 'Search'
 
       # prepare params for fetchflight and budget calc
@@ -13,50 +14,60 @@ class CitiesController < ApplicationController
       region = Region.find(params['/cities']['region'])
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
-      max_budget = params['/cities']["max_budget"].gsub(",","").gsub(" US$", "").to_i
+      max_budget = params['/cities']["max_budget"].gsub(",","").gsub("$", "").strip.to_i
 
       # Call api & scraping services
-      # pool = Thread.pool(1)
-      # pool.process {
-        flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-        accommodationsAPI = FetchAccommodations.call(region, outboundDate, inboundDate)
-      # }
-      # pool.shutdown
+      flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
+      accommodationsAPI = FetchAccommodations.call(region, outboundDate, inboundDate)
 
-      # Save Flights if in Bugdet
-      save_flight_time = Time.now
+      # Save all Accommodations
       saved_accoms = save_accommodation(accommodationsAPI)
-      saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
+      if flightsAPI.present? & accommodationsAPI.present?
+        if saved_accoms.present?
+          # Save Flights if in Bugdet
+          save_flight_time = Time.now
+          saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
 
-      # prepare city array and city flight pairs
-      cf_id_array = []
-      saved_flights.each do |flight|
-        @result_cities << flight.city unless @result_cities.include?(flight.city)
-        cf_id_array << {
-          city_id: flight.city.id,
-          flight_id: flight.id
-        }
+          # prepare city array and city flight pairs
+          cf_id_array = []
+          saved_flights.each do |flight|
+            @result_cities << flight.city unless @result_cities.include?(flight.city)
+            cf_id_array << {
+              city_id: flight.city.id,
+              flight_id: flight.id
+            }
+          end
+
+          # prepare city accom. pairs
+          ca_id_array = []
+          saved_accoms.each do |accom|
+            ca_id_array << {
+              city_id: accom.city.id,
+              accom_id: accom.id
+            }
+          end
+
+          # prepare list for view
+          @result_cities = @result_cities.map do |city|
+            [ city,
+              cf_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:flight_id] },
+              ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] }
+            ]
+          end
+
+          # prepare cost list by city
+          @total_cost =  prepare_cost_for_index(@result_cities)
+        else
+          @result_message = "The accommodation is not available for selected dates."
+        end
+      else
+        @result_message = "Oops we are having some difficulties with resource APIs.. Please try again : )"
       end
-
-      # prepare city accom. pairs
-      ca_id_array = []
-      saved_accoms.each do |accom|
-        ca_id_array << {
-          city_id: accom.city.id,
-          accom_id: accom.id
-        }
-      end
-
-      # prepare list for view
-      @result_cities = @result_cities.map do |city|
-        [ city,
-          cf_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:flight_id] },
-          ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] }
-        ]
-      end
-
-      # prepare cost list by city
-      @total_cost =  prepare_cost_for_index(@result_cities)
+    end
+    if @result_message.present?
+      puts "@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@"
+      puts @result_message
+      puts "@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@"
     end
   end
 
@@ -78,7 +89,7 @@ class CitiesController < ApplicationController
     end
     @accommodations = @accommodations.sort { |a, b| a.price <=> b.price }
 
-    if params['flight_choice']
+    if params['flight_choice'].present?
       @flight = Flight.find(params['flight_choice'].to_i)
       @picked_flight = params['flight_choice'].to_i
     else
@@ -86,7 +97,7 @@ class CitiesController < ApplicationController
       @picked_flight = @flight.id
     end
 
-    if params['accommodation_choice']
+    if params['accommodation_choice'].present?
       @accommodation = Accommodation.find(params['accommodation_choice'])
       @picked_accommodation = params['accommodation_choice']
     else
@@ -218,6 +229,10 @@ class CitiesController < ApplicationController
             else
               p "= = > > Error during saving flight: #{flight.errors.messages} "
             end
+          else
+            p "============================================================================="
+            p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
+            p "============================================================================="
           end
         end
         counter += 1
