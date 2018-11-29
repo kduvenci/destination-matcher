@@ -1,5 +1,8 @@
 <div class="wrapper">
   <% if @result_cities == [] %>
+    <br>
+    <br>
+    <br>
     <h3 class="text-center">Sorry, there currently are no destinations within your budget!</h3>
   <% else %>
     <br>
@@ -20,7 +23,7 @@
                   <%= cl_image_tag city.photo, class:"card-img-top img-responsive" %>
                   <div class="card-block text-center">
                     <h4 class="card-title"><%= city.name %>, <%= country.name %></h4>
-                    <h6 class="text-total"><strong><%= @total_price %> USD in total </strong><h6>
+                    <h6 class="text-total"><strong><%= @total_cost[city] %> USD in total </strong><h6>
                   </div>
                 </article>
                 <!-- .end Card -->
