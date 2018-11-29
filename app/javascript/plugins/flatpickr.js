@@ -9,7 +9,7 @@ flatpickr(".depart-date", {
 
 flatpickr(".return-date", {
   minDate: "today",
-  defaultDate: new Date().fp_incr(8)
+  defaultDate: new Date().fp_incr(4)
 })
 
 flatpickr("#range_start", {
