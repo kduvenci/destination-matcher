@@ -26,7 +26,7 @@
                   <p><i class="fas fa-utensils"></i> <%= @food.round %> US$ total</p>
                 </div>
                 <div class="accom col-xs-12 col-md-4">
-                  <p><i class="fas fa-hotel"></i> <%= @accommodation.price * @period %> US$ total</p>
+                  <p><i class="fas fa-hotel"></i> <%= @accommodation.price %> US$ total</p>
                 </div>
                 <div class="flight col-xs-12 col-md-4">
                   <p><i class="fas fa-plane"> </i> <%= @flight.price %> US$ round trip </p>
@@ -62,11 +62,26 @@
                   <div class="card-icons">
                     <h4><i class="far fa-comment"></i> <%= @city.country.language %></h4>
                   </div>
-                  <div class="card-icons" <a href="#" title="Example: 1 star = 0~20% of locals know at least basic English, 5 stars = 80~100%. Sources: Ethnologue, EF English Proficiency Index"></a>
+                  <div class="card-icons" <a href="#" title="Expl.
+1 star = 0~20% of locals
+partly know basic English.
+5 stars = 80~100%.
+
+Sources: Ethnologue,
+EF English Proficiency Index"></a>
                     <h4><%= '★' * @city.country.english_level %> English Level</h4>
                   </div>
                   <div class="card-icons">
-                    <h4><i class="fas fa-exclamation-circle" <a href="#" title="xxxx"></a></i>Safety Index: <%= @city.level_of_safety.safety_rank.to_i %>%</h4>
+                    <h4><i class="fas fa-exclamation-circle" <a href="#" title="Risks Assessements for <%= @city.name %>:
+
+Overall risk: <%= @city.level_of_safety.overrall_risk.capitalize %>
+Pickpoket risk: <%= @city.level_of_safety.pickpoket_risk.capitalize %>
+Mugging risk: <%= @city.level_of_safety.mugging_risk.capitalize %>
+Scams risk: <%= @city.level_of_safety.scams_risk.capitalize %>
+Transportation risk: <%= @city.level_of_safety.transport_and_taxis_risk.capitalize %>
+Natural disasters risk: <%= @city.level_of_safety.natural_disasters_risk.capitalize %>
+Terrorism risk: <%= @city.level_of_safety.terrorism_risk.capitalize %>
+Risk for women travelers: <%= @city.level_of_safety.women_travelers_risk.capitalize %>"></a></i>Safety Index: <%= @city.level_of_safety.safety_rank.to_i %>%</h4>
                   </div>
                   <div class="card-icons">
                     <h4><i class="fas fa-money-bill"></i> <%= @city.country.currency %></h4>
