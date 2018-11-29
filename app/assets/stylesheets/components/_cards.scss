@@ -81,7 +81,8 @@ a {transition: .25s all;}
   p {
     font-size: 22px;
     color: $dim-gray;
-    padding: 50px 0;
+    padding: 24px 0;
+    margin: 0 0;
   }
 }
 .price-container .meal {
@@ -122,6 +123,10 @@ a {transition: .25s all;}
 
 
 // Not sure which features these belong to? (- Amanda)
+.book-btn {
+  margin-left: 2px;
+}
+
 .card {
   h3:hover{
     text-decoration: none;
