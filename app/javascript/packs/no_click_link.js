@@ -1,8 +1,7 @@
-const tips = document.querySelectorAll(".tip");
-console.log(tips);
+const tooltips = document.querySelectorAll(".tooltip");
 
-tips.forEach(tip => {
-  tip.addEventListener("click", event => {
+tooltips.forEach(tooltip => {
+  tooltip.addEventListener("click", event => {
     console.log(event);
     event.preventDefault();
   })
