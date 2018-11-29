@@ -82,19 +82,21 @@ a {transition: .25s all;}
   p {
     font-size: 22px;
     color: $dim-gray;
-    padding: 50px 0;
+    padding: 16px 0;
+    margin: 0;
   }
 }
 .price-container .meal {
-  border-right: 1px dotted $coral;
+  border-right: 1px dotted $dim-gray;
 }
 .price-container .accom {
-  border-right: 1px dotted $coral;
+  border-right: 1px dotted $dim-gray;
 }
 .price-col {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px 0;
 }
 
 .flight-card {
