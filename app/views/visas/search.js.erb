@@ -2,7 +2,11 @@ var result = document.getElementById("result")
 
 result.innerText = "Your passport status is: '<%= @result %>'."
 
+<% if @result == "visa required" %>
 result.style.backgroundColor = "#FA6478";
 result.style.color = "#ffffff";
+<% else %>
+result.style.backgroundColor = "#37A464";
+result.style.color = "#ffffff";
 
-
+<% end %>
