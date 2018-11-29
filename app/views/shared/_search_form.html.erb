@@ -17,7 +17,7 @@
                     collection:  Region.all.order(:name),
                     input_html: {class: "form-small", required: true},
                     label: "To Which Region?",
-                    selected: 1 %>
+                    selected: Region.find_by_name("East Asia").id %>
       </div>
     </div>
   </div>
