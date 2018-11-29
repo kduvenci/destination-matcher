@@ -7,13 +7,12 @@
         <div class="modal-title modal-body-sm">
           <h4>Let's check if you need a <%= @city.country.nationality %> visa...</h3>
           <br>
-          <h5>Select your passport's nationality</h5>
            <br>
           <div class ="modal-body-md form-group">
             <%= form_tag({controller: :visas, action: :search}, remote: true, method: :get) do %>
-              <%= select_tag "id", options_for_select(Visa.all.map { |visa| [visa.country.nationality, visa.id] }) %>
+              <%= select_tag "id", options_for_select(Visa.all.map { |visa| [visa.country.nationality, visa.id] }.unshift(["Select your passport's nationality", nil])), class: "form-control", id: "select", style: "width: 70%;" %>
               <%= hidden_field_tag :destination, @city.country.name %>
-              <%= submit_tag "Search" %>
+              <%= submit_tag "Search", style: "display: none;", id: "submit" %>
             <% end %>
             <br>
             <br>
@@ -32,5 +31,9 @@
 </center>
 
 <script>
-
+  const button = document.getElementById("submit");
+  const select = document.getElementById("select");
+  select.addEventListener("change", (event) => {
+    button.click();
+  });
 </script>
