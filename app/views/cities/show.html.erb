@@ -16,21 +16,21 @@
             <div class="info-card">
               <div class="row" style="margin: 0;">
                 <div class="header text-center col-xs-12">
-                  <h2><strong>Best deal for <%= @period %> days: <%= @total.round %> US$</strong></h2>
+                  <h2><strong>Best deal for <%= @period %> days: $<%= @total.round %> </strong></h2>
                 </div>
               </div>
 
               <div class="row">
               <div class="text-center price-container">
                 <div class="meal price-col col-xs-12 col-md-4">
-                  <p><i class="fas fa-utensils"></i> <%= @food.round %> US$ total</p>
+                  <p><i class="fas fa-utensils"></i> $<%= @food.round %> total</p>
                 </div>
                 <div class="accom price-col col-xs-12 col-md-4">
-                  <p><i class="fas fa-hotel"></i> <%= @accommodation.price%> US$ total</p>
+                  <p><i class="fas fa-hotel"></i> $<%= @accommodation.price%> total</p>
                 </div>
                 <div class="flight price-col col-xs-12 col-md-4">
-                  <p><i class="fas fa-plane"> </i> <%= @flight.price %> US$ round trip </p>
-                </div>
+                  <p><i class="fas fa-plane"> </i> $<%= @flight.price %> round trip </p>
+                  </div>
               </div>
             </div>
             </div>
@@ -107,6 +107,3 @@ Source: SafeAround">
   </div>
 
 </div>
-
-
-
