@@ -18,12 +18,12 @@
                   <div class="col-xs-10">
                     <h1><%= accom.name %></h1>
                     <h2>Rating: <%= accom.score %></h2>
-                    <p>Price: $<%= accom.price%> total</p>
+                    <p>Price: $<%= number_with_delimiter(accom.price, delimiter: ",") %> total</p>
                     <p><%= accom.address%></p>
                   </div>
                   <div class="col-xs-2">
                     <br>
-                    <input type="radio" class="accommodation_choice change_btn radio" name="accommodation_choice" value=<%= accom.id %><%= accom.id == @picked_accommodation ? 'checked' : '' %>>
+                    <input type="radio" class="accommodation_choice change_btn radio" name="accommodation_choice" value=<%= accom.id %> <%= accom.id == @picked_accommodation ? 'checked' : '' %>>
                   </div>
                 </div>
               </div>
