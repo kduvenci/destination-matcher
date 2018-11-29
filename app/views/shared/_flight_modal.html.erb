@@ -86,7 +86,7 @@
                 <div class="text-center flight-total col-xs-3">
                   <div class="row">
                     <br>
-                    <h3><strong>$<%= flight.price %></strong></h3>
+                    <h3><strong>$<%= number_with_delimiter(flight.price, delimiter: ",") %></strong></h3>
                   </div>
                 </div>
 
