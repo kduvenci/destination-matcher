@@ -19,6 +19,9 @@
     <meta name="twitter:description" content="<%= meta_description %>">
     <meta name="twitter:image:src" content="<%= meta_image %>">
 
+    <%= javascript_include_tag 'application' %>
+
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -33,7 +36,6 @@
 
     <%= yield %>
 
-    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

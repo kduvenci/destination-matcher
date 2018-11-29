@@ -54,6 +54,8 @@ gem 'carrierwave', '~> 1.2'
 gem 'faker'
 gem 'flatpickr_rails'
 gem "roo", "~> 2.7.0"
+gem "jquery-rails"
+gem 'popper_js', '~> 1.14.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -13,9 +13,9 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery3
+//= require popper
 //= require_tree .
-
-// console.log("hello from JS spinner");
-//
-// const searchButton = document.querySelector(".spin-trigger");
-// console.log(searchButton);
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
