@@ -89,7 +89,7 @@ class CitiesController < ApplicationController
     end
     @accommodations = @accommodations.sort { |a, b| a.price <=> b.price }
 
-    if params['flight_choice']
+    if params['flight_choice'].present?
       @flight = Flight.find(params['flight_choice'].to_i)
       @picked_flight = params['flight_choice'].to_i
     else
@@ -97,7 +97,7 @@ class CitiesController < ApplicationController
       @picked_flight = @flight.id
     end
 
-    if params['accommodation_choice']
+    if params['accommodation_choice'].present?
       @accommodation = Accommodation.find(params['accommodation_choice'])
       @picked_accommodation = params['accommodation_choice']
     else
