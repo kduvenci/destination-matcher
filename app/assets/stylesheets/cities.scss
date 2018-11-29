@@ -2,7 +2,7 @@
 .city-cover-photo {
   background-position: center center;
   width: 100%;
-  height: calc(70vh - 50px);
+  height: calc(90vh - 50px);
   background-size: cover !important;
   box-shadow: 1px 1px 3px #333333;
   display: flex;
@@ -26,8 +26,8 @@
 .results {
   background-color: $light-yellow;
   position: relative;
-  padding-top: 50px;
   top: 500px;
-  height: 1000px;
+  height: 100%;
+  margin-bottom: 50px;
 }
 
