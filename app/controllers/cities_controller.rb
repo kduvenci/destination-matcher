@@ -101,11 +101,11 @@ class CitiesController < ApplicationController
   end
 
   def change_first_pick
-    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], flight_choice: params['flight_choice']
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], flight_choice: params['flight_choice'], anchor: "flight"
   end
 
   def change_accom
-    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], accommodation_choice: params['accommodation_choice']
+    redirect_to controller: 'cities', action: 'show', id: params['city-id'], flight_ids: params['flight_ids'], accom_ids: params["accom_ids"], accommodation_choice: params['accommodation_choice'], anchor: "accommodation"
   end
 
   private
