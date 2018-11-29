@@ -103,12 +103,12 @@ p {
     .description {
       flex-basis: 60%;
       &:before {
-        transform: skewX(-8deg);
+        transform: skewX(-3deg);
         content: "";
         background: #fff;
         width: 50px;
         position: absolute;
-        left: -60px;
+        left: -35px;
         top: 0;
         bottom: 0;
         z-index: -1;
