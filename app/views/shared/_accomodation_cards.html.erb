@@ -13,12 +13,10 @@
       </div>
       <div class="buttons text-right row">
         <button type="button" class="modal-btn btn btn-primary" data-toggle="modal" data-target="#accom">Change</button>
-        <%= link_to "Book", @accommodation.booking_url, target: "_blank", class: "btn btn-success" %>
+        <%= link_to "Book", @accommodation.booking_url, target: "_blank", class: "btn btn-success hotel-book-btn" %>
     </div>
     </div>
   </div>
 </div>
 
 <%= render "shared/accomodation_modal" %>
-
-
