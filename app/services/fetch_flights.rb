@@ -21,7 +21,7 @@ class FetchFlights
       destinationplaces << city.airport_key
     end
 
-    pool = Thread.pool([destinationplaces.size, 15].min)
+    pool = Thread.pool([destinationplaces.size, 5].min)
 
     destinationplaces.each do |destination|
       pool.process {

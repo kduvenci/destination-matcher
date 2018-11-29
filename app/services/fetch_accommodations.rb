@@ -20,7 +20,7 @@ class FetchAccommodations
     checkout_monthday = inboundDate[8..9]
     checkout_year = inboundDate[0..3]
 
-    pool = Thread.pool(5)
+    pool = Thread.pool(15)
     destinationplaces.each do |city_name|
       pool.process {
         url = "https://www.booking.com/searchresults.en-gb.html?"\
