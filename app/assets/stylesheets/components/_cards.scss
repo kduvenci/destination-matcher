@@ -113,13 +113,29 @@ a {transition: .25s all;}
 .flight-total {
   height: 100%;
   border-left: 3px dotted $dim-gray;
+  padding-left: 29px;
 }
 .card-flight-content {
   padding-top: 15px;
+  margin-right: -29px;
 }
-// .flight-card button {
-//   margin: 5px;
-// }
+
+.flight-book-btn {
+  margin-left: 13px;
+  margin-top: 5px;
+  padding: 7.2px 14px;
+  border-color: $coral;
+}
+
+.flight-price {
+  margin-left: 26px;
+  font-weight: bold;
+  margin-top: 11px;
+}
+
+.flight-card button {
+  margin: 5px;
+}
 
 
 // Not sure which features these belong to? (- Amanda)
