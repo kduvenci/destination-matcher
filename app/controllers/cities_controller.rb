@@ -270,7 +270,7 @@ class CitiesController < ApplicationController
       period = ((flight.return_arrival_time - flight.depart_departure_time)/60/60/24).floor;
       food = (meal * 3 * period).round
       accom_id = city_info.third.first
-      accom_price = Accommodation.find(accom_id).price * period
+      accom_price = Accommodation.find(accom_id).price
       cost = food + accom_price + flight_price
       total_cost[city_info.first] = cost
     end
