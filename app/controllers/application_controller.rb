@@ -34,5 +34,8 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 
-  ####################
+  ## Do not delete - This is for Social Meta Tags ##
+  def default_url_options
+  { host: ENV["HOST"] || "localhost:3000" }
+  end
 end

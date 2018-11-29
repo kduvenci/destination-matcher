@@ -1,0 +1,4 @@
+meta_product_name: "Destination Matcher"
+meta_title: "Destination Matcher"
+meta_description: "Search by budget and find the best destination"
+meta_image: "travel2.jpg"                       # should exist in `app/assets/images/`
