@@ -25,10 +25,10 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
       <div class ="form-group">
         <%= f.input :max_budget,
-                    collection: ["500 US$", "800 US$","1,000 US$", "1,500 US$", "2,000 US$", "2,500 US$", "3,000 US$", "3,500 US$", "4,000 US$", "4,500 US$", "5,000 US$", "5,500 US$", "6,000 US$"],
+                    collection: ["$500", "$800 ","$1,000 ", "$1,500 ", "$2,000 ", "$2,500 ", "$3,000 ", "$3,500 ", "$4,000 ", "$4,500 ", "$5,000 ", "$5,500 ", "$6,000 "],
                     input_html: {class: "form-small", required: true},
                     label: raw('<i class="far fa-money-bill-alt"></i> Travel Budget'),
-                    selected: "1,000 US$",
+                    selected: "$1,000 ",
                     hint: '*Includes: meals, flights, accommodations' %>
       </div>
     </div>
