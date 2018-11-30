@@ -118,7 +118,7 @@ a {transition: .25s all;}
   padding-left: 29px;
 }
 .card-flight-content {
-  padding-top: 15px;
+  padding-top: 22px;
   margin-right: -29px;
 }
 
@@ -198,4 +198,12 @@ a:hover, a:focus {
 .card-icons p {
   font-size: 25px;
   color: $light-gray;
+}
+
+.tooltip-inner {
+    max-width: 100% !important;
+}
+
+.tooltip {
+  width: 120%;
 }
