@@ -117,6 +117,17 @@ a {transition: .25s all;}
   border-left: 3px dotted $dim-gray;
   padding-left: 29px;
 }
+
+.flight-total-modal  {
+  height: 100%;
+  border-left: 3px dotted $dim-gray;
+  padding-left: 79px;
+  padding-top: 3px;
+  h3 {
+    font-size: 45px;
+  }
+}
+
 .card-flight-content {
   padding-top: 22px;
   margin-right: -29px;
