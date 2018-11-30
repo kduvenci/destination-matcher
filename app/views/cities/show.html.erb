@@ -63,12 +63,12 @@
                     <h4><i class="far fa-comment"></i> <%= @city.country.language %></h4>
                   </div>
                   <div class="card-icons">
-                    <a tabindex="0" role="button" href="#" data-toggle="tooltip" data-html="true" title="<h5>Expl.:<br>1 star = 0~20% of locals partly know basic English.<br>5 stars = 80~100%.<br><br>Sources: Ethnologue,<br>EF English Proficiency Index</h5>">
+                    <a tabindex="0" role="button" href="#" data-toggle="tooltip" data-html="true" title="<h5 class='text-left'>Expl.:<br>1 star = 0~20% of locals partly know basic English.<br>5 stars = 80~100%.<br><br>Sources: Ethnologue,<br>EF English Proficiency Index</h5>">
                       <h4><%= '★' * @city.country.english_level %> English Level</h4>
                     </a>
                   </div>
                   <div class="card-icons">
-                    <a tabindex="0" role="button" href="#" data-toggle="tooltip" data-html="true" title="<h4>Risks Assessements for <%= @city.name %>:</h4><h5>• Overall: <%= @city.level_of_safety.overrall_risk.capitalize %><br>• Pickpoket: <%= @city.level_of_safety.pickpoket_risk.capitalize %><br>• Mugging: <%= @city.level_of_safety.mugging_risk.capitalize %><br>• Scams: <%= @city.level_of_safety.scams_risk.capitalize %><br>• Transportation: <%= @city.level_of_safety.transport_and_taxis_risk.capitalize %><br>• Natural disasters: <%= @city.level_of_safety.natural_disasters_risk.capitalize %><br>• Terrorism: <%= @city.level_of_safety.terrorism_risk.capitalize %><br>• Risk for women travelers: <%= @city.level_of_safety.women_travelers_risk.capitalize %><br><br>Source: SafeAround</h5>">
+                    <a tabindex="0" role="button" href="#" data-toggle="tooltip" data-html="true" title="<span class='text-left'><h4>Risks Assessements for <%= @city.name %>:</h4><h5>• Overall: <%= @city.level_of_safety.overrall_risk.capitalize %><br>• Pickpoket: <%= @city.level_of_safety.pickpoket_risk.capitalize %><br>• Mugging: <%= @city.level_of_safety.mugging_risk.capitalize %><br>• Scams: <%= @city.level_of_safety.scams_risk.capitalize %><br>• Transportation: <%= @city.level_of_safety.transport_and_taxis_risk.capitalize %><br>• Natural disasters: <%= @city.level_of_safety.natural_disasters_risk.capitalize %><br>• Terrorism: <%= @city.level_of_safety.terrorism_risk.capitalize %><br>• Risk for women travelers: <%= @city.level_of_safety.women_travelers_risk.capitalize %><br><br>Source: SafeAround</h5></span>">
                     <h4><i class="fas fa-exclamation-circle"></i>Safety Index: <%= @city.level_of_safety.safety_rank.to_i %>%</h4>
                     </a>
 
