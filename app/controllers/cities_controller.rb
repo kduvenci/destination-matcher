@@ -229,10 +229,10 @@ class CitiesController < ApplicationController
             else
               p "= = > > Error during saving flight: #{flight.errors.messages} "
             end
-          else
-            p "============================================================================="
-            p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
-            p "============================================================================="
+          # else
+          #   p "============================================================================="
+          #   p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
+          #   p "============================================================================="
           end
         end
         counter += 1
