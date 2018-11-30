@@ -43,7 +43,8 @@ class FetchAccommodations
 
         html = open(url, {
           :proxy_http_basic_authentication => ['http://zproxy.lum-superproxy.io:22225/', "lum-customer-hl_38c0c709-zone-zone1", "bnywmqts56jx"],
-          "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
+          "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36",
+          :read_timeout => 7
         }).read
         p "============ ACCOM. = POOLinner >> #{Time.now - fetch_begin}"
         htmls << [city_name, html]
