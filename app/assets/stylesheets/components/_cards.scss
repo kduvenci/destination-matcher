@@ -111,14 +111,33 @@ a {transition: .25s all;}
   // transition: 0.4s ease-out;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
 }
+.flight-info{
+  display: flex;
+  justify-content: space-around;
+  flex: 1 0 auto;
+  .flight-logo {
+    flex: 0 0 30%;
+  }
+}
 
 .flight-total {
   height: 100%;
   border-left: 3px dotted $dim-gray;
+  h3 {
+    text-align: center;
+  }
 }
 .card-flight-content {
   padding-top: 15px;
   margin-right: -25px;
+}
+
+
+
+@media screen and (max-width: 560px){
+  .flight-total {
+    display: grid;
+  }
 }
 // .flight-card button {
 //   margin: 5px;
