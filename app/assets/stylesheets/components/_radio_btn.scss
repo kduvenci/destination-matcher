@@ -21,10 +21,10 @@
   -o-appearance: none;
   appearance: none;
   position: relative;
-  top: 45px;
+  top: 0px;
   right: 0;
-  bottom: 0;
-  left: 8px;
+  bottom: 0px;
+  left: 0px;
   height: 30px;
   width: 30px;
   transition: all 0.15s ease-out 0s;
@@ -73,21 +73,3 @@
 .change_btn.radio::after {
   border-radius: 50%;
 }
-
-// body {
-//   display: -webkit-box;
-//   display: -moz-box;
-//   display: -ms-flexbox;
-//   display: box;
-//   background: #e8ebee;
-//   color: #9faab7;
-//   font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
-//   text-align: center;
-// }
-// body div {
-//   padding: 5rem;
-// }
-// body label {
-//   display: block;
-//   line-height: 30px;
-// }

@@ -86,68 +86,65 @@ a {transition: .25s all;}
     margin: 0;
   }
 }
-.price-container .meal {
-  border-right: 1px dotted $dim-gray;
-}
-.price-container .accom {
-  border-right: 1px dotted $dim-gray;
-}
 .price-col {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 15px 0;
 }
+@media (min-width: 600px) {
+  .price-container .meal {
+  border-right: 1px dotted $dim-gray;
+  }
+  .price-container .accom {
+    border-right: 1px dotted $dim-gray;
+  }
+}
 
-.flight-card {
-  width: 100%;
-  height: 200px;
+// Flight Card
+
+.card-flight-content {
   padding: 1.5rem;
   margin-top: 10px;
   background: white;
-  // position: relative;
-  // display: flex;
-  // align-items: flex-end;
-  // transition: 0.4s ease-out;
+  width: 100%;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
+}
+.flight-info{
+  display: flex;
+  justify-content: space-around;
+  flex: 1 0 auto;
+  padding: 0 10px;
+  .flight-logo {
+    flex: 0 0 30%;
+  }
 }
 
 .flight-total {
   height: 100%;
-  border-left: 3px dotted $dim-gray;
-  padding-left: 29px;
-}
-
-.flight-total-modal  {
-  height: 100%;
-  border-left: 3px dotted $dim-gray;
-  padding-left: 79px;
-  padding-top: 3px;
   h3 {
-    font-size: 45px;
+    text-align: center;
   }
 }
-
-.card-flight-content {
-  padding-top: 22px;
-  margin-right: -29px;
+.flight-buttons{
+  padding: 0 10px;
 }
 
-.flight-book-btn {
-  margin-left: 13px;
-  margin-top: 5px;
-  padding: 7.2px 14px;
-  border-color: $coral;
-}
+@media (min-width: 600px) {
+  .flight-total {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-left: 3px dotted $dim-gray;
+  }
 
-.flight-price {
-  margin-left: 26px;
-  font-weight: bold;
-  margin-top: 11px;
-}
+  .flight-price {
+     grid-column: span 2;
+     grid-row: span 2;
+  }
 
-.flight-card button {
-  margin: 5px;
+  .flight-buttons {
+    grid-column: span 2;
+  }
 }
 
 
@@ -182,18 +179,17 @@ a:hover, a:focus {
   color: $red;
 }
 
+
 // Country at a Glance General Info
 .card-country-general-info {
-  width: 108%;
-  margin-left: -8%;
-  height: 410px;
+  height: 378px;
   padding: 1.5rem;
   margin-top: 10px;
   background-color: white;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
 }
 
-// Card Icons
+// General Info Card Icons
 .card-icons {
   text-align: left;
 }
@@ -211,6 +207,12 @@ a:hover, a:focus {
   color: $light-gray;
 }
 
+
+@media (min-width: 600px) {
+  .card-country-general-info {
+    width: 108%;
+    margin-left: -8%;
+  }
 .tooltip-inner {
     max-width: 100% !important;
 }
