@@ -86,19 +86,20 @@ a {transition: .25s all;}
     margin: 0;
   }
 }
-.price-container .meal {
-  border-right: 1px dotted $dim-gray;
-}
-.price-container .accom {
-  border-right: 1px dotted $dim-gray;
-}
 .price-col {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 15px 0;
 }
-
+@media (min-width: 600px) {
+  .price-container .meal {
+  border-right: 1px dotted $dim-gray;
+  }
+  .price-container .accom {
+    border-right: 1px dotted $dim-gray;
+  }
+}
 
 // Flight Card
 
@@ -107,10 +108,6 @@ a {transition: .25s all;}
   margin-top: 10px;
   background: white;
   width: 100%;
-  // position: relative;
-  // display: flex;
-  // align-items: flex-end;
-  // transition: 0.4s ease-out;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
 }
 .flight-info{
@@ -151,16 +148,6 @@ a {transition: .25s all;}
 }
 
 
-// @media screen and (max-width: 560px){
-//   .flight-total {
-//     display: grid;
-//   }
-// }
-// .flight-card button {
-//   margin: 5px;
-// }
-
-
 // Not sure which features these belong to? (- Amanda)
 .card {
   h3:hover{
@@ -192,6 +179,7 @@ a:hover, a:focus {
   color: $red;
 }
 
+
 // Country at a Glance General Info
 .card-country-general-info {
   height: 378px;
@@ -201,7 +189,7 @@ a:hover, a:focus {
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.2);
 }
 
-// Card Icons
+// General Info Card Icons
 .card-icons {
   text-align: left;
 }
