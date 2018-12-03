@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   ## Do not delete - This is for Social Meta Tags ##
-  def default_url_options
-  { host: ENV["HOST"] || "localhost:3000" }
-  end
+  # def default_url_options
+  # { host: ENV["HOST"] || "localhost:3000" }
+  # end
 end

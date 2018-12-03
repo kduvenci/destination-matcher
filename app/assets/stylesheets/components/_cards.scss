@@ -207,9 +207,16 @@ a:hover, a:focus {
   color: $light-gray;
 }
 
+
 @media (min-width: 600px) {
   .card-country-general-info {
     width: 108%;
     margin-left: -8%;
   }
+.tooltip-inner {
+    max-width: 100% !important;
+}
+
+.tooltip {
+  width: 120%;
 }

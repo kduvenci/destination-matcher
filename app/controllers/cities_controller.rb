@@ -229,10 +229,10 @@ class CitiesController < ApplicationController
             else
               p "= = > > Error during saving flight: #{flight.errors.messages} "
             end
-          else
-            p "============================================================================="
-            p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
-            p "============================================================================="
+          # else
+          #   p "============================================================================="
+          #   p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
+          #   p "============================================================================="
           end
         end
         counter += 1
@@ -266,10 +266,11 @@ class CitiesController < ApplicationController
   end
 
   def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
+    accommodation_cost = saved_accoms.select { |a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price rescue nil
+    return false unless accommodation_cost.present?
     period = ((return_arrival_time - depart_departure_time)/60/60/24).floor
     meal = city.meal_average_price_cents
     food = (meal * 3 * period).round
-    accommodation_cost = saved_accoms.select {|a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price
     total = food + ticket_price + accommodation_cost
     # pp "Food = #{food}, Acc = #{accommodation_cost}, Fly = #{ticket_price}, T = #{total}, B = #{max_budget}"
     return total <= max_budget

@@ -43,7 +43,6 @@
           </div>
         </div>
 
-
         <div>
           <div class="col-xs-12 col-md-9">
             <div class="flight-info">
@@ -71,11 +70,10 @@
           </div>
         </div>
 
-
         <div class="text-center flight-total">
           <div class="flight-price">
             <br>
-            <h3><strong>$<%= @flight.price %></strong></h3>
+            <h3><strong>$<%= number_with_delimiter(flight.price, delimiter: ",") %></strong></h3>
             <br>
           </div>
         </div>
