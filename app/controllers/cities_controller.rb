@@ -17,9 +17,17 @@ class CitiesController < ApplicationController
       max_budget = params['/cities']["max_budget"].gsub(",","").gsub("$", "").strip.to_i
 
       # Call api & scraping services
-      flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
-      accommodationsAPI = FetchAccommodations.call(region, outboundDate, inboundDate)
+      puts "====== FETCH DATA ACCOM. BEGIN ! ======"
+      fetch_begin = Time.now
+      accommodation_pool = Thread.pool(5)
+      accommodationsAPI = Array.new
+      FetchAccommodations.call(region, outboundDate, inboundDate, accommodation_pool, accommodationsAPI)
+      accommodation_pool.shutdown
+      puts "====== FETCH DATA ACCOM. END ! ======"
+      puts "====== FETCH DATA ACCOM. TOTAL ====== >>> #{Time.now - fetch_begin} sn"
 
+      flightsAPI = FetchFlights.call(origin, region, outboundDate, inboundDate)
+      
       # Save all Accommodations
       saved_accoms = save_accommodation(accommodationsAPI)
       if flightsAPI.present? & accommodationsAPI.present?
