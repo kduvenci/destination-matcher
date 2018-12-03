@@ -136,6 +136,7 @@ a {transition: .25s all;}
     grid-template-columns: 1fr 1fr;
     border-left: 3px dotted $dim-gray;
   }
+}
 
   .flight-price {
      grid-column: span 2;
@@ -213,6 +214,7 @@ a:hover, a:focus {
     width: 108%;
     margin-left: -8%;
   }
+}
 .tooltip-inner {
     max-width: 100% !important;
 }
@@ -220,3 +222,4 @@ a:hover, a:focus {
 .tooltip {
   width: 120%;
 }
+
