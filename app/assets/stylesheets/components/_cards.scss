@@ -136,6 +136,7 @@ a {transition: .25s all;}
     grid-template-columns: 1fr 1fr;
     border-left: 3px dotted $dim-gray;
   }
+}
 
   .flight-price {
      grid-column: span 2;
