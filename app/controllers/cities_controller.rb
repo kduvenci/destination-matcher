@@ -6,16 +6,22 @@ class CitiesController < ApplicationController
 
   def index
     @result_cities = []
-    @result_message = ""
+    @messages = []
     if params[:commit] == 'Search'
-
       # prepare params for fetchflight and budget calc
       origin = City.find(params['/cities']['origin'])
       region = Region.find(params['/cities']['region'])
-      destination_cities = region.cities.reject { |city| city == origin }
       outboundDate = params['/cities']["dep_date"]
       inboundDate = params['/cities']["return_date"]
       max_budget = params['/cities']["max_budget"].gsub(",","").gsub("$", "").strip.to_i
+      
+      # reject the origin city if city in the selected region
+      destination_cities = region.cities.reject { |city| city == origin }
+
+      # find travel period for budget calculation
+      outDay = DateTime.new(outboundDate[0..3].to_i, outboundDate[5..6].to_i, outboundDate[8..9].to_i)
+      inDay = DateTime.new(inboundDate[0..3].to_i, inboundDate[5..6].to_i, inboundDate[8..9].to_i)
+      period = (inDay - outDay).to_i  
 
       # Call A scraping services
       fetch_begin = Time.now
@@ -29,13 +35,18 @@ class CitiesController < ApplicationController
       accommodation_pool.shutdown
       puts "====== FETCH DATA ACCOM END ====== >>> in > #{Time.now - fetch_begin} sec"
 
-      # Save all Accommodations
-      saved_accoms = save_accommodation(accom_service_response)
-      if flight_service_response.present? & accom_service_response.present?
-        if saved_accoms.present?
+      # Save Accommodations
+      @messages << "Accommodation data resource not available." if accom_service_response.empty?
+      @messages << "Flight API resource not available." if flight_service_response.empty?
+
+      if @messages.empty?
+        saved_accoms = save_accommodation(accom_service_response)
+        @messages << "Accommodation is not available for selected dates." if saved_accoms.empty?
+
+        if @messages.empty?
           # Save Flights if in Bugdet
           save_flight_time = Time.now
-          saved_flights = save_flights(flight_service_response, max_budget, saved_accoms)
+          saved_flights = save_flights(flight_service_response, saved_accoms, max_budget, period)
 
           # prepare city array and city flight pairs
           cf_id_array = []
@@ -63,20 +74,15 @@ class CitiesController < ApplicationController
               ca_id_array.select { |pair| pair[:city_id] == city.id }.map { |pair| pair[:accom_id] }
             ]
           end
-
           # prepare cost list by city
-          @total_cost =  prepare_cost_for_index(@result_cities)
-        else
-          @result_message = "The accommodation is not available for selected dates."
+          @total_cost =  prepare_cost_for_index(@result_cities)          
         end
-      else
-        @result_message = "Oops we are having some difficulties with resource APIs.. Please try again : )"
       end
-    end
-    if @result_message.present?
-      puts "@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@"
-      puts @result_message
-      puts "@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@=@"
+      if @messages.present?
+        puts "========== >>> ERROR MESSAGES <<< =========="
+        @messages.each { |message| puts "-> #{message}" }
+        puts "============================================"
+      end  
     end
   end
 
@@ -130,13 +136,10 @@ class CitiesController < ApplicationController
 
   private
 
-  def save_flights(flightsAPI, max_budget, saved_accoms)
-    # from result max how much ticket will should save
-    save_max_flight = 150
-
+  def save_flights(flight_service_response, saved_accoms, max_budget, period)
     # Get information from json objects
-    savedFlights = []
-    flightsAPI.each do |jsonHash|
+    saved_flights = []
+    flight_service_response.each do |json_hash|
       depart_departure_time = ""
       depart_arrival_time = ""
       depart_originID = ""
@@ -159,125 +162,124 @@ class CitiesController < ApplicationController
 
       departure_location = ""
       return_location = ""
-      counter = 0
+      
+      # sort itineraries by price
+      itineraries = json_hash["Itineraries"].sort! { |iti_a, iti_b| iti_a["PricingOptions"].first["Price"] <=> iti_b["PricingOptions"].first["Price"] }
 
-      jsonHash["Itineraries"].each do |itinerary|
-        if counter < save_max_flight
-          # ticket general informations
-          adults = jsonHash["Query"]["Adults"]
-          depart_code = jsonHash["Places"].select { |place| place["Id"] == jsonHash["Query"]["OriginPlace"].to_i }.first["Code"]
-          return_code = jsonHash["Places"].select { |place| place["Id"] == jsonHash["Query"]["DestinationPlace"].to_i }.first["Code"]
-          cabin_class = jsonHash["Query"]["CabinClass"]
-          deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
-          ticket_price = itinerary["PricingOptions"].first["Price"]
+      # iterate first 5 itinerary
+      itineraries[0..4].each do |itinerary|
+        # ticket general informations
+        adults = json_hash["Query"]["Adults"]
+        depart_code = json_hash["Places"].select { |place| place["Id"] == json_hash["Query"]["OriginPlace"].to_i }.first["Code"]
+        return_code = json_hash["Places"].select { |place| place["Id"] == json_hash["Query"]["DestinationPlace"].to_i }.first["Code"]
+        cabin_class = json_hash["Query"]["CabinClass"]
+        deeplinkUrl = itinerary["PricingOptions"].first["DeeplinkUrl"]
+        ticket_price = itinerary["PricingOptions"].first["Price"]
 
-          # find agent
-          agentId = itinerary["PricingOptions"].first["Agents"].first
-          agent = jsonHash["Agents"].select { |agent| agent["Id"] == agentId }
-          agent_name = agent.first["Name"]
+        # find agent
+        agentId = itinerary["PricingOptions"].first["Agents"].first
+        agent = json_hash["Agents"].select { |agent| agent["Id"] == agentId }
+        agent_name = agent.first["Name"]
 
-          # departure and arrival infos
-          jsonHash["Legs"].each do |leg|
-            if leg["Id"] == itinerary["OutboundLegId"]
-              depart_departure_time = leg["Departure"].to_time
-              depart_arrival_time = leg["Arrival"].to_time
-              depart_departure_placeID = leg["OriginStation"]
-              # depart_arrival_placeID = leg["DestinationStation"]
-              depart_carrierID = leg["Carriers"].first
-              depart_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
-            end
-            if leg["Id"] == itinerary["InboundLegId"]
-              return_departure_time = leg["Departure"].to_time
-              return_arrival_time = leg["Arrival"].to_time
-              return_departure_placeID = leg["OriginStation"]
-              # return_arrival_placeID = leg["DestinationStation"]
-              return_carrierID = leg["Carriers"].first
-              return_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
-            end
+        # departure and arrival infos
+        json_hash["Legs"].each do |leg|
+          if leg["Id"] == itinerary["OutboundLegId"]
+            depart_departure_time = leg["Departure"].to_time
+            depart_arrival_time = leg["Arrival"].to_time
+            depart_departure_placeID = leg["OriginStation"]
+            depart_carrierID = leg["Carriers"].first
+            depart_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
           end
-
-          # locations
-          departure_location = jsonHash["Places"].select { |place| place["Id"] == depart_departure_placeID }
-          return_location = jsonHash["Places"].select { |place| place["Id"] == return_departure_placeID }
-          # airline company
-          depart_carrier = jsonHash["Carriers"].select { |carrier| carrier["Id"] == depart_carrierID }
-          return_carrier = jsonHash["Carriers"].select { |carrier| carrier["Id"] == return_carrierID }
-          city = City.find_by(airport_key: "#{return_location[0]["Code"]}-sky")
-
-          if in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
-            # prepare flight instances
-            flight = Flight.new(
-              # general
-              adults: adults,
-              agent: agent_name,
-              cabin_class: cabin_class,
-              price: ticket_price,
-              booking_url: deeplinkUrl,
-              city: city,
-              # depart info
-              depart_airline_name: depart_carrier[0]["Name"],
-              departure_location: departure_location[0]["Name"],
-              depart_departure_time: depart_departure_time,
-              depart_arrival_time: depart_arrival_time,
-              depart_stops: depart_stops,
-              depart_code: depart_code,
-              depart_image_url: depart_carrier[0]["ImageUrl"],
-              # return info
-              return_airline_name: return_carrier[0]["Name"],
-              return_location: return_location[0]["Name"],
-              return_departure_time: return_departure_time,
-              return_arrival_time: return_arrival_time,
-              return_stops: return_stops,
-              return_code: return_code,
-              return_image_url: return_carrier[0]["ImageUrl"]
-            )
-
-            # save flights
-            if flight.save!
-              savedFlights << flight
-            else
-              p "= = > > Error during saving flight: #{flight.errors.messages} "
-            end
-          # else
-          #   p "============================================================================="
-          #   p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
-          #   p "============================================================================="
+          if leg["Id"] == itinerary["InboundLegId"]
+            return_departure_time = leg["Departure"].to_time
+            return_arrival_time = leg["Arrival"].to_time
+            return_departure_placeID = leg["OriginStation"]
+            return_carrierID = leg["Carriers"].first
+            return_stops = leg["Stops"].size == 0 ? "Direct" : leg["Stops"].size
           end
         end
-        counter += 1
+
+        # locations
+        departure_location = json_hash["Places"].select { |place| place["Id"] == depart_departure_placeID }
+        return_location = json_hash["Places"].select { |place| place["Id"] == return_departure_placeID }
+        # airline company
+        depart_carrier = json_hash["Carriers"].select { |carrier| carrier["Id"] == depart_carrierID }
+        return_carrier = json_hash["Carriers"].select { |carrier| carrier["Id"] == return_carrierID }
+        city = City.find_by(airport_key: "#{return_location[0]["Code"]}-sky")
+
+        if in_bugget?(max_budget, ticket_price, city, saved_accoms, period)
+          # prepare flight instances
+          flight = Flight.new(
+            # general
+            adults: adults,
+            agent: agent_name,
+            cabin_class: cabin_class,
+            price: ticket_price,
+            booking_url: deeplinkUrl,
+            city: city,
+            # depart info
+            depart_airline_name: depart_carrier[0]["Name"],
+            departure_location: departure_location[0]["Name"],
+            depart_departure_time: depart_departure_time,
+            depart_arrival_time: depart_arrival_time,
+            depart_stops: depart_stops,
+            depart_code: depart_code,
+            depart_image_url: depart_carrier[0]["ImageUrl"],
+            # return info
+            return_airline_name: return_carrier[0]["Name"],
+            return_location: return_location[0]["Name"],
+            return_departure_time: return_departure_time,
+            return_arrival_time: return_arrival_time,
+            return_stops: return_stops,
+            return_code: return_code,
+            return_image_url: return_carrier[0]["ImageUrl"]
+          )
+
+          # save flights
+          if flight.save!
+            saved_flights << flight
+          else
+            p "= = > > Error during saving flight: #{flight.errors.messages} "
+          end
+        # else
+        #   p "============================================================================="
+        #   p "======= Ticket price: #{ticket_price}$ NOT IN BUGDET for #{city.name} ======="
+        #   p "============================================================================="
+        end
       end
     end
 
-    return savedFlights.sort { |a, b| a.price <=> b.price }
+    return saved_flights
   end
 
-  def save_accommodation(accommodationsAPI)
+  def save_accommodation(accom_service_response)
     savedAccommodations = []
-    accommodationsAPI.each do |accCity|
-      accCity.each do |accommodation|
+    accom_service_response.each do |accoms_of_city|
+      accoms_of_city.reject! { |elem| elem[:price].empty? }
+      accoms_of_city.sort! { |a, b| a[:price] <=> b[:price] }
+      accoms_of_city[0..4].each do |accom_hash|
         accommodation = Accommodation.new(
-          city: City.find_by(name: accommodation[:city]),
-          name: accommodation[:name],
-          price: accommodation[:price].gsub(",","").gsub("US$","").to_i,
-          address: accommodation[:address],
-          photo: accommodation[:image_url],
-          booking_url: accommodation[:booking_url],
-          score: accommodation[:score]
+          city: City.find_by(name: accom_hash[:city]),
+          name: accom_hash[:name],
+          price: accom_hash[:price].gsub(",","").gsub("US$","").to_i,
+          address: accom_hash[:address],
+          photo: accom_hash[:image_url],
+          booking_url: accom_hash[:booking_url],
+          score: accom_hash[:score]
         )
         if accommodation.save
           savedAccommodations << accommodation
         else
-          p "= = > > Error during saving accommodation: #{accommodation.errors.messages} "
+          p "--- !!! Error Saving Accommodation !!! --->: #{accommodation.errors.messages}"
         end
       end
     end
-    return savedAccommodations.sort { |a, b| a.price <=> b.price }
+    return savedAccommodations
   end
 
-  def in_bugget?(max_budget, ticket_price, city, return_arrival_time, depart_departure_time, saved_accoms)
-    accommodation_cost = saved_accoms.select { |a| a.city == city }.sort { |a, b| a.price <=> b.price }.first.price rescue nil
+  def in_bugget?(max_budget, ticket_price, city, saved_accoms, period)
+    accommodation_cost = saved_accoms.select { |accom| accom.city == city }.first.price rescue nil
     return false unless accommodation_cost.present?
-    period = ((return_arrival_time - depart_departure_time)/60/60/24).floor
     meal = city.meal_average_price_cents
     food = (meal * 3 * period).round
     total = food + ticket_price + accommodation_cost
