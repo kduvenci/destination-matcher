@@ -1,37 +1,29 @@
-# require 'thread'
-# require 'thread/pool'
-# require 'json'
-# require 'rest-client'
-
 class FetchFlights
-  def self.call(origin, region, outboundDate, inboundDate)
+  def self.call(origin, destination_cities, outboundDate, inboundDate)
     puts "========== FETCH DATA FLIGHT BEGIN ========= >>> AT > #{Time.now}"
     fetch_begin = Time.now
-    destinationplaces = []
 
     session_keys = []
     results = []
     country = "JP"
-    originplace = origin.airport_key
+    origin_airport_key = origin.airport_key
     adults = 1
     postURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
     getURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0"
 
-    region.cities.each do |city|
-      destinationplaces << city.airport_key
-    end
+    destination_airport_keys = destination_cities.map  { |city| city.airport_key }
 
-    pool = Thread.pool([destinationplaces.size, 15].min)
+    pool = Thread.pool(15)
 
-    destinationplaces.each do |destination|
+    destination_airport_keys.each do |destination_airport_key|
       pool.process {
         begin
           response = RestClient.post postURL, {
             "country" => country,
             "currency" => "USD",
             "locale" => "en-US",
-            "originPlace" => originplace,
-            "destinationPlace" => destination,
+            "originPlace" => origin_airport_key,
+            "destinationPlace" => destination_airport_key,
             "outboundDate" => outboundDate,
             "inboundDate" => inboundDate,
             "cabinClass" => "economy",
