@@ -51,15 +51,17 @@ class FetchAccommodations
           price = content.css(".roomPrice").css(".price").inner_text.strip rescue nil
           address = content.css(".jq_tooltip").inner_text.strip.split("\n").first rescue nil
 
-          hotels_array << {
-            city: city_name,
-            name: name,
-            image_url: image_url,
-            booking_url: "https://booking.com#{booking_url}",
-            score: score,
-            price: price,
-            address: address 
-          }
+          if name & image_url & booking_url & score & price & address
+            hotels_array << {
+              city: city_name,
+              name: name,
+              image_url: image_url,
+              booking_url: "https://booking.com#{booking_url}",
+              score: score,
+              price: price,
+              address: address 
+            }
+          end
         end
         results << hotels_array
       }
