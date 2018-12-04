@@ -29,8 +29,15 @@ class CitiesController < ApplicationController
       accommodation_pool.shutdown
       puts "====== FETCH DATA ACCOM END ====== >>> in > #{Time.now - fetch_begin} sec"
 
-      # Save all Accommodations
-      saved_accoms = save_accommodation(accom_service_response)
+      # Save Accommodations
+      if accom_service_response.present?
+        saved_accoms = save_accommodation(accom_service_response)
+      else
+        @result_message = "The accommodation is not available for selected dates."
+      end
+
+      # ======================
+            
       if flight_service_response.present? & accom_service_response.present?
         if saved_accoms.present?
           # Save Flights if in Bugdet
@@ -251,18 +258,21 @@ class CitiesController < ApplicationController
     return savedFlights.sort { |a, b| a.price <=> b.price }
   end
 
-  def save_accommodation(accommodationsAPI)
+  def save_accommodation(accom_service_response)
     savedAccommodations = []
-    accommodationsAPI.each do |accCity|
-      accCity.each do |accommodation|
+    accom_service_response.each do |accoms_of_city|
+      puts
+      accoms_of_city.reject! { |elem| elem[:price].empty? }
+      accoms_of_city.sort! { |a, b| a[:price] <=> b[:price] }
+      accoms_of_city[0..4].each do |accom_hash|
         accommodation = Accommodation.new(
-          city: City.find_by(name: accommodation[:city]),
-          name: accommodation[:name],
-          price: accommodation[:price].gsub(",","").gsub("US$","").to_i,
-          address: accommodation[:address],
-          photo: accommodation[:image_url],
-          booking_url: accommodation[:booking_url],
-          score: accommodation[:score]
+          city: City.find_by(name: accom_hash[:city]),
+          name: accom_hash[:name],
+          price: accom_hash[:price].gsub(",","").gsub("US$","").to_i,
+          address: accom_hash[:address],
+          photo: accom_hash[:image_url],
+          booking_url: accom_hash[:booking_url],
+          score: accom_hash[:score]
         )
         if accommodation.save
           savedAccommodations << accommodation
