@@ -17,25 +17,25 @@ class CitiesController < ApplicationController
       inboundDate = params['/cities']["return_date"]
       max_budget = params['/cities']["max_budget"].gsub(",","").gsub("$", "").strip.to_i
 
-      # Call api & scraping services
-      puts "====== FETCH DATA ACCOM. BEGIN ! ======"
+      # Call A scraping services
       fetch_begin = Time.now
       accom_service_response = []
-      accommodation_pool = Thread.pool(5)
-      FetchAccommodations.call(destination_cities, outboundDate, inboundDate, accommodation_pool, accom_service_response)
-      accommodation_pool.shutdown
-      puts "====== FETCH DATA ACCOM. END ! ======"
-      puts "====== FETCH DATA ACCOM. TIME TOTAL ====== >>> #{Time.now - fetch_begin} sn"
+      flight_service_response = []
+      accommodation_pool = Thread.pool(15)
 
-      flightsAPI = FetchFlights.call(origin, destination_cities, outboundDate, inboundDate)
+      FetchAccommodations.call(destination_cities, outboundDate, inboundDate, accommodation_pool, accom_service_response)
+      FetchFlights.call(origin, destination_cities, outboundDate, inboundDate, flight_service_response)
+      
+      accommodation_pool.shutdown
+      puts "====== FETCH DATA ACCOM END ====== >>> in > #{Time.now - fetch_begin} sec"
 
       # Save all Accommodations
       saved_accoms = save_accommodation(accom_service_response)
-      if flightsAPI.present? & accom_service_response.present?
+      if flight_service_response.present? & accom_service_response.present?
         if saved_accoms.present?
           # Save Flights if in Bugdet
           save_flight_time = Time.now
-          saved_flights = save_flights(flightsAPI, max_budget, saved_accoms)
+          saved_flights = save_flights(flight_service_response, max_budget, saved_accoms)
 
           # prepare city array and city flight pairs
           cf_id_array = []

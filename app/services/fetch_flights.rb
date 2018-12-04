@@ -1,18 +1,14 @@
 class FetchFlights
-  def self.call(origin, destination_cities, outboundDate, inboundDate)
-    puts "========== FETCH DATA FLIGHT BEGIN ========= >>> AT > #{Time.now}"
+  def self.call(origin, destination_cities, outboundDate, inboundDate, flight_service_response)
+    puts "====== FETCH DATA FLIGHT BEGIN ===== >>>"
     fetch_begin = Time.now
-
     session_keys = []
-    results = []
     country = "JP"
     origin_airport_key = origin.airport_key
     adults = 1
     postURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
     getURL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0"
-
     destination_airport_keys = destination_cities.map  { |city| city.airport_key }
-
     pool = Thread.pool(15)
 
     destination_airport_keys.each do |destination_airport_key|
@@ -40,8 +36,7 @@ class FetchFlights
             "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
             }
           session_keys << response.headers[:location].split("/").last
-  
-          p "================ FLIGHT PUSH = POOLinner >> #{Time.now - fetch_begin}"
+          p ">>-- Flight PUSH - POOLinner -->> #{Time.now - fetch_begin}"
         rescue => e
           p e
         end
@@ -49,10 +44,7 @@ class FetchFlights
     end
 
     pool.shutdown
-
     pool = Thread.pool([session_keys.size, 15].min)
-
-    get_origin = Time.now
 
     session_keys.each do |session_key|
       pool.process {
@@ -60,14 +52,13 @@ class FetchFlights
         "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
         "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
         }
-        results << JSON.parse(response.body)
-        p "================ FLIGHT GET = POOLinner >> #{Time.now - get_origin}"
+        flight_service_response << JSON.parse(response.body)
+        p ">>-- Flight GET - POOLinner -->> #{Time.now - fetch_begin}"
       }
     end
     pool.shutdown
 
-    puts "========== FETCH DATA FLIGHT END ========= >>> in > #{Time.now - fetch_begin} sec"
-    fetch_begin = Time.now
-    return results
+    puts "====== FETCH DATA FLIGHT END ===== >>> in > #{Time.now - fetch_begin} sec"
+    return flight_service_response
   end
 end
