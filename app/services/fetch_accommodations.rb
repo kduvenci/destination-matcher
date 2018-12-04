@@ -51,7 +51,7 @@ class FetchAccommodations
           price = content.css(".roomPrice").css(".price").inner_text.strip rescue nil
           address = content.css(".jq_tooltip").inner_text.strip.split("\n").first rescue nil
 
-          if name & image_url & booking_url & score & price & address
+          if name.present? && image_url.present? && booking_url.present? && score.present? && price.present? && address.present?
             hotels_array << {
               city: city_name,
               name: name,
