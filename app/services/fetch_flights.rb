@@ -32,8 +32,7 @@ class FetchFlights
           },
           headers = {
             "Content-Type" => "application/x-www-form-urlencoded",
-            "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
-            "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
+            "X-RapidAPI-Key" => ENV["X_MASHAPE_KEY"]
             }
           session_keys << response.headers[:location].split("/").last
           p ">>-- Flight PUSH - POOLinner -->> #{Time.now - fetch_begin}"
@@ -49,9 +48,8 @@ class FetchFlights
     session_keys.each do |session_key|
       pool.process {
         response = RestClient.get "#{getURL}/#{session_key}",{
-        "X-Mashape-Key" => ENV["X_MASHAPE_KEY"],
-        "X-Mashape-Host" => ENV["X_MASHAPE_HOST"]
-        }
+          "X-RapidAPI-Key" => ENV["X_MASHAPE_KEY"]
+      }
         flight_service_response << JSON.parse(response.body)
         p ">>-- Flight GET - POOLinner -->> #{Time.now - fetch_begin}"
       }
